@@ -4,4 +4,5 @@
 *.bin
 *.hex
 *.lst
-build/*
+build
+*~

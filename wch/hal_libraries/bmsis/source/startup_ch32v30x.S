@@ -4,6 +4,8 @@
 * Version            : V1.0.0
 * Date               : 2021/06/06
 * Description        : CH32V30x vector table for eclipse toolchain.
+* Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
+* SPDX-License-Identifier: Apache-2.0
 *******************************************************************************/
 
 	.section	.init,"ax",@progbits
@@ -334,13 +336,13 @@ DMA2_Channel11_IRQHandler_Raw:  call DMA2_Channel11_IRQHandler; mret
 	.weak	handle_reset
 	.align	1
 handle_reset:
-.option push 
-.option	norelax 
-    csrw mepc, t0
+.option push
+.option	norelax
+	csrw mepc, t0
 	la gp, __global_pointer$
-.option	pop 
+.option	pop
 1:
-	la sp, _eusrstack 
+	la sp, _eusrstack
 2:
 	/* Load data section from flash to RAM */
 	la a0, _data_lma
@@ -367,20 +369,19 @@ handle_reset:
     csrw 0xbc0, t0
 
     /* Enable hardware stack */
-    li t0,0x1
+	li t0,0x1
 	csrw 0x804, t0
-
 
     /* Enable floating point and interrupt */
    	li t0, 0x7800
    	csrs mstatus, t0
 
  	la t0, _vector_base
-    ori t0, t0, 3           
+	ori t0, t0, 3
 	csrw mtvec, t0
 
-    jal  SystemInit
-	la t0, entry
+	jal  SystemInit
+	la t0, main
 	csrw mepc, t0
 	mret
 

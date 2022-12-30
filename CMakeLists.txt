@@ -4,32 +4,13 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 project(firmware)
 set(TARGET_ELF ${PROJECT_NAME}.elf)
-add_executable(${TARGET_ELF} src/main.c src/donut.c src/cdc_acm_template.c src/cxx_test.cpp src/Pin.hpp)
+add_executable(${TARGET_ELF} src/main.c wch/extra/src/debug.c)
 enable_language(C CXX ASM)
 target_compile_features(${TARGET_ELF} PRIVATE cxx_std_17)
-
-set(PKG_CHERRYUSB_DEVICE_CDC ON)
-set(PKG_CHERRYUSB_DEVICE_CH32VXXX ON)
-set(PKG_CHERRYUSB_RTTHREAD ON)
-
-set(RT_USING_DFS ON)
-set(RT_USING_DFS_DEVFS ON)
-set(RT_USING_DFS_ROMFS ON)
-set(RT_USING_PIN ON)
-set(RT_USING_ADC ON)
-set(RT_USING_DAC ON)
-set(RT_USING_I2C ON)
-set(RT_USING_I2C_BITOPS ON)
-set(RT_USING_RTC ON)
-set(RT_DFS_ROMFS_PATH ${CMAKE_CURRENT_SOURCE_DIR}/rootfs)
 
 add_subdirectory(wch)
 
 target_link_libraries(${TARGET_ELF} m)
-add_custom_target(generate_romfs
-    COMMAND python ${CMAKE_CURRENT_SOURCE_DIR}/wch/rtthread/tools/mkromfs.py ${RT_DFS_ROMFS_PATH} ${CMAKE_CURRENT_BINARY_DIR}/romfs.c
-    SOURCES ${CMAKE_CURRENT_BINARY_DIR}/romfs.c
-    COMMENT "Generate romfs file")
 
 add_custom_command(
     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/romfs.c
