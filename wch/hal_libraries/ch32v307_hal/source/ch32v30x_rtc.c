@@ -7,7 +7,7 @@
 ********************************************************************************/
 #include "ch32v30x_rtc.h"
 
-/* RTC_Private_Defines */	
+/* RTC_Private_Defines */
 #define RTC_LSB_MASK     ((uint32_t)0x0000FFFF)  /* RTC LSB Mask */
 #define PRLH_MSB_MASK    ((uint32_t)0x000F0000)  /* RTC Prescaler MSB Mask */
 
@@ -19,9 +19,9 @@
 *                     RTC_IT_ALR: Alarm interrupt
 *                     RTC_IT_SEC: Second interrupt
 * Return         : NewState: new state of the specified RTC interrupts(ENABLE or DISABLE).
-*********************************************************************************/		
+*********************************************************************************/
 void RTC_ITConfig(uint16_t RTC_IT, FunctionalState NewState)
-{  
+{
   if (NewState != DISABLE)
   {
     RTC->CTLRH |= RTC_IT;
@@ -37,7 +37,7 @@ void RTC_ITConfig(uint16_t RTC_IT, FunctionalState NewState)
 * Description    : Enters the RTC configuration mode.
 * Input          : None
 * Return         : None
-*********************************************************************************/	
+*********************************************************************************/
 void RTC_EnterConfigMode(void)
 {
   RTC->CTLRL |= RTC_CTLRL_CNF;
@@ -48,10 +48,10 @@ void RTC_EnterConfigMode(void)
 * Description    : Exits from the RTC configuration mode.
 * Input          : None
 * Return         : None
-*********************************************************************************/	
+*********************************************************************************/
 void RTC_ExitConfigMode(void)
 {
-  RTC->CTLRL &= (uint16_t)~((uint16_t)RTC_CTLRL_CNF); 
+  RTC->CTLRL &= (uint16_t)~((uint16_t)RTC_CTLRL_CNF);
 }
 
 /********************************************************************************
@@ -59,7 +59,7 @@ void RTC_ExitConfigMode(void)
 * Description    : Gets the RTC counter value
 * Input          : None
 * Return         : RTC counter value
-*********************************************************************************/	
+*********************************************************************************/
 uint32_t RTC_GetCounter(void)
 {
   uint16_t high1 = 0, high2 = 0, low = 0;
@@ -83,9 +83,9 @@ uint32_t RTC_GetCounter(void)
 * Description    : Sets the RTC counter value.
 * Input          : CounterValue: RTC counter new value.
 * Return         : None
-*********************************************************************************/	
+*********************************************************************************/
 void RTC_SetCounter(uint32_t CounterValue)
-{ 
+{
   RTC_EnterConfigMode();
   RTC->CNTH = CounterValue >> 16;
   RTC->CNTL = (CounterValue & RTC_LSB_MASK);
@@ -97,7 +97,7 @@ void RTC_SetCounter(uint32_t CounterValue)
 * Description    : Sets the RTC prescaler value
 * Input          : PrescalerValue: RTC prescaler new value
 * Return         : None
-*********************************************************************************/	
+*********************************************************************************/
 void RTC_SetPrescaler(uint32_t PrescalerValue)
 {
   RTC_EnterConfigMode();
@@ -111,9 +111,9 @@ void RTC_SetPrescaler(uint32_t PrescalerValue)
 * Description    : Sets the RTC alarm value
 * Input          : AlarmValue: RTC alarm new value
 * Return         : None
-*********************************************************************************/	
+*********************************************************************************/
 void RTC_SetAlarm(uint32_t AlarmValue)
-{  
+{
   RTC_EnterConfigMode();
   RTC->ALRMH = AlarmValue >> 16;
   RTC->ALRML = (AlarmValue & RTC_LSB_MASK);
@@ -125,7 +125,7 @@ void RTC_SetAlarm(uint32_t AlarmValue)
 * Description    : Gets the RTC divider value
 * Input          : None
 * Return         : RTC Divider value
-*********************************************************************************/	
+*********************************************************************************/
 uint32_t RTC_GetDivider(void)
 {
   uint32_t tmp = 0x00;
@@ -139,7 +139,7 @@ uint32_t RTC_GetDivider(void)
 * Description    : Waits until last write operation on RTC registers has finished
 * Input          : None
 * Return         : None
-*********************************************************************************/	
+*********************************************************************************/
 void RTC_WaitForLastTask(void)
 {
   while ((RTC->CTLRL & RTC_FLAG_RTOFF) == (uint16_t)RESET)
@@ -149,11 +149,11 @@ void RTC_WaitForLastTask(void)
 
 /********************************************************************************
 * Function Name  : RTC_WaitForSynchro
-* Description    : Waits until the RTC registers 
+* Description    : Waits until the RTC registers
 *                  are synchronized with RTC APB clock
 * Input          : None
 * Return         : None
-*********************************************************************************/	
+*********************************************************************************/
 void RTC_WaitForSynchro(void)
 {
   RTC->CTLRL &= (uint16_t)~RTC_FLAG_RSF;
@@ -175,7 +175,7 @@ void RTC_WaitForSynchro(void)
 *********************************************************************************/
 FlagStatus RTC_GetFlagStatus(uint16_t RTC_FLAG)
 {
-  FlagStatus bitstatus = RESET;  
+  FlagStatus bitstatus = RESET;
   if ((RTC->CTLRL & RTC_FLAG) != (uint16_t)RESET)
   {
     bitstatus = SET;
@@ -215,7 +215,7 @@ void RTC_ClearFlag(uint16_t RTC_FLAG)
 ITStatus RTC_GetITStatus(uint16_t RTC_IT)
 {
   ITStatus bitstatus = RESET;
-  
+
   bitstatus = (ITStatus)(RTC->CTLRL & RTC_IT);
   if (((RTC->CTLRH & RTC_IT) != (uint16_t)RESET) && (bitstatus != (uint16_t)RESET))
   {

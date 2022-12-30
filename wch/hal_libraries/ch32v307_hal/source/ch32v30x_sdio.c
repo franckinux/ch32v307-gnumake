@@ -12,7 +12,7 @@
 #define SDIO_OFFSET              (SDIO_BASE - PERIPH_BASE)
 
 /* CLKCR register clear mask */
-#define CLKCR_CLEAR_MASK         ((uint32_t)0xFFFF8100) 
+#define CLKCR_CLEAR_MASK         ((uint32_t)0xFFFF8100)
 
 /* SDIO PWRCTRL Mask */
 #define PWR_PWRCTRL_MASK         ((uint32_t)0xFFFFFFFC)
@@ -56,12 +56,12 @@ void SDIO_DeInit(void)
 void SDIO_Init(SDIO_InitTypeDef* SDIO_InitStruct)
 {
   uint32_t tmpreg = 0;
-   
+
   tmpreg = SDIO->CLKCR;
   tmpreg &= CLKCR_CLEAR_MASK;
   tmpreg |= (SDIO_InitStruct->SDIO_ClockDiv  | SDIO_InitStruct->SDIO_ClockPowerSave |
              SDIO_InitStruct->SDIO_ClockBypass | SDIO_InitStruct->SDIO_BusWide |
-             SDIO_InitStruct->SDIO_ClockEdge | SDIO_InitStruct->SDIO_HardwareFlowControl); 
+             SDIO_InitStruct->SDIO_ClockEdge | SDIO_InitStruct->SDIO_HardwareFlowControl);
 
   SDIO->CLKCR = tmpreg;
 }
@@ -107,7 +107,7 @@ void SDIO_ClockCmd(FunctionalState NewState)
 *******************************************************************************/
 void SDIO_SetPowerState(uint32_t SDIO_PowerState)
 {
-  
+
   SDIO->POWER &= PWR_PWRCTRL_MASK;
   SDIO->POWER |= SDIO_PowerState;
 }
@@ -166,7 +166,7 @@ void SDIO_ITConfig(uint32_t SDIO_IT, FunctionalState NewState)
   else
   {
     SDIO->MASK &= ~SDIO_IT;
-  } 
+  }
 }
 
 /*******************************************************************************
@@ -194,12 +194,12 @@ void SDIO_SendCommand(SDIO_CmdInitTypeDef *SDIO_CmdInitStruct)
   uint32_t tmpreg = 0;
 
   SDIO->ARG = SDIO_CmdInitStruct->SDIO_Argument;
-  
+
   tmpreg = SDIO->CMD;
   tmpreg &= CMD_CLEAR_MASK;
   tmpreg |= (uint32_t)SDIO_CmdInitStruct->SDIO_CmdIndex | SDIO_CmdInitStruct->SDIO_Response
            | SDIO_CmdInitStruct->SDIO_Wait | SDIO_CmdInitStruct->SDIO_CPSM;
-  
+
   SDIO->CMD = tmpreg;
 }
 
@@ -246,8 +246,8 @@ uint32_t SDIO_GetResponse(uint32_t SDIO_RESP)
   __IO uint32_t tmp = 0;
 
   tmp = SDIO_RESP_ADDR + SDIO_RESP;
-  
-  return (*(__IO uint32_t *) tmp); 
+
+  return (*(__IO uint32_t *) tmp);
 }
 
 /*******************************************************************************
@@ -284,7 +284,7 @@ void SDIO_DataStructInit(SDIO_DataInitTypeDef* SDIO_DataInitStruct)
   SDIO_DataInitStruct->SDIO_DataLength = 0x00;
   SDIO_DataInitStruct->SDIO_DataBlockSize = SDIO_DataBlockSize_1b;
   SDIO_DataInitStruct->SDIO_TransferDir = SDIO_TransferDir_ToCard;
-  SDIO_DataInitStruct->SDIO_TransferMode = SDIO_TransferMode_Block;  
+  SDIO_DataInitStruct->SDIO_TransferMode = SDIO_TransferMode_Block;
   SDIO_DataInitStruct->SDIO_DPSM = SDIO_DPSM_Disable;
 }
 
@@ -295,7 +295,7 @@ void SDIO_DataStructInit(SDIO_DataInitTypeDef* SDIO_DataInitStruct)
 * Return         : Number of remaining data bytes to be transferred
 *******************************************************************************/
 uint32_t SDIO_GetDataCounter(void)
-{ 
+{
   return SDIO->DCOUNT;
 }
 
@@ -306,7 +306,7 @@ uint32_t SDIO_GetDataCounter(void)
 * Return         : Data received
 *******************************************************************************/
 uint32_t SDIO_ReadData(void)
-{ 
+{
   return SDIO->FIFO;
 }
 
@@ -317,7 +317,7 @@ uint32_t SDIO_ReadData(void)
 * Return         : None
 *******************************************************************************/
 void SDIO_WriteData(uint32_t Data)
-{ 
+{
   SDIO->FIFO = Data;
 }
 
@@ -328,7 +328,7 @@ void SDIO_WriteData(uint32_t Data)
 * Return         : Remaining number of words.
 *******************************************************************************/
 uint32_t SDIO_GetFIFOCount(void)
-{ 
+{
   return SDIO->FIFOCNT;
 }
 
@@ -339,7 +339,7 @@ uint32_t SDIO_GetFIFOCount(void)
 * Return         : None
 *******************************************************************************/
 void SDIO_StartSDIOReadWait(FunctionalState NewState)
-{ 
+{
   if(NewState) SDIO->DCTRL |= (1<<8);
   else SDIO->DCTRL &= ~(1<<8);
 }
@@ -351,7 +351,7 @@ void SDIO_StartSDIOReadWait(FunctionalState NewState)
 * Return         : None
 *******************************************************************************/
 void SDIO_StopSDIOReadWait(FunctionalState NewState)
-{ 
+{
   if(NewState) SDIO->DCTRL |= (1<<9);
   else SDIO->DCTRL &= ~(1<<9);
 
@@ -378,7 +378,7 @@ void SDIO_SetSDIOReadWaitMode(uint32_t SDIO_ReadWaitMode)
 * Return         : None
 *******************************************************************************/
 void SDIO_SetSDIOOperation(FunctionalState NewState)
-{ 
+{
   if(NewState) SDIO->DCTRL |= (1<<11);
   else SDIO->DCTRL &= ~(1<<11);
 }
@@ -390,7 +390,7 @@ void SDIO_SetSDIOOperation(FunctionalState NewState)
 * Return         : None
 *******************************************************************************/
 void SDIO_SendSDIOSuspendCmd(FunctionalState NewState)
-{ 
+{
   if(NewState) SDIO->CMD |= (1<<11);
   else SDIO->CMD &= ~(1<<11);
 }
@@ -402,7 +402,7 @@ void SDIO_SendSDIOSuspendCmd(FunctionalState NewState)
 * Return         : None
 *******************************************************************************/
 void SDIO_CommandCompletionCmd(FunctionalState NewState)
-{ 
+{
   if(NewState) SDIO->CMD |= (1<<12);
   else SDIO->CMD &= ~(1<<12);
 }
@@ -414,7 +414,7 @@ void SDIO_CommandCompletionCmd(FunctionalState NewState)
 * Return         : None
 *******************************************************************************/
 void SDIO_CEATAITCmd(FunctionalState NewState)
-{ 
+{
   if(NewState) SDIO->CMD |= (1<<13);
   else SDIO->CMD &= ~(1<<13);
 }
@@ -426,7 +426,7 @@ void SDIO_CEATAITCmd(FunctionalState NewState)
 * Return         : None
 *******************************************************************************/
 void SDIO_SendCEATACmd(FunctionalState NewState)
-{ 
+{
   if(NewState) SDIO->CMD |= (1<<14);
   else SDIO->CMD &= ~(1<<14);
 }
@@ -463,9 +463,9 @@ void SDIO_SendCEATACmd(FunctionalState NewState)
 * Return         : ITStatus: SET or RESET
 *******************************************************************************/
 FlagStatus SDIO_GetFlagStatus(uint32_t SDIO_FLAG)
-{ 
+{
   FlagStatus bitstatus = RESET;
-  
+
   if ((SDIO->STA & SDIO_FLAG) != (uint32_t)RESET)
   {
     bitstatus = SET;
@@ -535,10 +535,10 @@ void SDIO_ClearFlag(uint32_t SDIO_FLAG)
 * Return         : ITStatus: SET or RESET
 *******************************************************************************/
 ITStatus SDIO_GetITStatus(uint32_t SDIO_IT)
-{ 
+{
   ITStatus bitstatus = RESET;
-  
-  if ((SDIO->STA & SDIO_IT) != (uint32_t)RESET)  
+
+  if ((SDIO->STA & SDIO_IT) != (uint32_t)RESET)
   {
     bitstatus = SET;
   }
@@ -572,3 +572,4 @@ void SDIO_ClearITPendingBit(uint32_t SDIO_IT)
 {
   SDIO->ICR = SDIO_IT;
 }
+

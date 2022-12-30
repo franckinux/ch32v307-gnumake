@@ -3,9 +3,9 @@
 * Author             : WCH
 * Version            : V1.0.0
 * Date               : 2021/06/06
-* Description        : This file contains all the functions prototypes for the 
+* Description        : This file contains all the functions prototypes for the
 *                      GPIO firmware library.
-*******************************************************************************/ 
+*******************************************************************************/
 #ifndef __CH32V30x_GPIO_H
 #define __CH32V30x_GPIO_H
 
@@ -14,12 +14,12 @@
 #endif
 
 #include "ch32v30x.h"
-                                 
+
 /* Output Maximum frequency selection */
 typedef enum
-{ 
+{
   GPIO_Speed_10MHz = 1,
-  GPIO_Speed_2MHz, 
+  GPIO_Speed_2MHz,
   GPIO_Speed_50MHz
 }GPIOSpeed_TypeDef;
 
@@ -112,8 +112,8 @@ typedef enum
 #define GPIO_Remap_FSMC_NADV        ((uint32_t)0x80000400)  /* FSMC_NADV Alternate Function mapping (only for High density Value line and XL-density devices) */
 #define GPIO_Remap_TIM1_DMA         ((uint32_t)0x80000010)  /* TIM1 DMA requests mapping (only for Value line devices) */
 #define GPIO_Remap_TIM67_DAC_DMA    ((uint32_t)0x80000800)  /* TIM6/TIM7 and DAC DMA requests remapping (only for High density Value line devices) */
-#define GPIO_Remap_MISC             ((uint32_t)0x80002000)  /* Miscellaneous Remap (DMA2 Channel5 Position and DAC Trigger remapping, 
-                                                                 only for High density Value line devices) */                                                       
+#define GPIO_Remap_MISC             ((uint32_t)0x80002000)  /* Miscellaneous Remap (DMA2 Channel5 Position and DAC Trigger remapping,
+                                                                 only for High density Value line devices) */
 
 /* GPIO_Port_Sources */
 #define GPIO_PortSourceGPIOA        ((uint8_t)0x00)
@@ -170,11 +170,5 @@ void GPIO_ETH_MediaInterfaceConfig(uint32_t GPIO_ETH_MediaInterface);
 }
 #endif
 
-#endif 
-
-
-
-
-
-
+#endif
 

@@ -11,18 +11,18 @@ __IO uint32_t NVIC_Priority_Group = 0;
 
 /******************************************************************************************
 * Function Name  : NVIC_PriorityGroupConfig
-* Description    : Configures the priority grouping: pre-emption priority and subpriority. 
+* Description    : Configures the priority grouping: pre-emption priority and subpriority.
 * Input          : NVIC_PriorityGroup: specifies the priority grouping bits length.
 *                    NVIC_PriorityGroup_0: 0 bits for pre-emption priority
 *                                          4 bits for subpriority
-*										 NVIC_PriorityGroup_1: 1 bits for pre-emption priority	
+*										 NVIC_PriorityGroup_1: 1 bits for pre-emption priority
 *                                          3 bits for subpriority
 *                    NVIC_PriorityGroup_2: 2 bits for pre-emption priority
 *                                          2 bits for subpriority
 *                    NVIC_PriorityGroup_3: 3 bits for pre-emption priority
 *                                          1 bits for subpriority
 *                    NVIC_PriorityGroup_4: 4 bits for pre-emption priority
-*                                          0 bits for subpriority                        
+*                                          0 bits for subpriority
 * Return         : None
 *******************************************************************************************/
 void NVIC_PriorityGroupConfig(uint32_t NVIC_PriorityGroup)
@@ -32,10 +32,10 @@ void NVIC_PriorityGroupConfig(uint32_t NVIC_PriorityGroup)
 
 /******************************************************************************************
 * Function Name  : NVIC_Init
-* Description    : Initializes the NVIC peripheral according to the specified parameters in 
-*                  the NVIC_InitStruct. 
+* Description    : Initializes the NVIC peripheral according to the specified parameters in
+*                  the NVIC_InitStruct.
 * Input          : NVIC_InitStruct: pointer to a NVIC_InitTypeDef structure that contains the
-*                                   configuration information for the specified NVIC peripheral.                 
+*                                   configuration information for the specified NVIC peripheral.
 * Return         : None
 *******************************************************************************************/
 void NVIC_Init(NVIC_InitTypeDef* NVIC_InitStruct)
@@ -97,6 +97,4 @@ void NVIC_Init(NVIC_InitTypeDef* NVIC_InitStruct)
   	NVIC_DisableIRQ(NVIC_InitStruct->NVIC_IRQChannel);
   }
 }
-
-
 

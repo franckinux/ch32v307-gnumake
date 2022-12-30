@@ -189,5 +189,3 @@ void *_sbrk(ptrdiff_t incr)
     return curbrk - incr;
 }
 
-
-

@@ -23,13 +23,13 @@
 /* DOR register offset */
 #define DOR_OFFSET                 ((uint32_t)0x0000002C)
 
-	
+
 /******************************************************************************************
 * Function Name  : DAC_DeInit
 * Description    : Deinitializes the DAC peripheral registers to their default reset values.
 * Input          : None
 * Return         : None
-*******************************************************************************************/	
+*******************************************************************************************/
 void DAC_DeInit(void)
 {
   RCC_APB1PeriphResetCmd(RCC_APB1Periph_DAC, ENABLE);
@@ -38,7 +38,7 @@ void DAC_DeInit(void)
 
 /******************************************************************************************
 * Function Name  : DAC_Init
-* Description    : Initializes the DAC peripheral according to the specified parameters in 
+* Description    : Initializes the DAC peripheral according to the specified parameters in
 *                  the DAC_InitStruct.
 * Input          : DAC_Channel:the selected DAC channel.
 *                     DAC_Channel_1: DAC Channel1 selected
@@ -51,7 +51,7 @@ void DAC_Init(uint32_t DAC_Channel, DAC_InitTypeDef* DAC_InitStruct)
   uint32_t tmpreg1 = 0, tmpreg2 = 0;
 
   tmpreg1 = DAC->CTLR;
-  tmpreg1 &= ~(CTLR_CLEAR_MASK << DAC_Channel);   
+  tmpreg1 &= ~(CTLR_CLEAR_MASK << DAC_Channel);
   tmpreg2 = (DAC_InitStruct->DAC_Trigger | DAC_InitStruct->DAC_WaveGeneration |
              DAC_InitStruct->DAC_LFSRUnmask_TriangleAmplitude | DAC_InitStruct->DAC_OutputBuffer);
   tmpreg1 |= tmpreg2 << DAC_Channel;
@@ -78,7 +78,7 @@ void DAC_StructInit(DAC_InitTypeDef* DAC_InitStruct)
 * Input          : DAC_Channel: the selected DAC channel.
 *                    DAC_Channel_1: DAC Channel1 selected
 *                    DAC_Channel_2: DAC Channel2 selected
-*                  NewState:new state of the DAC channel(ENABLE or DISABLE). 
+*                  NewState:new state of the DAC channel(ENABLE or DISABLE).
 * Return         : None
 *******************************************************************************************/
 void DAC_Cmd(uint32_t DAC_Channel, FunctionalState NewState)
@@ -99,7 +99,7 @@ void DAC_Cmd(uint32_t DAC_Channel, FunctionalState NewState)
 * Input          : DAC_Channel: the selected DAC channel.
 *                    DAC_Channel_1: DAC Channel1 selected
 *                    DAC_Channel_2: DAC Channel2 selected
-*                  NewState:new state of the DAC channel(ENABLE or DISABLE). 
+*                  NewState:new state of the DAC channel(ENABLE or DISABLE).
 * Return         : None
 *******************************************************************************************/
 void DAC_DMACmd(uint32_t DAC_Channel, FunctionalState NewState)
@@ -120,7 +120,7 @@ void DAC_DMACmd(uint32_t DAC_Channel, FunctionalState NewState)
 * Input          : DAC_Channel: the selected DAC channel.
 *                    DAC_Channel_1: DAC Channel1 selected
 *                    DAC_Channel_2: DAC Channel2 selected
-*                  NewState:new state of the DAC channel(ENABLE or DISABLE). 
+*                  NewState:new state of the DAC channel(ENABLE or DISABLE).
 * Return         : None
 *******************************************************************************************/
 void DAC_SoftwareTriggerCmd(uint32_t DAC_Channel, FunctionalState NewState)
@@ -162,7 +162,7 @@ void DAC_DualSoftwareTriggerCmd(FunctionalState NewState)
 *                  DAC_Wave: Specifies the wave type to enable or disable.
 *                    DAC_Wave_Noise: noise wave generation
 *                    DAC_Wave_Triangle: triangle wave generation
-*                  NewState:new state of the DAC channel(ENABLE or DISABLE). 
+*                  NewState:new state of the DAC channel(ENABLE or DISABLE).
 * Return         : None
 *******************************************************************************************/
 void DAC_WaveGenerationCmd(uint32_t DAC_Channel, uint32_t DAC_Wave, FunctionalState NewState)
@@ -184,14 +184,14 @@ void DAC_WaveGenerationCmd(uint32_t DAC_Channel, uint32_t DAC_Wave, FunctionalSt
 *                    DAC_Align_8b_R: 8bit right data alignment selected
 *                    DAC_Align_12b_L: 12bit left data alignment selected
 *                    DAC_Align_12b_R: 12bit right data alignment selected
-*                  Data : Data to be loaded in the selected data holding register. 
+*                  Data : Data to be loaded in the selected data holding register.
 * Return         : None
 *******************************************************************************************/
 void DAC_SetChannel1Data(uint32_t DAC_Align, uint16_t Data)
-{  
+{
   __IO uint32_t tmp = 0;
-    
-  tmp = (uint32_t)DAC_BASE; 
+
+  tmp = (uint32_t)DAC_BASE;
   tmp += DHR12R1_OFFSET + DAC_Align;
 
   *(__IO uint32_t *) tmp = Data;
@@ -204,7 +204,7 @@ void DAC_SetChannel1Data(uint32_t DAC_Align, uint16_t Data)
 *                    DAC_Align_8b_R: 8bit right data alignment selected
 *                    DAC_Align_12b_L: 12bit left data alignment selected
 *                    DAC_Align_12b_R: 12bit right data alignment selected
-*                  Data : Data to be loaded in the selected data holding register. 
+*                  Data : Data to be loaded in the selected data holding register.
 * Return         : None
 *******************************************************************************************/
 void DAC_SetChannel2Data(uint32_t DAC_Align, uint16_t Data)
@@ -258,12 +258,10 @@ void DAC_SetDualChannelData(uint32_t DAC_Align, uint16_t Data2, uint16_t Data1)
 uint16_t DAC_GetDataOutputValue(uint32_t DAC_Channel)
 {
   __IO uint32_t tmp = 0;
-  
+
   tmp = (uint32_t) DAC_BASE ;
   tmp += DOR_OFFSET + ((uint32_t)DAC_Channel >> 2);
-  
+
   return (uint16_t) (*(__IO uint32_t*) tmp);
 }
-
-
 

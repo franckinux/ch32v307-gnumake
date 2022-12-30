@@ -4,9 +4,9 @@
 * Version            : V1.0.0
 * Date               : 2021/06/06
 * Description        : This file provides all the IWDG firmware functions.
-*******************************************************************************/ 
+*******************************************************************************/
 #include "ch32v30x_iwdg.h"
-  
+
 /* CTLR register bit mask */
 #define CTLR_KEY_Reload    ((uint16_t)0xAAAA)
 #define CTLR_KEY_Enable    ((uint16_t)0xCCCC)
@@ -14,11 +14,11 @@
 /*******************************************************************************
 * Function Name  : IWDG_WriteAccessCmd
 * Description    : Enables or disables write access to IWDG_PSCR and IWDG_RLDR registers.
-* Input          : WDG_WriteAccess: new state of write access to IWDG_PSCR and 
+* Input          : WDG_WriteAccess: new state of write access to IWDG_PSCR and
 *      IWDG_RLDR registers.
 *                    IWDG_WriteAccess_Enable: Enable write access to IWDG_PSCR and
 *      IWDG_RLDR registers.
-*                    IWDG_WriteAccess_Disable: Disable write access to IWDG_PSCR 
+*                    IWDG_WriteAccess_Disable: Disable write access to IWDG_PSCR
 *      and IWDG_RLDR registers.
 * Return         : None
 *******************************************************************************/
@@ -102,8 +102,4 @@ FlagStatus IWDG_GetFlagStatus(uint16_t IWDG_FLAG)
 
   return bitstatus;
 }
-
-
-
-
 

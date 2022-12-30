@@ -3,9 +3,9 @@
 * Author             : WCH
 * Version            : V1.0.0
 * Date               : 2021/06/06
-* Description        : This file contains all the functions prototypes for the 
+* Description        : This file contains all the functions prototypes for the
 *                      OPA firmware library.
-*******************************************************************************/ 
+*******************************************************************************/
 #ifndef __CH32V30x_OPA_H
 #define __CH32V30x_OPA_H
 
@@ -68,5 +68,5 @@ void OPA_Cmd(OPA_Num_TypeDef OPA_NUM, FunctionalState NewState);
 }
 #endif
 
-#endif 
+#endif
 

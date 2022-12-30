@@ -3,9 +3,9 @@
 * Author             : WCH
 * Version            : V1.0.0
 * Date               : 2021/06/06
-* Description        : This file contains all the functions prototypes for the 
+* Description        : This file contains all the functions prototypes for the
 *                      DVP firmware library.
-*******************************************************************************/ 
+*******************************************************************************/
 #ifndef __CH32V30x_DVP_H
 #define __CH32V30x_DVP_H
 
@@ -56,10 +56,5 @@
 }
 #endif
 
-#endif 
-
-
-
-
-
+#endif
 

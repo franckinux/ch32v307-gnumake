@@ -76,7 +76,7 @@ typedef struct
   uint32_t FSMC_BurstAccessMode;     /* Enables or disables the burst access mode for Flash memory,
                                         valid only with synchronous burst Flash memories.
                                         This parameter can be a value of @ref FSMC_Burst_Access_Mode */
-                                       
+
   uint32_t FSMC_AsynchronousWait;    /* Enables or disables wait signal during asynchronous transfers,
                                         valid only with asynchronous Flash memories.
                                         This parameter can be a value of @ref FSMC_AsynchronousWait */
@@ -186,11 +186,11 @@ typedef struct
                                    delay between ALE low and RE low.
                                    This parameter can be a number between 0x0 and 0xFF */
 
-  
+
   FSMC_NAND_PCCARDTimingInitTypeDef*  FSMC_CommonSpaceTimingStruct; /* FSMC Common Space Timing */
 
   FSMC_NAND_PCCARDTimingInitTypeDef*  FSMC_AttributeSpaceTimingStruct;  /* FSMC Attribute Space Timing */
-  
+
   FSMC_NAND_PCCARDTimingInitTypeDef*  FSMC_IOSpaceTimingStruct; /* FSMC IO Space Timing */
 }FSMC_PCCARDInitTypeDef;
 
@@ -222,7 +222,7 @@ typedef struct
 #define FSMC_MemoryDataWidth_16b                        ((uint32_t)0x00000010)
 
 /* FSMC_Burst_Access_Mode */
-#define FSMC_BurstAccessMode_Disable                    ((uint32_t)0x00000000) 
+#define FSMC_BurstAccessMode_Disable                    ((uint32_t)0x00000000)
 #define FSMC_BurstAccessMode_Enable                     ((uint32_t)0x00000100)
 
 /* FSMC_AsynchronousWait */
@@ -235,11 +235,11 @@ typedef struct
 
 /* FSMC_Wrap_Mode */
 #define FSMC_WrapMode_Disable                           ((uint32_t)0x00000000)
-#define FSMC_WrapMode_Enable                            ((uint32_t)0x00000400) 
+#define FSMC_WrapMode_Enable                            ((uint32_t)0x00000400)
 
 /* FSMC_Wait_Timing */
 #define FSMC_WaitSignalActive_BeforeWaitState           ((uint32_t)0x00000000)
-#define FSMC_WaitSignalActive_DuringWaitState           ((uint32_t)0x00000800) 
+#define FSMC_WaitSignalActive_DuringWaitState           ((uint32_t)0x00000800)
 
 /* FSMC_Write_Operation */
 #define FSMC_WriteOperation_Disable                     ((uint32_t)0x00000000)
@@ -247,7 +247,7 @@ typedef struct
 
 /* FSMC_Wait_Signal */
 #define FSMC_WaitSignal_Disable                         ((uint32_t)0x00000000)
-#define FSMC_WaitSignal_Enable                          ((uint32_t)0x00002000) 
+#define FSMC_WaitSignal_Enable                          ((uint32_t)0x00002000)
 
 /* FSMC_Extended_Mode */
 #define FSMC_ExtendedMode_Disable                       ((uint32_t)0x00000000)
@@ -255,11 +255,11 @@ typedef struct
 
 /* FSMC_Write_Burst */
 #define FSMC_WriteBurst_Disable                         ((uint32_t)0x00000000)
-#define FSMC_WriteBurst_Enable                          ((uint32_t)0x00080000) 
+#define FSMC_WriteBurst_Enable                          ((uint32_t)0x00080000)
 
 /* FSMC_Access_Mode */
 #define FSMC_AccessMode_A                               ((uint32_t)0x00000000)
-#define FSMC_AccessMode_B                               ((uint32_t)0x10000000) 
+#define FSMC_AccessMode_B                               ((uint32_t)0x10000000)
 #define FSMC_AccessMode_C                               ((uint32_t)0x20000000)
 #define FSMC_AccessMode_D                               ((uint32_t)0x30000000)
 
@@ -315,4 +315,5 @@ void FSMC_ClearITPendingBit(uint32_t FSMC_Bank, uint32_t FSMC_IT);
 }
 #endif
 
-#endif 
+#endif
+

@@ -37,3 +37,4 @@ void RNG_ClearITPendingBit(uint8_t RNG_IT);
 #endif
 
 #endif
+

@@ -3,9 +3,9 @@
 * Author             : WCH
 * Version            : V1.0.0
 * Date               : 2021/06/06
-* Description        : This file contains all the functions prototypes for the 
+* Description        : This file contains all the functions prototypes for the
 *                      ADC firmware library.
-*******************************************************************************/ 
+*******************************************************************************/
 #ifndef __CH32V30x_ADC_H
 #define __CH32V30x_ADC_H
 
@@ -20,7 +20,7 @@
 typedef struct
 {
   uint32_t ADC_Mode;                      /* Configures the ADC to operate in independent or
-                                             dual mode. 
+                                             dual mode.
                                              This parameter can be a value of @ref ADC_mode */
 
   FunctionalState ADC_ScanConvMode;       /* Specifies whether the conversion is performed in
@@ -62,22 +62,22 @@ typedef struct
 #define ADC_Mode_AlterTrig                          ((uint32_t)0x00090000)
 
 /* ADC_external_trigger_sources_for_regular_channels_conversion */
-#define ADC_ExternalTrigConv_T1_CC1                 ((uint32_t)0x00000000) 
-#define ADC_ExternalTrigConv_T1_CC2                 ((uint32_t)0x00020000) 
-#define ADC_ExternalTrigConv_T2_CC2                 ((uint32_t)0x00060000) 
-#define ADC_ExternalTrigConv_T3_TRGO                ((uint32_t)0x00080000) 
+#define ADC_ExternalTrigConv_T1_CC1                 ((uint32_t)0x00000000)
+#define ADC_ExternalTrigConv_T1_CC2                 ((uint32_t)0x00020000)
+#define ADC_ExternalTrigConv_T2_CC2                 ((uint32_t)0x00060000)
+#define ADC_ExternalTrigConv_T3_TRGO                ((uint32_t)0x00080000)
 #define ADC_ExternalTrigConv_T4_CC4                 ((uint32_t)0x000A0000)
-#define ADC_ExternalTrigConv_Ext_IT11_TIM8_TRGO     ((uint32_t)0x000C0000) 
+#define ADC_ExternalTrigConv_Ext_IT11_TIM8_TRGO     ((uint32_t)0x000C0000)
 
-#define ADC_ExternalTrigConv_T1_CC3                 ((uint32_t)0x00040000) 
-#define ADC_ExternalTrigConv_None                   ((uint32_t)0x000E0000) 
+#define ADC_ExternalTrigConv_T1_CC3                 ((uint32_t)0x00040000)
+#define ADC_ExternalTrigConv_None                   ((uint32_t)0x000E0000)
 
-#define ADC_ExternalTrigConv_T3_CC1                ((uint32_t)0x00000000) 
-#define ADC_ExternalTrigConv_T2_CC3                ((uint32_t)0x00020000) 
-#define ADC_ExternalTrigConv_T8_CC1                ((uint32_t)0x00060000) 
+#define ADC_ExternalTrigConv_T3_CC1                ((uint32_t)0x00000000)
+#define ADC_ExternalTrigConv_T2_CC3                ((uint32_t)0x00020000)
+#define ADC_ExternalTrigConv_T8_CC1                ((uint32_t)0x00060000)
 #define ADC_ExternalTrigConv_T8_TRGO               ((uint32_t)0x00080000)
-#define ADC_ExternalTrigConv_T5_CC1                ((uint32_t)0x000A0000) 
-#define ADC_ExternalTrigConv_T5_CC3                ((uint32_t)0x000C0000) 
+#define ADC_ExternalTrigConv_T5_CC1                ((uint32_t)0x000A0000)
+#define ADC_ExternalTrigConv_T5_CC3                ((uint32_t)0x000C0000)
 
 
 /* ADC_data_align */
@@ -128,21 +128,21 @@ typedef struct
 #define ADC_SampleTime_239Cycles5                   ((uint8_t)0x07)
 
 /* ADC_external_trigger_sources_for_injected_channels_conversion */
-#define ADC_ExternalTrigInjecConv_T2_TRGO           ((uint32_t)0x00002000) 
-#define ADC_ExternalTrigInjecConv_T2_CC1            ((uint32_t)0x00003000) 
-#define ADC_ExternalTrigInjecConv_T3_CC4            ((uint32_t)0x00004000) 
-#define ADC_ExternalTrigInjecConv_T4_TRGO           ((uint32_t)0x00005000) 
-#define ADC_ExternalTrigInjecConv_Ext_IT15_TIM8_CC4 ((uint32_t)0x00006000) 
+#define ADC_ExternalTrigInjecConv_T2_TRGO           ((uint32_t)0x00002000)
+#define ADC_ExternalTrigInjecConv_T2_CC1            ((uint32_t)0x00003000)
+#define ADC_ExternalTrigInjecConv_T3_CC4            ((uint32_t)0x00004000)
+#define ADC_ExternalTrigInjecConv_T4_TRGO           ((uint32_t)0x00005000)
+#define ADC_ExternalTrigInjecConv_Ext_IT15_TIM8_CC4 ((uint32_t)0x00006000)
 
-#define ADC_ExternalTrigInjecConv_T1_TRGO           ((uint32_t)0x00000000) 
-#define ADC_ExternalTrigInjecConv_T1_CC4            ((uint32_t)0x00001000) 
-#define ADC_ExternalTrigInjecConv_None              ((uint32_t)0x00007000) 
+#define ADC_ExternalTrigInjecConv_T1_TRGO           ((uint32_t)0x00000000)
+#define ADC_ExternalTrigInjecConv_T1_CC4            ((uint32_t)0x00001000)
+#define ADC_ExternalTrigInjecConv_None              ((uint32_t)0x00007000)
 
-#define ADC_ExternalTrigInjecConv_T4_CC3            ((uint32_t)0x00002000) 
-#define ADC_ExternalTrigInjecConv_T8_CC2            ((uint32_t)0x00003000) 
-#define ADC_ExternalTrigInjecConv_T8_CC4            ((uint32_t)0x00004000) 
+#define ADC_ExternalTrigInjecConv_T4_CC3            ((uint32_t)0x00002000)
+#define ADC_ExternalTrigInjecConv_T8_CC2            ((uint32_t)0x00003000)
+#define ADC_ExternalTrigInjecConv_T8_CC4            ((uint32_t)0x00004000)
 #define ADC_ExternalTrigInjecConv_T5_TRGO           ((uint32_t)0x00005000)
-#define ADC_ExternalTrigInjecConv_T5_CC4            ((uint32_t)0x00006000) 
+#define ADC_ExternalTrigInjecConv_T5_CC4            ((uint32_t)0x00006000)
 
 
 /* ADC_injected_channel_selection */
@@ -217,10 +217,5 @@ int16_t Get_CalibrationValue(ADC_TypeDef* ADCx);
 }
 #endif
 
-#endif 
-
-
-
-
-
+#endif
 

@@ -3,9 +3,9 @@
 * Author             : WCH
 * Version            : V1.0.0
 * Date               : 2021/06/06
-* Description        : This file contains all the functions prototypes for the FLASH  
+* Description        : This file contains all the functions prototypes for the FLASH
 *                      firmware library.
-*******************************************************************************/ 
+*******************************************************************************/
 #ifndef __CH32V30x_FLASH_H
 #define __CH32V30x_FLASH_H
 
@@ -17,7 +17,7 @@
 
 /* FLASH Status */
 typedef enum
-{ 
+{
   FLASH_BUSY = 1,
   FLASH_ERROR_PG,
   FLASH_ERROR_WRP,
@@ -33,11 +33,11 @@ typedef enum
 
 /* Half_Cycle_Enable_Disable */
 #define FLASH_HalfCycleAccess_Enable   ((uint32_t)0x00000008)  /* FLASH Half Cycle Enable */
-#define FLASH_HalfCycleAccess_Disable  ((uint32_t)0x00000000)  /* FLASH Half Cycle Disable */ 
+#define FLASH_HalfCycleAccess_Disable  ((uint32_t)0x00000000)  /* FLASH Half Cycle Disable */
 
 /* Prefetch_Buffer_Enable_Disable */
 #define FLASH_PrefetchBuffer_Enable    ((uint32_t)0x00000010)  /* FLASH Prefetch Buffer Enable */
-#define FLASH_PrefetchBuffer_Disable   ((uint32_t)0x00000000)  /* FLASH Prefetch Buffer Disable */ 
+#define FLASH_PrefetchBuffer_Disable   ((uint32_t)0x00000000)  /* FLASH Prefetch Buffer Disable */
 
 /* Values to be used with Low and Medium density devices */
 #define FLASH_WRProt_Pages0to3         ((uint32_t)0x00000001) /* CH32 Low and Medium density devices: Write protection of page 0 to 3 */
@@ -48,8 +48,8 @@ typedef enum
 #define FLASH_WRProt_Pages20to23       ((uint32_t)0x00000020) /* CH32 Low and Medium density devices: Write protection of page 20 to 23 */
 #define FLASH_WRProt_Pages24to27       ((uint32_t)0x00000040) /* CH32 Low and Medium density devices: Write protection of page 24 to 27 */
 #define FLASH_WRProt_Pages28to31       ((uint32_t)0x00000080) /* CH32 Low and Medium density devices: Write protection of page 28 to 31 */
-                                                                   
-/* Values to be used with Medium-density devices */       
+
+/* Values to be used with Medium-density devices */
 #define FLASH_WRProt_Pages32to35       ((uint32_t)0x00000100) /* CH32 Medium-density devices: Write protection of page 32 to 35 */
 #define FLASH_WRProt_Pages36to39       ((uint32_t)0x00000200) /* CH32 Medium-density devices: Write protection of page 36 to 39 */
 #define FLASH_WRProt_Pages40to43       ((uint32_t)0x00000400) /* CH32 Medium-density devices: Write protection of page 40 to 43 */
@@ -74,7 +74,7 @@ typedef enum
 #define FLASH_WRProt_Pages116to119     ((uint32_t)0x20000000) /* CH32 Medium-density devices: Write protection of page 115 to 119 */
 #define FLASH_WRProt_Pages120to123     ((uint32_t)0x40000000) /* CH32 Medium-density devices: Write protection of page 120 to 123 */
 #define FLASH_WRProt_Pages124to127     ((uint32_t)0x80000000) /* CH32 Medium-density devices: Write protection of page 124 to 127 */
-                                                                   
+
 #define FLASH_WRProt_Pages62to255      ((uint32_t)0x80000000) /* CH32 Medium-density devices: Write protection of page 62 to 255 */
 
 #define FLASH_WRProt_AllPages          ((uint32_t)0xFFFFFFFF) /* Write protection of all Pages */
@@ -91,13 +91,13 @@ typedef enum
 #define OB_STDBY_NoRST                 ((uint16_t)0x0004) /* No reset generated when entering in STANDBY */
 #define OB_STDBY_RST                   ((uint16_t)0x0000) /* Reset generated when entering in STANDBY */
 
-/* FLASH_Interrupts */	
+/* FLASH_Interrupts */
 #define FLASH_IT_ERROR                 ((uint32_t)0x00000400)  /* FPEC error interrupt source */
 #define FLASH_IT_EOP                   ((uint32_t)0x00001000)  /* End of FLASH Operation Interrupt source */
 #define FLASH_IT_BANK1_ERROR           FLASH_IT_ERROR          /* FPEC BANK1 error interrupt source */
 #define FLASH_IT_BANK1_EOP             FLASH_IT_EOP            /* End of FLASH BANK1 Operation Interrupt source */
 
-/* FLASH_Flags */	
+/* FLASH_Flags */
 #define FLASH_FLAG_BSY                 ((uint32_t)0x00000001)  /* FLASH Busy flag */
 #define FLASH_FLAG_EOP                 ((uint32_t)0x00000020)  /* FLASH End of Operation flag */
 #define FLASH_FLAG_PGERR               ((uint32_t)0x00000004)  /* FLASH Program error flag */
@@ -108,8 +108,8 @@ typedef enum
 #define FLASH_FLAG_BANK1_EOP                 FLASH_FLAG_EOP       /* FLASH BANK1 End of Operation flag */
 #define FLASH_FLAG_BANK1_PGERR               FLASH_FLAG_PGERR     /* FLASH BANK1 Program error flag */
 #define FLASH_FLAG_BANK1_WRPRTERR            FLASH_FLAG_WRPRTERR  /* FLASH BANK1 Write protected error flag */
- 
- 
+
+
 /*Functions used for all devices*/
 void FLASH_SetLatency(uint32_t FLASH_Latency);
 void FLASH_HalfCycleAccessCmd(uint32_t FLASH_HalfCycleAccess);
@@ -153,5 +153,5 @@ FLASH_Status FLASH_WaitForLastBank1Operation(uint32_t Timeout);
 #endif
 
 
-#endif 
+#endif
 

@@ -3,9 +3,9 @@
 * Author             : WCH
 * Version            : V1.0.0
 * Date               : 2021/06/06
-* Description        : This file contains all the functions prototypes for the 
+* Description        : This file contains all the functions prototypes for the
 *                      miscellaneous firmware library functions.
-*******************************************************************************/   
+*******************************************************************************/
 #ifndef __CH32V30X_MISC_H
 #define __CH32V30X_MISC_H
 
@@ -15,7 +15,7 @@
 
 #include "ch32v30x.h"
 
-/* NVIC Init Structure definition */	 
+/* NVIC Init Structure definition */
 typedef struct
 {
   uint8_t NVIC_IRQChannel;
@@ -23,7 +23,7 @@ typedef struct
   uint8_t NVIC_IRQChannelSubPriority;
   FunctionalState NVIC_IRQChannelCmd;
 } NVIC_InitTypeDef;
- 
+
 
 /* Preemption_Priority_Group */
 #define NVIC_PriorityGroup_0           ((uint32_t)0x00)
@@ -40,5 +40,5 @@ void NVIC_Init(NVIC_InitTypeDef* NVIC_InitStruct);
 }
 #endif
 
-#endif 
+#endif
 

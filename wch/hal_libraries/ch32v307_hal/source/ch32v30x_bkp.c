@@ -4,7 +4,7 @@
 * Version            : V1.0.0
 * Date               : 2021/06/06
 * Description        : This file provides all the BKP firmware functions.
-*******************************************************************************/ 
+*******************************************************************************/
 #include "ch32v30x_bkp.h"
 #include "ch32v30x_rcc.h"
 
@@ -16,11 +16,11 @@
 
 /*******************************************************************************
 * Function Name  : BKP_DeInit
-* Description    : Deinitializes the BKP peripheral registers to their default 
+* Description    : Deinitializes the BKP peripheral registers to their default
 *      reset values.
 * Input          : None
 * Return         : None
-*******************************************************************************/	
+*******************************************************************************/
 void BKP_DeInit(void)
 {
   RCC_BackupResetCmd(ENABLE);
@@ -34,7 +34,7 @@ void BKP_DeInit(void)
 *                    BKP_TamperPinLevel_High: Tamper pin active on high level.
 *                    BKP_TamperPinLevel_Low: Tamper pin active on low level.
 * Return         : None
-*******************************************************************************/	
+*******************************************************************************/
 void BKP_TamperPinLevelConfig(uint16_t BKP_TamperPinLevel)
 {
 	if(BKP_TamperPinLevel)
@@ -52,7 +52,7 @@ void BKP_TamperPinLevelConfig(uint16_t BKP_TamperPinLevel)
 * Description    : Enables or disables the Tamper Pin activation.
 * Input          : NewState: ENABLE or DISABLE.
 * Return         : None
-*******************************************************************************/	
+*******************************************************************************/
 void BKP_TamperPinCmd(FunctionalState NewState)
 {
 	if(NewState)
@@ -61,7 +61,7 @@ void BKP_TamperPinCmd(FunctionalState NewState)
 	}
 	else
 	{
-		BKP->TPCTLR &= ~(1<<0);		
+		BKP->TPCTLR &= ~(1<<0);
 	}
 }
 
@@ -70,7 +70,7 @@ void BKP_TamperPinCmd(FunctionalState NewState)
 * Description    : Enables or disables the Tamper Pin Interrupt.
 * Input          : NewState: ENABLE or DISABLE.
 * Return         : None
-*******************************************************************************/	
+*******************************************************************************/
 void BKP_ITConfig(FunctionalState NewState)
 {
 	if(NewState)
@@ -79,8 +79,8 @@ void BKP_ITConfig(FunctionalState NewState)
 	}
 	else
 	{
-		BKP->TPCSR &= ~(1<<2);		
-	}	
+		BKP->TPCSR &= ~(1<<2);
+	}
 }
 
 /*******************************************************************************
@@ -88,14 +88,14 @@ void BKP_ITConfig(FunctionalState NewState)
 * Description    : Select the RTC output source to output on the Tamper pin.
 * Input          : BKP_RTCOutputSource: specifies the RTC output source.
 *                    BKP_RTCOutputSource_None: no RTC output on the Tamper pin.
-*                    BKP_RTCOutputSource_CalibClock: output the RTC clock with 
+*                    BKP_RTCOutputSource_CalibClock: output the RTC clock with
 *      frequency divided by 64 on the Tamper pin.
-*                    BKP_RTCOutputSource_Alarm: output the RTC Alarm pulse signal 
+*                    BKP_RTCOutputSource_Alarm: output the RTC Alarm pulse signal
 *      on the Tamper pin.
-*                    BKP_RTCOutputSource_Second: output the RTC Second pulse 
-*      signal on the Tamper pin. 
+*                    BKP_RTCOutputSource_Second: output the RTC Second pulse
+*      signal on the Tamper pin.
 * Return         : None
-*******************************************************************************/	
+*******************************************************************************/
 void BKP_RTCOutputConfig(uint16_t BKP_RTCOutputSource)
 {
   uint16_t tmpreg = 0;
@@ -134,7 +134,7 @@ void BKP_WriteBackupRegister(uint16_t BKP_DR, uint16_t Data)
 {
   __IO uint32_t tmp = 0;
 
-  tmp = (uint32_t)BKP_BASE; 
+  tmp = (uint32_t)BKP_BASE;
   tmp += BKP_DR;
   *(__IO uint32_t *) tmp = Data;
 }
@@ -150,7 +150,7 @@ uint16_t BKP_ReadBackupRegister(uint16_t BKP_DR)
 {
   __IO uint32_t tmp = 0;
 
-  tmp = (uint32_t)BKP_BASE; 
+  tmp = (uint32_t)BKP_BASE;
   tmp += BKP_DR;
 
   return (*(__IO uint16_t *) tmp);
@@ -170,7 +170,7 @@ FlagStatus BKP_GetFlagStatus(void)
 	}
 	else
 	{
-		return RESET;		
+		return RESET;
 	}
 }
 
@@ -199,7 +199,7 @@ ITStatus BKP_GetITStatus(void)
 	}
 	else
 	{
-		return RESET;		
+		return RESET;
 	}
 }
 
@@ -213,9 +213,4 @@ void BKP_ClearITPendingBit(void)
 {
   BKP->TPCSR |= BKP_CTI;
 }
-
-
-
-
-
 

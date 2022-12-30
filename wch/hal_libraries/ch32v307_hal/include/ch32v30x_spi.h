@@ -3,9 +3,9 @@
 * Author             : WCH
 * Version            : V1.0.0
 * Date               : 2021/06/06
-* Description        : This file contains all the functions prototypes for the  
+* Description        : This file contains all the functions prototypes for the
 *                      SPI firmware library.
-*******************************************************************************/ 
+*******************************************************************************/
 #ifndef __CH32V30x_SPI_H
 #define __CH32V30x_SPI_H
 
@@ -36,7 +36,7 @@ typedef struct
   uint16_t SPI_NSS;                 /* Specifies whether the NSS signal is managed by
                                        hardware (NSS pin) or by software using the SSI bit.
                                        This parameter can be a value of @ref SPI_Slave_Select_management */
- 
+
   uint16_t SPI_BaudRatePrescaler;   /* Specifies the Baud Rate prescaler value which will be
                                        used to configure the transmit and receive SCK clock.
                                        This parameter can be a value of @ref SPI_BaudRate_Prescaler.
@@ -72,7 +72,7 @@ typedef struct
                                 This parameter can be a value of @ref I2S_Clock_Polarity */
 }I2S_InitTypeDef;
 
-/* SPI_data_direction */  
+/* SPI_data_direction */
 #define SPI_Direction_2Lines_FullDuplex ((uint16_t)0x0000)
 #define SPI_Direction_2Lines_RxOnly     ((uint16_t)0x0400)
 #define SPI_Direction_1Line_Rx          ((uint16_t)0x8000)
@@ -215,13 +215,5 @@ void SPI_I2S_ClearITPendingBit(SPI_TypeDef* SPIx, uint8_t SPI_I2S_IT);
 }
 #endif
 
-#endif 
-
-
-
-
-
-
-
-
+#endif
 

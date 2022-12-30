@@ -3,7 +3,7 @@
 * Author             : WCH
 * Version            : V1.0.0
 * Date               : 2021/06/06
-* Description        : This file provides all the GPIO firmware functions. 
+* Description        : This file provides all the GPIO firmware functions.
 *******************************************************************************/
 #include "ch32v30x_gpio.h"
 #include "ch32v30x_rcc.h"
@@ -43,12 +43,12 @@ void GPIO_DeInit(GPIO_TypeDef* GPIOx)
   {
     RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOD, ENABLE);
     RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOD, DISABLE);
-  }    
+  }
   else if (GPIOx == GPIOE)
   {
     RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOE, ENABLE);
     RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOE, DISABLE);
-  } 
+  }
   else if (GPIOx == GPIOF)
   {
     RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOF, ENABLE);
@@ -90,21 +90,21 @@ void GPIO_Init(GPIO_TypeDef* GPIOx, GPIO_InitTypeDef* GPIO_InitStruct)
   uint32_t tmpreg = 0x00, pinmask = 0x00;
 
   currentmode = ((uint32_t)GPIO_InitStruct->GPIO_Mode) & ((uint32_t)0x0F);
-	
+
   if ((((uint32_t)GPIO_InitStruct->GPIO_Mode) & ((uint32_t)0x10)) != 0x00)
-  { 
+  {
     currentmode |= (uint32_t)GPIO_InitStruct->GPIO_Speed;
   }
 
   if (((uint32_t)GPIO_InitStruct->GPIO_Pin & ((uint32_t)0x00FF)) != 0x00)
   {
     tmpreg = GPIOx->CFGLR;
-		
+
     for (pinpos = 0x00; pinpos < 0x08; pinpos++)
     {
       pos = ((uint32_t)0x01) << pinpos;
       currentpin = (GPIO_InitStruct->GPIO_Pin) & pos;
-			
+
       if (currentpin == pos)
       {
         pos = pinpos << 2;
@@ -131,12 +131,12 @@ void GPIO_Init(GPIO_TypeDef* GPIOx, GPIO_InitTypeDef* GPIO_InitStruct)
   if (GPIO_InitStruct->GPIO_Pin > 0x00FF)
   {
     tmpreg = GPIOx->CFGHR;
-		
+
     for (pinpos = 0x00; pinpos < 0x08; pinpos++)
     {
       pos = (((uint32_t)0x01) << (pinpos + 0x08));
       currentpin = ((GPIO_InitStruct->GPIO_Pin) & pos);
-			
+
       if (currentpin == pos)
       {
         pos = pinpos << 2;
@@ -162,7 +162,7 @@ void GPIO_Init(GPIO_TypeDef* GPIOx, GPIO_InitTypeDef* GPIO_InitStruct)
 /*******************************************************************************
 * Function Name  : GPIO_StructInit
 * Description    : Fills each GPIO_InitStruct member with its default
-* Input          : GPIO_InitStruct: pointer to a GPIO_InitTypeDef structure 
+* Input          : GPIO_InitStruct: pointer to a GPIO_InitTypeDef structure
 *      which will be initialized.
 * Return         : None
 *******************************************************************************/
@@ -183,7 +183,7 @@ void GPIO_StructInit(GPIO_InitTypeDef* GPIO_InitStruct)
 uint8_t GPIO_ReadInputDataBit(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
 {
   uint8_t bitstatus = 0x00;
-  
+
   if ((GPIOx->INDR & GPIO_Pin) != (uint32_t)Bit_RESET)
   {
     bitstatus = (uint8_t)Bit_SET;
@@ -192,7 +192,7 @@ uint8_t GPIO_ReadInputDataBit(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
   {
     bitstatus = (uint8_t)Bit_RESET;
   }
-	
+
   return bitstatus;
 }
 
@@ -218,7 +218,7 @@ uint16_t GPIO_ReadInputData(GPIO_TypeDef* GPIOx)
 uint8_t GPIO_ReadOutputDataBit(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
 {
   uint8_t bitstatus = 0x00;
- 
+
   if ((GPIOx->OUTDR & GPIO_Pin) != (uint32_t)Bit_RESET)
   {
     bitstatus = (uint8_t)Bit_SET;
@@ -227,18 +227,18 @@ uint8_t GPIO_ReadOutputDataBit(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
   {
     bitstatus = (uint8_t)Bit_RESET;
   }
-	
+
   return bitstatus;
 }
 
 /*******************************************************************************
 * Function Name  : GPIO_ReadOutputData
 * Description    : Reads the specified GPIO output data port.
-* Input          : GPIOx: where x can be (A..G) to select the GPIO peripheral.        
+* Input          : GPIOx: where x can be (A..G) to select the GPIO peripheral.
 * Return         : GPIO output port pin value.
 *******************************************************************************/
 uint16_t GPIO_ReadOutputData(GPIO_TypeDef* GPIOx)
-{ 
+{
   return ((uint16_t)GPIOx->OUTDR);
 }
 
@@ -275,7 +275,7 @@ void GPIO_ResetBits(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
 *                    This parameter can be one of GPIO_Pin_x where x can be (0..15).
 *                  BitVal: specifies the value to be written to the selected bit.
 *                    Bit_SetL: to clear the port pin.
-*                    Bit_SetH: to set the port pin.                  
+*                    Bit_SetH: to set the port pin.
 * Return         : None
 *******************************************************************************/
 void GPIO_WriteBit(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, BitAction BitVal)
@@ -313,7 +313,7 @@ void GPIO_Write(GPIO_TypeDef* GPIOx, uint16_t PortVal)
 void GPIO_PinLockConfig(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
 {
   uint32_t tmp = 0x00010000;
-  
+
   tmp |= GPIO_Pin;
   GPIOx->LCKR = tmp;
   GPIOx->LCKR =  GPIO_Pin;
@@ -335,7 +335,7 @@ void GPIO_PinLockConfig(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
 void GPIO_EventOutputConfig(uint8_t GPIO_PortSource, uint8_t GPIO_PinSource)
 {
   uint32_t tmpreg = 0x00;
-  
+
   tmpreg = AFIO->ECR;
   tmpreg &= ECR_PORTPINCONFIG_MASK;
   tmpreg |= (uint32_t)GPIO_PortSource << 0x04;
@@ -357,7 +357,7 @@ void GPIO_EventOutputCmd(FunctionalState NewState)
 	}
 	else
 	{
-		AFIO->ECR &= ~(1<<7);		
+		AFIO->ECR &= ~(1<<7);
 	}
 }
 
@@ -386,16 +386,16 @@ void GPIO_EventOutputCmd(FunctionalState NewState)
 *                    GPIO_Remap_ADC1_ETRGREG: ADC1 External Trigger Regular Conversion remapping
 *                    GPIO_Remap_SWJ_NoJTRST: Full SWJ Enabled (JTAG-DP + SW-DP) but without JTRST
 *                    GPIO_Remap_SWJ_JTAGDisable: JTAG-DP Disabled and SW-DP Enabled
-*                    GPIO_Remap_SWJ_Disable: Full SWJ Disabled (JTAG-DP + SW-DP)  
-*                    GPIO_Remap_TIM2ITR1_PTP_SOF: Ethernet PTP output or USB OTG SOF (Start of Frame) 
+*                    GPIO_Remap_SWJ_Disable: Full SWJ Disabled (JTAG-DP + SW-DP)
+*                    GPIO_Remap_TIM2ITR1_PTP_SOF: Ethernet PTP output or USB OTG SOF (Start of Frame)
 *      connected to TIM2 Internal Trigger 1 for calibration (only for Connectivity line devices).If the
-*      is enabled the TIM2 ITR1 is connected to Ethernet PTP output. When Reset TIM2 ITR1 is connected  
-*      to USB OTG SOF output.    
+*      is enabled the TIM2 ITR1 is connected to Ethernet PTP output. When Reset TIM2 ITR1 is connected
+*      to USB OTG SOF output.
 *                    GPIO_Remap_TIM1_DMA: TIM1 DMA requests mapping (only for Value line devices)
 *                    GPIO_Remap_TIM67_DAC_DMA: TIM6/TIM7 and DAC DMA requests remapping (only for High density Value line devices)
-*                    GPIO_Remap_MISC: Miscellaneous Remap (DMA2 Channel5 Position and DAC Trigger remapping, 
-*      only for High density Value line devices)     
-*                  NewState: ENABLE or DISABLE.             
+*                    GPIO_Remap_MISC: Miscellaneous Remap (DMA2 Channel5 Position and DAC Trigger remapping,
+*      only for High density Value line devices)
+*                  NewState: ENABLE or DISABLE.
 * Return         : None
 *******************************************************************************/
 void GPIO_PinRemapConfig(uint32_t GPIO_Remap, FunctionalState NewState)
@@ -443,7 +443,7 @@ void GPIO_PinRemapConfig(uint32_t GPIO_Remap, FunctionalState NewState)
   else
   {
     AFIO->PCFR1 = tmpreg;
-  }  
+  }
 }
 
 /*******************************************************************************
@@ -484,7 +484,4 @@ void GPIO_ETH_MediaInterfaceConfig(uint32_t GPIO_ETH_MediaInterface)
         AFIO->PCFR1 &= ~(1<<23);
     }
 }
-
-
-
 

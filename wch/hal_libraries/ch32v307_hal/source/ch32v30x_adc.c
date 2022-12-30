@@ -3,8 +3,8 @@
 * Author             : WCH
 * Version            : V1.0.0
 * Date               : 2021/06/06
-* Description        : This file provides all the ADC firmware functions. 
-*******************************************************************************/ 
+* Description        : This file provides all the ADC firmware functions.
+*******************************************************************************/
 #include "ch32v30x_adc.h"
 #include "ch32v30x_rcc.h"
 
@@ -105,7 +105,7 @@
 
 /*******************************************************************************
 * Function Name  : ADC_DeInit
-* Description    : Deinitializes the ADCx peripheral registers to their default 
+* Description    : Deinitializes the ADCx peripheral registers to their default
 *      reset values.
 * Input          : ADCx:
 *                    where x can be 1 to select the ADC peripheral.
@@ -127,11 +127,11 @@ void ADC_DeInit(ADC_TypeDef* ADCx)
 
 /*******************************************************************************
 * Function Name  : ADC_Init
-* Description    : Initializes the ADCx peripheral according to the specified 
+* Description    : Initializes the ADCx peripheral according to the specified
 *      parameters in the ADC_InitStruct.
 * Input          : ADCx:
 *                    where x can be 1 to select the ADC peripheral.
-*                  ADC_InitStruct: pointer to an ADC_InitTypeDef structure that 
+*                  ADC_InitStruct: pointer to an ADC_InitTypeDef structure that
 *      contains the configuration information for the specified ADC peripheral.
 * Return         : None
 *******************************************************************************/
@@ -179,7 +179,7 @@ void ADC_StructInit(ADC_InitTypeDef* ADC_InitStruct)
 /*******************************************************************************
 * Function Name  : ADC_Cmd
 * Description    : Enables or disables the specified ADC peripheral.
-* Input          : ADCx: 
+* Input          : ADCx:
 *                    where x can be 1 to select the ADC peripheral.
 *                  NewState: ENABLE or DISABLE.
 * Return         : None
@@ -221,7 +221,7 @@ void ADC_DMACmd(ADC_TypeDef* ADCx, FunctionalState NewState)
 * Description    : Enables or disables the specified ADC interrupts.
 * Input          : ADCx:
 *                    where x can be 1 to select the ADC peripheral.
-*                  ADC_IT: specifies the ADC interrupt sources to be enabled or disabled. 
+*                  ADC_IT: specifies the ADC interrupt sources to be enabled or disabled.
 *                    ADC_IT_EOC: End of conversion interrupt mask.
 *                    ADC_IT_AWD: Analog watchdog interrupt mask.
 *                    ADC_IT_JEOC: End of injected conversion interrupt mask.
@@ -233,7 +233,7 @@ void ADC_ITConfig(ADC_TypeDef* ADCx, uint16_t ADC_IT, FunctionalState NewState)
   uint8_t itmask = 0;
 
   itmask = (uint8_t)ADC_IT;
-	
+
   if (NewState != DISABLE)
   {
     ADCx->CTLR1 |= itmask;
@@ -275,7 +275,7 @@ FlagStatus ADC_GetResetCalibrationStatus(ADC_TypeDef* ADCx)
   {
     bitstatus = RESET;
   }
-	
+
   return  bitstatus;
 }
 
@@ -287,7 +287,7 @@ FlagStatus ADC_GetResetCalibrationStatus(ADC_TypeDef* ADCx)
 * Return         : None
 *******************************************************************************/
 void ADC_StartCalibration(ADC_TypeDef* ADCx)
-{ 
+{
   ADCx->CTLR2 |= CTLR2_CAL_Set;
 }
 
@@ -432,11 +432,11 @@ void ADC_DiscModeCmd(ADC_TypeDef* ADCx, FunctionalState NewState)
 *                    ADC_SampleTime_1Cycles5: Sample time equal to 1.5 cycles.
 *                    ADC_SampleTime_7Cycles5: Sample time equal to 7.5 cycles.
 *                    ADC_SampleTime_13Cycles5: Sample time equal to 13.5 cycles.
-*                    ADC_SampleTime_28Cycles5: Sample time equal to 28.5 cycles.	
-*                    ADC_SampleTime_41Cycles5: Sample time equal to 41.5 cycles.	
-*                    ADC_SampleTime_55Cycles5: Sample time equal to 55.5 cycles.	
-*                    ADC_SampleTime_71Cycles5: Sample time equal to 71.5 cycles.	
-*                    ADC_SampleTime_239Cycles5: Sample time equal to 239.5 cycles.	                   
+*                    ADC_SampleTime_28Cycles5: Sample time equal to 28.5 cycles.
+*                    ADC_SampleTime_41Cycles5: Sample time equal to 41.5 cycles.
+*                    ADC_SampleTime_55Cycles5: Sample time equal to 55.5 cycles.
+*                    ADC_SampleTime_71Cycles5: Sample time equal to 71.5 cycles.
+*                    ADC_SampleTime_239Cycles5: Sample time equal to 239.5 cycles.
 * Return         : None
 *******************************************************************************/
 void ADC_RegularChannelConfig(ADC_TypeDef* ADCx, uint8_t ADC_Channel, uint8_t Rank, uint8_t ADC_SampleTime)
@@ -452,7 +452,7 @@ void ADC_RegularChannelConfig(ADC_TypeDef* ADCx, uint8_t ADC_Channel, uint8_t Ra
     tmpreg1 |= tmpreg2;
     ADCx->SAMPTR1 = tmpreg1;
   }
-  else 
+  else
   {
     tmpreg1 = ADCx->SAMPTR2;
     tmpreg2 = SAMPTR2_SMP_Set << (3 * ADC_Channel);
@@ -583,18 +583,18 @@ void ADC_InjectedDiscModeCmd(ADC_TypeDef* ADCx, FunctionalState NewState)
 * Description    : Configures the ADCx external trigger for injected channels conversion.
 * Input          : ADCx:
 *                    where x can be 1 to select the ADC peripheral.
-*                  ADC_ExternalTrigInjecConv: specifies the ADC trigger to start 
+*                  ADC_ExternalTrigInjecConv: specifies the ADC trigger to start
 *      injected conversion.
 *                    ADC_ExternalTrigInjecConv_T1_TRGO: Timer1 TRGO event selected.
-*                    ADC_ExternalTrigInjecConv_T1_CC4: Timer1 capture compare4 selected. 
-*                    ADC_ExternalTrigInjecConv_T2_TRGO: Timer2 TRGO event selected. 
-*                    ADC_ExternalTrigInjecConv_T2_CC1: Timer2 capture compare1 selected. 
-*                    ADC_ExternalTrigInjecConv_T3_CC4: Timer3 capture compare4 selected. 
+*                    ADC_ExternalTrigInjecConv_T1_CC4: Timer1 capture compare4 selected.
+*                    ADC_ExternalTrigInjecConv_T2_TRGO: Timer2 TRGO event selected.
+*                    ADC_ExternalTrigInjecConv_T2_CC1: Timer2 capture compare1 selected.
+*                    ADC_ExternalTrigInjecConv_T3_CC4: Timer3 capture compare4 selected.
 *                    ADC_ExternalTrigInjecConv_T4_TRGO: Timer4 TRGO event selected.
-*                    ADC_ExternalTrigInjecConv_Ext_IT15_TIM8_CC4: External interrupt 
+*                    ADC_ExternalTrigInjecConv_Ext_IT15_TIM8_CC4: External interrupt
 *      line 15 event selected.
 *                    ADC_ExternalTrigInjecConv_None: Injected conversion started
-*      by software and not by external trigger.                   
+*      by software and not by external trigger.
 * Return         : None
 *******************************************************************************/
 void ADC_ExternalTrigInjectedConvConfig(ADC_TypeDef* ADCx, uint32_t ADC_ExternalTrigInjecConv)
@@ -630,7 +630,7 @@ void ADC_ExternalTrigInjectedConvCmd(ADC_TypeDef* ADCx, FunctionalState NewState
 
 /*******************************************************************************
 * Function Name  : ADC_SoftwareStartInjectedConvCmd
-* Description    : Enables or disables the selected ADC start of the injected 
+* Description    : Enables or disables the selected ADC start of the injected
 *      channels conversion.
 * Input          : ADCx:
 *                    where x can be 1 to select the ADC peripheral.
@@ -659,7 +659,7 @@ void ADC_SoftwareStartInjectedConvCmd(ADC_TypeDef* ADCx, FunctionalState NewStat
 FlagStatus ADC_GetSoftwareStartInjectedConvCmdStatus(ADC_TypeDef* ADCx)
 {
   FlagStatus bitstatus = RESET;
-	
+
   if ((ADCx->CTLR2 & CTLR2_JSWSTART_Set) != (uint32_t)RESET)
   {
     bitstatus = SET;
@@ -703,11 +703,11 @@ FlagStatus ADC_GetSoftwareStartInjectedConvCmdStatus(ADC_TypeDef* ADCx)
 *                    ADC_SampleTime_1Cycles5: Sample time equal to 1.5 cycles.
 *                    ADC_SampleTime_7Cycles5: Sample time equal to 7.5 cycles.
 *                    ADC_SampleTime_13Cycles5: Sample time equal to 13.5 cycles.
-*                    ADC_SampleTime_28Cycles5: Sample time equal to 28.5 cycles.	
-*                    ADC_SampleTime_41Cycles5: Sample time equal to 41.5 cycles.	
-*                    ADC_SampleTime_55Cycles5: Sample time equal to 55.5 cycles.	
-*                    ADC_SampleTime_71Cycles5: Sample time equal to 71.5 cycles.	
-*                    ADC_SampleTime_239Cycles5: Sample time equal to 239.5 cycles.                   
+*                    ADC_SampleTime_28Cycles5: Sample time equal to 28.5 cycles.
+*                    ADC_SampleTime_41Cycles5: Sample time equal to 41.5 cycles.
+*                    ADC_SampleTime_55Cycles5: Sample time equal to 55.5 cycles.
+*                    ADC_SampleTime_71Cycles5: Sample time equal to 71.5 cycles.
+*                    ADC_SampleTime_239Cycles5: Sample time equal to 239.5 cycles.
 * Return         : None
 *******************************************************************************/
 void ADC_InjectedChannelConfig(ADC_TypeDef* ADCx, uint8_t ADC_Channel, uint8_t Rank, uint8_t ADC_SampleTime)
@@ -723,7 +723,7 @@ void ADC_InjectedChannelConfig(ADC_TypeDef* ADCx, uint8_t ADC_Channel, uint8_t R
     tmpreg1 |= tmpreg2;
     ADCx->SAMPTR1 = tmpreg1;
   }
-  else 
+  else
   {
     tmpreg1 = ADCx->SAMPTR2;
     tmpreg2 = SAMPTR2_SMP_Set << (3 * ADC_Channel);
@@ -758,7 +758,7 @@ void ADC_InjectedSequencerLengthConfig(ADC_TypeDef* ADCx, uint8_t Length)
 
   tmpreg1 = ADCx->ISQR;
   tmpreg1 &= ISQR_JL_Reset;
-  tmpreg2 = Length - 1; 
+  tmpreg2 = Length - 1;
   tmpreg1 |= tmpreg2 << 20;
   ADCx->ISQR = tmpreg1;
 }
@@ -768,7 +768,7 @@ void ADC_InjectedSequencerLengthConfig(ADC_TypeDef* ADCx, uint8_t Length)
 * Description    : Set the injected channels conversion value offset.
 * Input          : ADCx:
 *                    where x can be 1 to select the ADC peripheral.
-*                  ADC_InjectedChannel: the ADC injected channel to set its offset. 
+*                  ADC_InjectedChannel: the ADC injected channel to set its offset.
 *                    ADC_InjectedChannel_1: Injected Channel1 selected.
 *                    ADC_InjectedChannel_2: Injected Channel2 selected.
 *                    ADC_InjectedChannel_3: Injected Channel3 selected.
@@ -780,10 +780,10 @@ void ADC_InjectedSequencerLengthConfig(ADC_TypeDef* ADCx, uint8_t Length)
 void ADC_SetInjectedOffset(ADC_TypeDef* ADCx, uint8_t ADC_InjectedChannel, uint16_t Offset)
 {
   __IO uint32_t tmp = 0;
-  
+
   tmp = (uint32_t)ADCx;
   tmp += ADC_InjectedChannel;
-  
+
   *(__IO uint32_t *) tmp = (uint32_t)Offset;
 }
 
@@ -802,11 +802,11 @@ void ADC_SetInjectedOffset(ADC_TypeDef* ADCx, uint8_t ADC_InjectedChannel, uint1
 uint16_t ADC_GetInjectedConversionValue(ADC_TypeDef* ADCx, uint8_t ADC_InjectedChannel)
 {
   __IO uint32_t tmp = 0;
-  
+
   tmp = (uint32_t)ADCx;
   tmp += ADC_InjectedChannel + IDATAR_Offset;
-  
-  return (uint16_t) (*(__IO uint32_t*)  tmp);   
+
+  return (uint16_t) (*(__IO uint32_t*)  tmp);
 }
 
 /*******************************************************************************
@@ -816,19 +816,19 @@ uint16_t ADC_GetInjectedConversionValue(ADC_TypeDef* ADCx, uint8_t ADC_InjectedC
 * Input          : ADCx:
 *                    where x can be 1 to select the ADC peripheral.
 *                  ADC_AnalogWatchdog: the ADC analog watchdog configuration.
-*                    ADC_AnalogWatchdog_SingleRegEnable: Analog watchdog on a 
+*                    ADC_AnalogWatchdog_SingleRegEnable: Analog watchdog on a
 *      single regular channel.
-*                    ADC_AnalogWatchdog_SingleInjecEnable: Analog watchdog on a 
+*                    ADC_AnalogWatchdog_SingleInjecEnable: Analog watchdog on a
 *      single injected channel.
-*                    ADC_AnalogWatchdog_SingleRegOrInjecEnable: Analog watchdog 
+*                    ADC_AnalogWatchdog_SingleRegOrInjecEnable: Analog watchdog
 *      on a single regular or injected channel.
-*                    ADC_AnalogWatchdog_AllRegEnable: Analog watchdog on  all 
+*                    ADC_AnalogWatchdog_AllRegEnable: Analog watchdog on  all
 *      regular channel.
-*                    ADC_AnalogWatchdog_AllInjecEnable: Analog watchdog on  all 
+*                    ADC_AnalogWatchdog_AllInjecEnable: Analog watchdog on  all
 *      injected channel.
-*                    ADC_AnalogWatchdog_AllRegAllInjecEnable: Analog watchdog on 
+*                    ADC_AnalogWatchdog_AllRegAllInjecEnable: Analog watchdog on
 *      all regular and injected channels.
-*                    ADC_AnalogWatchdog_None: No channel guarded by the analog 
+*                    ADC_AnalogWatchdog_None: No channel guarded by the analog
 *      watchdog.
 * Return         : None
 *******************************************************************************/
@@ -883,7 +883,7 @@ void ADC_AnalogWatchdogThresholdsConfig(ADC_TypeDef* ADCx, uint16_t HighThreshol
 *                    ADC_Channel_14: ADC Channel14 selected.
 *                    ADC_Channel_15: ADC Channel15 selected.
 *                    ADC_Channel_16: ADC Channel16 selected.
-*                    ADC_Channel_17: ADC Channel17 selected.                   
+*                    ADC_Channel_17: ADC Channel17 selected.
 * Return         : None
 *******************************************************************************/
 void ADC_AnalogWatchdogSingleChannelConfig(ADC_TypeDef* ADCx, uint8_t ADC_Channel)
@@ -979,7 +979,7 @@ ITStatus ADC_GetITStatus(ADC_TypeDef* ADCx, uint16_t ADC_IT)
 
   itmask = ADC_IT >> 8;
   enablestatus = (ADCx->CTLR1 & (uint8_t)ADC_IT) ;
-	
+
   if (((ADCx->STATR & itmask) != (uint32_t)RESET) && enablestatus)
   {
     bitstatus = SET;
@@ -1021,12 +1021,12 @@ s32 TempSensor_Volt_To_Temper(s32 Value)
 {
 	s32 Temper, Refer_Volt, Refer_Temper;
 	s32 k=43;
-	
+
 	Refer_Volt = (s32)((*(u32*)0x1FFFF898)&0x0000FFFF);
 	Refer_Temper = (s32)(((*(u32*)0x1FFFF898)>>16) & 0x0000FFFF);
-	
+
 	Temper = Refer_Temper + ((Value-Refer_Volt)*10+(k>>1))/k;
-	
+
 	return Temper;
 }
 
@@ -1090,5 +1090,4 @@ int16_t Get_CalibrationValue(ADC_TypeDef* ADCx)
 
     return (int16_t)((int16_t)t-2048);
 }
-
 

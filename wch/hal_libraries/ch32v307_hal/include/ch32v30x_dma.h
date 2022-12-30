@@ -3,9 +3,9 @@
 * Author             : WCH
 * Version            : V1.0.0
 * Date               : 2021/06/06
-* Description        : This file contains all the functions prototypes for the 
+* Description        : This file contains all the functions prototypes for the
 *                      DMA firmware library.
-*******************************************************************************/  
+*******************************************************************************/
 #ifndef __CH32V30x_DMA_H
 #define __CH32V30x_DMA_H
 
@@ -14,7 +14,7 @@
 #endif
 
 #include "ch32v30x.h"
- 
+
 /* DMA Init structure definition */
 typedef struct
 {
@@ -25,7 +25,7 @@ typedef struct
   uint32_t DMA_DIR;                /* Specifies if the peripheral is the source or destination.
                                       This parameter can be a value of @ref DMA_data_transfer_direction */
 
-  uint32_t DMA_BufferSize;         /* Specifies the buffer size, in data unit, of the specified Channel. 
+  uint32_t DMA_BufferSize;         /* Specifies the buffer size, in data unit, of the specified Channel.
                                       The data unit is equal to the configuration set in DMA_PeripheralDataSize
                                       or DMA_MemoryDataSize members depending in the transfer direction. */
 
@@ -60,11 +60,11 @@ typedef struct
 /* DMA_peripheral_incremented_mode */
 #define DMA_PeripheralInc_Enable           ((uint32_t)0x00000040)
 #define DMA_PeripheralInc_Disable          ((uint32_t)0x00000000)
-											
+
 /* DMA_memory_incremented_mode */
 #define DMA_MemoryInc_Enable               ((uint32_t)0x00000080)
 #define DMA_MemoryInc_Disable              ((uint32_t)0x00000000)
-										
+
 /* DMA_peripheral_data_size */
 #define DMA_PeripheralDataSize_Byte        ((uint32_t)0x00000000)
 #define DMA_PeripheralDataSize_HalfWord    ((uint32_t)0x00000100)
@@ -251,7 +251,7 @@ void DMA_Init(DMA_Channel_TypeDef* DMAy_Channelx, DMA_InitTypeDef* DMA_InitStruc
 void DMA_StructInit(DMA_InitTypeDef* DMA_InitStruct);
 void DMA_Cmd(DMA_Channel_TypeDef* DMAy_Channelx, FunctionalState NewState);
 void DMA_ITConfig(DMA_Channel_TypeDef* DMAy_Channelx, uint32_t DMA_IT, FunctionalState NewState);
-void DMA_SetCurrDataCounter(DMA_Channel_TypeDef* DMAy_Channelx, uint16_t DataNumber); 
+void DMA_SetCurrDataCounter(DMA_Channel_TypeDef* DMAy_Channelx, uint16_t DataNumber);
 uint16_t DMA_GetCurrDataCounter(DMA_Channel_TypeDef* DMAy_Channelx);
 FlagStatus DMA_GetFlagStatus(uint32_t DMAy_FLAG);
 void DMA_ClearFlag(uint32_t DMAy_FLAG);
@@ -262,5 +262,5 @@ void DMA_ClearITPendingBit(uint32_t DMAy_IT);
 }
 #endif
 
-#endif 
+#endif
 

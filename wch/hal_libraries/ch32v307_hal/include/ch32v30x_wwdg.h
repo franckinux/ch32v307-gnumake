@@ -3,9 +3,9 @@
 * Author             : WCH
 * Version            : V1.0.0
 * Date               : 2021/06/06
-* Description        : This file contains all the functions prototypes for the WWDG 
+* Description        : This file contains all the functions prototypes for the WWDG
 *                      firmware library.
-*******************************************************************************/ 
+*******************************************************************************/
 #ifndef __CH32V30x_WWDG_H
 #define __CH32V30x_WWDG_H
 
@@ -16,13 +16,13 @@
 #include "ch32v30x.h"
 
 
-/* WWDG_Prescaler */  
+/* WWDG_Prescaler */
 #define WWDG_Prescaler_1    ((uint32_t)0x00000000)
 #define WWDG_Prescaler_2    ((uint32_t)0x00000080)
 #define WWDG_Prescaler_4    ((uint32_t)0x00000100)
 #define WWDG_Prescaler_8    ((uint32_t)0x00000180)
 
-  
+
 void WWDG_DeInit(void);
 void WWDG_SetPrescaler(uint32_t WWDG_Prescaler);
 void WWDG_SetWindowValue(uint8_t WindowValue);
@@ -36,5 +36,5 @@ void WWDG_ClearFlag(void);
 }
 #endif
 
-#endif 
+#endif
 

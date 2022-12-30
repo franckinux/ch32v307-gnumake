@@ -24,11 +24,11 @@ SECTIONS
 		_einit = .;
 	} >FLASH AT>FLASH
 
-  .vector :
-  {
-      *(.vector);
-	  . = ALIGN(64);
-  } >FLASH AT>FLASH
+	.vector :
+	{
+		*(.vector);
+		. = ALIGN(64);
+	} >FLASH AT>FLASH
 
 	.text :
 	{
@@ -85,25 +85,27 @@ SECTIONS
 	     linker won't look for a file to match a
 	     wildcard.  The wildcard also means that it
 	     doesn't matter which directory crtbegin.o
-	     is in.  */
-	  KEEP (*crtbegin.o(.ctors))
-	  KEEP (*crtbegin?.o(.ctors))
+	     is in.
+		*/
+		KEEP (*crtbegin.o(.ctors))
+		KEEP (*crtbegin?.o(.ctors))
 	  /* We don't want to include the .ctor section from
 	     the crtend.o file until after the sorted ctors.
 	     The .ctor section from the crtend file contains the
-	     end of ctors marker and it must be last */
-	  KEEP (*(EXCLUDE_FILE (*crtend.o *crtend?.o ) .ctors))
-	  KEEP (*(SORT(.ctors.*)))
-	  KEEP (*(.ctors))
+	     end of ctors marker and it must be last
+		*/
+		KEEP (*(EXCLUDE_FILE (*crtend.o *crtend?.o ) .ctors))
+		KEEP (*(SORT(.ctors.*)))
+		KEEP (*(.ctors))
 	} >FLASH AT>FLASH
 
 	.dtors          :
 	{
-	  KEEP (*crtbegin.o(.dtors))
-	  KEEP (*crtbegin?.o(.dtors))
-	  KEEP (*(EXCLUDE_FILE (*crtend.o *crtend?.o ) .dtors))
-	  KEEP (*(SORT(.dtors.*)))
-	  KEEP (*(.dtors))
+		KEEP (*crtbegin.o(.dtors))
+		KEEP (*crtbegin?.o(.dtors))
+		KEEP (*(EXCLUDE_FILE (*crtend.o *crtend?.o ) .dtors))
+		KEEP (*(SORT(.dtors.*)))
+		KEEP (*(.dtors))
 	} >FLASH AT>FLASH
 
 	.dalign :
@@ -120,21 +122,21 @@ SECTIONS
 
 	.data :
 	{
-    	*(.gnu.linkonce.r.*)
-    	*(.data .data.*)
-    	*(.gnu.linkonce.d.*)
+		*(.gnu.linkonce.r.*)
+		*(.data .data.*)
+		*(.gnu.linkonce.d.*)
 		. = ALIGN(8);
-    	PROVIDE( __global_pointer$ = . + 0x800 );
-    	*(.sdata .sdata.*)
+		PROVIDE( __global_pointer$ = . + 0x800 );
+		*(.sdata .sdata.*)
 		*(.sdata2.*)
-    	*(.gnu.linkonce.s.*)
-    	. = ALIGN(8);
-    	*(.srodata.cst16)
-    	*(.srodata.cst8)
-    	*(.srodata.cst4)
-    	*(.srodata.cst2)
-    	*(.srodata .srodata.*)
-    	. = ALIGN(4);
+		*(.gnu.linkonce.s.*)
+		. = ALIGN(8);
+		*(.srodata.cst16)
+		*(.srodata.cst8)
+		*(.srodata.cst4)
+		*(.srodata.cst2)
+		*(.srodata .srodata.*)
+	. = ALIGN(4);
 		PROVIDE( _edata = .);
 	} >RAM AT>FLASH
 
@@ -142,10 +144,10 @@ SECTIONS
 	{
 		. = ALIGN(4);
 		PROVIDE( _sbss = .);
-  	    *(.sbss*)
-        *(.gnu.linkonce.sb.*)
+		*(.sbss*)
+		*(.gnu.linkonce.sb.*)
 		*(.bss*)
-     	*(.gnu.linkonce.b.*)
+		*(.gnu.linkonce.b.*)
 		*(COMMON*)
 		. = ALIGN(4);
 		PROVIDE( _ebss = .);
@@ -154,17 +156,13 @@ SECTIONS
 	PROVIDE( _end = _ebss);
 	PROVIDE( end = . );
 
-    .stack ORIGIN(RAM) + LENGTH(RAM) - __stack_size :
-    {
-        PROVIDE( _heap_end = . );
-        . = ALIGN(4);
-        PROVIDE(_susrstack = . );
-        . = . + __stack_size;
-        PROVIDE( _eusrstack = .);
-    } >RAM
+	.stack ORIGIN(RAM) + LENGTH(RAM) - __stack_size :
+	{
+		PROVIDE( _heap_end = . );
+		. = ALIGN(4);
+		PROVIDE(_susrstack = . );
+		. = . + __stack_size;
+		PROVIDE( _eusrstack = .);
+	} >RAM
 
 }
-
-
-
-

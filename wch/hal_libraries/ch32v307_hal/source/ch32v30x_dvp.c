@@ -3,8 +3,8 @@
 * Author             : WCH
 * Version            : V1.0.0
 * Date               : 2021/06/06
-* Description        : This file provides all the DVP firmware functions. 
-*******************************************************************************/ 
+* Description        : This file provides all the DVP firmware functions.
+*******************************************************************************/
 #include "ch32v30x_dvp.h"
 
 
@@ -116,3 +116,4 @@ void DVP_Cfg( DVP_DMATypeDef s,  DVP_FLAG_FIFO_RESETTypeDef i, DVP_RX_RESETTypeD
     }
 
 }
+

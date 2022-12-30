@@ -37,7 +37,7 @@ typedef struct
 
   uint8_t SDIO_ClockDiv;              /* Specifies the clock frequency of the SDIO controller.
                                          This parameter can be a value between 0x00 and 0xFF. */
-                                           
+
 } SDIO_InitTypeDef;
 
 
@@ -66,17 +66,17 @@ typedef struct
   uint32_t SDIO_DataTimeOut;    /* Specifies the data timeout period in card bus clock periods. */
 
   uint32_t SDIO_DataLength;     /* Specifies the number of data bytes to be transferred. */
- 
+
   uint32_t SDIO_DataBlockSize;  /* Specifies the data block size for block transfer.
                                    This parameter can be a value of @ref SDIO_Data_Block_Size */
- 
+
   uint32_t SDIO_TransferDir;    /* Specifies the data transfer direction, whether the transfer
                                    is a read or write.
                                    This parameter can be a value of @ref SDIO_Transfer_Direction */
- 
+
   uint32_t SDIO_TransferMode;   /* Specifies whether data transfer is in stream or block mode.
                                    This parameter can be a value of @ref SDIO_Transfer_Type */
- 
+
   uint32_t SDIO_DPSM;           /* Specifies whether SDIO Data path state machine (DPSM)
                                    is enabled or disabled.
                                    This parameter can be a value of @ref SDIO_DPSM_State */
@@ -89,11 +89,11 @@ typedef struct
 
 /* SDIO_Clock_Bypass */
 #define SDIO_ClockBypass_Disable             ((uint32_t)0x00000000)
-#define SDIO_ClockBypass_Enable              ((uint32_t)0x00000400)    
+#define SDIO_ClockBypass_Enable              ((uint32_t)0x00000400)
 
 /* SDIO_Clock_Power_Save */
 #define SDIO_ClockPowerSave_Disable         ((uint32_t)0x00000000)
-#define SDIO_ClockPowerSave_Enable          ((uint32_t)0x00000200) 
+#define SDIO_ClockPowerSave_Enable          ((uint32_t)0x00000200)
 
 /* SDIO_Bus_Wide */
 #define SDIO_BusWide_1b                     ((uint32_t)0x00000000)
@@ -249,4 +249,5 @@ void SDIO_ClearITPendingBit(uint32_t SDIO_IT);
 }
 #endif
 
-#endif 
+#endif
+

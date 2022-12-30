@@ -3,9 +3,9 @@
 * Author             : WCH
 * Version            : V1.0.0
 * Date               : 2021/06/06
-* Description        : This file contains all the functions prototypes for the  
+* Description        : This file contains all the functions prototypes for the
 *                      IWDG firmware library.
-*******************************************************************************/ 
+*******************************************************************************/
 #ifndef __CH32V30x_IWDG_H
 #define __CH32V30x_IWDG_H
 
@@ -44,11 +44,5 @@ FlagStatus IWDG_GetFlagStatus(uint16_t IWDG_FLAG);
 }
 #endif
 
-#endif 
-
-
-
-
-
-
+#endif
 

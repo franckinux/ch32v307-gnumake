@@ -4,7 +4,7 @@
 * Version            : V1.0.0
 * Date               : 2021/06/06
 * Description        : This file provides all the RCC firmware functions.
-*******************************************************************************/ 
+*******************************************************************************/
 #include "ch32v30x_rcc.h"
 
 /* RCC registers bit address in the alias region */
@@ -77,7 +77,7 @@ static __I uint8_t ADCPrescTable[4] = {2, 4, 6, 8};
 void RCC_DeInit(void)
 {
   RCC->CTLR |= (uint32_t)0x00000001;
-  RCC->CFGR0 &= (uint32_t)0xF8FF0000;  
+  RCC->CFGR0 &= (uint32_t)0xF8FF0000;
   RCC->CTLR &= (uint32_t)0xFEF6FFFF;
   RCC->CTLR &= (uint32_t)0xFFFBFFFF;
   RCC->CFGR0 &= (uint32_t)0xFF80FFFF;
@@ -103,11 +103,11 @@ void RCC_HSEConfig(uint32_t RCC_HSE)
     case RCC_HSE_ON:
       RCC->CTLR |= CTLR_HSEON_Set;
       break;
-      
+
     case RCC_HSE_Bypass:
       RCC->CTLR |= CTLR_HSEBYP_Set | CTLR_HSEON_Set;
       break;
-      
+
     default:
       break;
   }
@@ -123,16 +123,16 @@ void RCC_HSEConfig(uint32_t RCC_HSE)
 ErrorStatus RCC_WaitForHSEStartUp(void)
 {
   __IO uint32_t StartUpCounter = 0;
-	
+
   ErrorStatus status = ERROR;
   FlagStatus HSEStatus = RESET;
-  
+
   do
   {
     HSEStatus = RCC_GetFlagStatus(RCC_FLAG_HSERDY);
-    StartUpCounter++;  
+    StartUpCounter++;
   } while((StartUpCounter != HSE_STARTUP_TIMEOUT) && (HSEStatus == RESET));
-  
+
   if (RCC_GetFlagStatus(RCC_FLAG_HSERDY) != RESET)
   {
     status = SUCCESS;
@@ -140,8 +140,8 @@ ErrorStatus RCC_WaitForHSEStartUp(void)
   else
   {
     status = ERROR;
-  }  
-	
+  }
+
   return (status);
 }
 
@@ -175,7 +175,7 @@ void RCC_HSICmd(FunctionalState NewState)
 		RCC->CTLR |= (1<<0);
 	}
 	else{
-		RCC->CTLR &= ~(1<<0);		
+		RCC->CTLR &= ~(1<<0);
 	}
 }
 
@@ -183,11 +183,11 @@ void RCC_HSICmd(FunctionalState NewState)
 * Function Name  : RCC_PLLConfig
 * Description    : Configures the PLL clock source and multiplication factor.
 * Input          : RCC_PLLSource: specifies the PLL entry clock source.
-*                    RCC_PLLSource_HSI_Div2: HSI oscillator clock divided by 2 
+*                    RCC_PLLSource_HSI_Div2: HSI oscillator clock divided by 2
 *      selected as PLL clock entry.
-*                    RCC_PLLSource_HSE_Div1: HSE oscillator clock selected as PLL 
+*                    RCC_PLLSource_HSE_Div1: HSE oscillator clock selected as PLL
 *      clock entry.
-*                    RCC_PLLSource_HSE_Div2: HSE oscillator clock divided by 2 
+*                    RCC_PLLSource_HSE_Div2: HSE oscillator clock divided by 2
 *      selected as PLL clock entry.
 *                  RCC_PLLMul: specifies the PLL multiplication factor.
 *                    This parameter can be RCC_PLLMul_x where x:[2,16].
@@ -257,7 +257,7 @@ void RCC_PLLCmd(FunctionalState NewState)
 		RCC->CTLR |= (1<<24);
 	}
 	else{
-		RCC->CTLR &= ~(1<<24);		
+		RCC->CTLR &= ~(1<<24);
 	}
 }
 
@@ -297,7 +297,7 @@ uint8_t RCC_GetSYSCLKSource(void)
 * Function Name  : RCC_HCLKConfig
 * Description    : Configures the AHB clock (HCLK).
 * Input          : RCC_SYSCLK: defines the AHB clock divider. This clock is derived from
-*     the system clock (SYSCLK).        
+*     the system clock (SYSCLK).
 *                    RCC_SYSCLK_Div1: AHB clock = SYSCLK.
 *                    RCC_SYSCLK_Div2: AHB clock = SYSCLK/2.
 *                    RCC_SYSCLK_Div4: AHB clock = SYSCLK/4.
@@ -323,7 +323,7 @@ void RCC_HCLKConfig(uint32_t RCC_SYSCLK)
 * Function Name  : RCC_PCLK1Config
 * Description    : Configures the Low Speed APB clock (PCLK1).
 * Input          : RCC_HCLK: defines the APB1 clock divider. This clock is derived from
-*     the AHB clock (HCLK).        
+*     the AHB clock (HCLK).
 *                    RCC_HCLK_Div1: APB1 clock = HCLK.
 *                    RCC_HCLK_Div2: APB1 clock = HCLK/2.
 *                    RCC_HCLK_Div4: APB1 clock = HCLK/4.
@@ -344,8 +344,8 @@ void RCC_PCLK1Config(uint32_t RCC_HCLK)
 /*******************************************************************************
 * Function Name  : RCC_PCLK2Config
 * Description    : Configures the High Speed APB clock (PCLK2).
-* Input          : RCC_HCLK: defines the APB2 clock divider. This clock is derived from 
-*     the AHB clock (HCLK).        
+* Input          : RCC_HCLK: defines the APB2 clock divider. This clock is derived from
+*     the AHB clock (HCLK).
 *                    RCC_HCLK_Div1: APB2 clock = HCLK.
 *                    RCC_HCLK_Div2: APB2 clock = HCLK/2.
 *                    RCC_HCLK_Div4: APB2 clock = HCLK/4.
@@ -390,7 +390,7 @@ void RCC_ITConfig(uint8_t RCC_IT, FunctionalState NewState)
 /*******************************************************************************
 * Function Name  : RCC_ADCCLKConfig
 * Description    : Configures the ADC clock (ADCCLK).
-* Input          : RCC_PCLK2: defines the ADC clock divider. This clock is derived from 
+* Input          : RCC_PCLK2: defines the ADC clock divider. This clock is derived from
 *      the APB2 clock (PCLK2).
 *                    RCC_PCLK2_Div2: ADC clock = PCLK2/2.
 *                    RCC_PCLK2_Div4: ADC clock = PCLK2/4.
@@ -421,19 +421,19 @@ void RCC_LSEConfig(uint8_t RCC_LSE)
 {
   *(__IO uint8_t *) BDCTLR_ADDRESS = RCC_LSE_OFF;
   *(__IO uint8_t *) BDCTLR_ADDRESS = RCC_LSE_OFF;
-	
+
   switch(RCC_LSE)
   {
     case RCC_LSE_ON:
       *(__IO uint8_t *) BDCTLR_ADDRESS = RCC_LSE_ON;
       break;
-      
+
     case RCC_LSE_Bypass:
       *(__IO uint8_t *) BDCTLR_ADDRESS = RCC_LSE_Bypass | RCC_LSE_ON;
-      break;            
-      
+      break;
+
     default:
-      break;      
+      break;
   }
 }
 
@@ -450,8 +450,8 @@ void RCC_LSICmd(FunctionalState NewState)
 		RCC->RSTSCKR |= (1<<0);
 	}
 	else{
-		RCC->RSTSCKR &= ~(1<<0);		
-	}	
+		RCC->RSTSCKR &= ~(1<<0);
+	}
 }
 
 /*******************************************************************************
@@ -470,7 +470,7 @@ void RCC_RTCCLKConfig(uint32_t RCC_RTCCLKSource)
 
 /*******************************************************************************
 * Function Name  : RCC_RTCCLKCmd
-* Description    : This function must be used only after the RTC clock was selected 
+* Description    : This function must be used only after the RTC clock was selected
 *      using the RCC_RTCCLKConfig function.
 * Input          : NewState: ENABLE or DISABLE.
 * Return         : None
@@ -482,8 +482,8 @@ void RCC_RTCCLKCmd(FunctionalState NewState)
 		RCC->BDCTLR |= (1<<15);
 	}
 	else{
-		RCC->BDCTLR &= ~(1<<15);		
-	}	
+		RCC->BDCTLR &= ~(1<<15);
+	}
 }
 
 /*******************************************************************************
@@ -598,7 +598,7 @@ void RCC_GetClocksFreq(RCC_ClocksTypeDef* RCC_Clocks)
 *                    RCC_AHBPeriph_ETH_MAC_Rx
 *                  NewState: ENABLE or DISABLE.
 * Return         : None
-*******************************************************************************/	
+*******************************************************************************/
 void RCC_AHBPeriphClockCmd(uint32_t RCC_AHBPeriph, FunctionalState NewState)
 {
   if (NewState != DISABLE)
@@ -631,7 +631,7 @@ void RCC_AHBPeriphClockCmd(uint32_t RCC_AHBPeriph, FunctionalState NewState)
 *                    RCC_APB2Periph_USART1.
 *                  NewState: ENABLE or DISABLE
 * Return         : None
-*******************************************************************************/	
+*******************************************************************************/
 void RCC_APB2PeriphClockCmd(uint32_t RCC_APB2Periph, FunctionalState NewState)
 {
   if (NewState != DISABLE)
@@ -669,10 +669,10 @@ void RCC_APB2PeriphClockCmd(uint32_t RCC_APB2Periph, FunctionalState NewState)
 *                    RCC_APB1Periph_CAN1.
 *                    RCC_APB1Periph_BKP.
 *                    RCC_APB1Periph_PWR.
-*                    RCC_APB1Periph_DAC.                
+*                    RCC_APB1Periph_DAC.
 *                  NewState: ENABLE or DISABLE.
 * Return         : None
-*******************************************************************************/	
+*******************************************************************************/
 void RCC_APB1PeriphClockCmd(uint32_t RCC_APB1Periph, FunctionalState NewState)
 {
   if (NewState != DISABLE)
@@ -702,10 +702,10 @@ void RCC_APB1PeriphClockCmd(uint32_t RCC_APB1Periph, FunctionalState NewState)
 *                    RCC_APB2Periph_TIM8
 *                    RCC_APB2Periph_TIM9
 *                    RCC_APB2Periph_TIM10
-*                    RCC_APB2Periph_USART1.                
+*                    RCC_APB2Periph_USART1.
 *                  NewState: ENABLE or DISABLE.
 * Return         : None
-*******************************************************************************/	
+*******************************************************************************/
 void RCC_APB2PeriphResetCmd(uint32_t RCC_APB2Periph, FunctionalState NewState)
 {
   if (NewState != DISABLE)
@@ -746,7 +746,7 @@ void RCC_APB2PeriphResetCmd(uint32_t RCC_APB2Periph, FunctionalState NewState)
 *                    RCC_APB1Periph_DAC.
 *                  NewState: ENABLE or DISABLE.
 * Return         : None
-*******************************************************************************/	
+*******************************************************************************/
 void RCC_APB1PeriphResetCmd(uint32_t RCC_APB1Periph, FunctionalState NewState)
 {
   if (NewState != DISABLE)
@@ -764,7 +764,7 @@ void RCC_APB1PeriphResetCmd(uint32_t RCC_APB1Periph, FunctionalState NewState)
 * Description    : Forces or releases the Backup domain reset.
 * Input          : NewState: ENABLE or DISABLE.
 * Return         : None
-*******************************************************************************/	
+*******************************************************************************/
 void RCC_BackupResetCmd(FunctionalState NewState)
 {
 	if(NewState)
@@ -772,8 +772,8 @@ void RCC_BackupResetCmd(FunctionalState NewState)
 		RCC->BDCTLR |= (1<<16);
 	}
 	else{
-		RCC->BDCTLR &= ~(1<<16);		
-	}		
+		RCC->BDCTLR &= ~(1<<16);
+	}
 }
 
 /*******************************************************************************
@@ -781,7 +781,7 @@ void RCC_BackupResetCmd(FunctionalState NewState)
 * Description    : Enables or disables the Clock Security System.
 * Input          : NewState: ENABLE or DISABLE.
 * Return         : None
-*******************************************************************************/	
+*******************************************************************************/
 void RCC_ClockSecuritySystemCmd(FunctionalState NewState)
 {
 	if(NewState)
@@ -789,8 +789,8 @@ void RCC_ClockSecuritySystemCmd(FunctionalState NewState)
 		RCC->CTLR |= (1<<19);
 	}
 	else{
-		RCC->CTLR &= ~(1<<19);		
-	}		
+		RCC->CTLR &= ~(1<<19);
+	}
 }
 
 /*******************************************************************************
@@ -827,34 +827,34 @@ void RCC_MCOConfig(uint8_t RCC_MCO)
 *                    RCC_FLAG_PINRST: Pin reset.
 *                    RCC_FLAG_PORRST: POR/PDR reset.
 *                    RCC_FLAG_SFTRST: Software reset.
-*                    RCC_FLAG_IWDGRST: Independent Watchdog reset.  
+*                    RCC_FLAG_IWDGRST: Independent Watchdog reset.
 *                    RCC_FLAG_WWDGRST: Window Watchdog reset.
 *                    RCC_FLAG_LPWRRST: Low Power reset.
 * Return         : FlagStatus: SET or RESET.
-*******************************************************************************/	
+*******************************************************************************/
 FlagStatus RCC_GetFlagStatus(uint8_t RCC_FLAG)
 {
   uint32_t tmp = 0;
   uint32_t statusreg = 0;
-	
+
   FlagStatus bitstatus = RESET;
   tmp = RCC_FLAG >> 5;
-	
-  if (tmp == 1)            
+
+  if (tmp == 1)
   {
     statusreg = RCC->CTLR;
   }
-  else if (tmp == 2)       
+  else if (tmp == 2)
   {
     statusreg = RCC->BDCTLR;
   }
-  else                    
+  else
   {
     statusreg = RCC->RSTSCKR;
   }
 
   tmp = RCC_FLAG & FLAG_Mask;
-	
+
   if ((statusreg & ((uint32_t)1 << tmp)) != (uint32_t)RESET)
   {
     bitstatus = SET;
@@ -891,7 +891,7 @@ void RCC_ClearFlag(void)
 *                    RCC_IT_PLL3RDY: PLL3 ready interrupt.
 *                    RCC_IT_CSS: Clock Security System interrupt.
 * Return         : ITStatus: SET or RESET.
-*******************************************************************************/	
+*******************************************************************************/
 ITStatus RCC_GetITStatus(uint8_t RCC_IT)
 {
   ITStatus bitstatus = RESET;
@@ -921,7 +921,7 @@ ITStatus RCC_GetITStatus(uint8_t RCC_IT)
 *                    RCC_IT_PLL3RDY: PLL3 ready interrupt.
 *                    RCC_IT_CSS: Clock Security System interrupt.
 * Return         : None
-*******************************************************************************/	
+*******************************************************************************/
 void RCC_ClearITPendingBit(uint8_t RCC_IT)
 {
   *(__IO uint8_t *) INTR_BYTE3_ADDRESS = RCC_IT;
@@ -1242,3 +1242,4 @@ void RCC_USBCLK48MConfig(uint32_t RCC_USBCLK48MSource)
     RCC->CFGR2 &= ~(1<<31);
     RCC->CFGR2 |= RCC_USBCLK48MSource<<31;
 }
+

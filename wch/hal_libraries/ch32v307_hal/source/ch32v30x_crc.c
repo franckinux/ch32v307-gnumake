@@ -3,13 +3,13 @@
 * Author             : WCH
 * Version            : V1.0.0
 * Date               : 2021/06/06
-* Description        : This file provides all the CRC firmware functions. 
-*******************************************************************************/ 
+* Description        : This file provides all the CRC firmware functions.
+*******************************************************************************/
 #include "ch32v30x_crc.h"
 
 /*******************************************************************************
 * Function Name  : CRC_ResetDR
-* Description    : Resets the CRC Data register (DR). 
+* Description    : Resets the CRC Data register (DR).
 * Input          : None
 * Return         : None
 *******************************************************************************/
@@ -20,14 +20,14 @@ void CRC_ResetDR(void)
 
 /*******************************************************************************
 * Function Name  : CRC_CalcCRC
-* Description    : Computes the 32-bit CRC of a given data word(32-bit). 
+* Description    : Computes the 32-bit CRC of a given data word(32-bit).
 * Input          : Data: data word(32-bit) to compute its CRC.
 * Return         : 32-bit CRC.
 *******************************************************************************/
 uint32_t CRC_CalcCRC(uint32_t Data)
 {
   CRC->DATAR = Data;
-  
+
   return (CRC->DATAR);
 }
 
@@ -35,18 +35,18 @@ uint32_t CRC_CalcCRC(uint32_t Data)
 * Function Name  : CRC_CalcBlockCRC
 * Description    : Computes the 32-bit CRC of a given buffer of data word(32-bit).
 * Input          : pBuffer: pointer to the buffer containing the data to be computed.
-*                  BufferLength: length of the buffer to be computed.		
+*                  BufferLength: length of the buffer to be computed.
 * Return         : 32-bit CRC.
 *******************************************************************************/
 uint32_t CRC_CalcBlockCRC(uint32_t pBuffer[], uint32_t BufferLength)
 {
   uint32_t index = 0;
-  
+
   for(index = 0; index < BufferLength; index++)
   {
     CRC->DATAR = pBuffer[index];
   }
-	
+
   return (CRC->DATAR);
 }
 
@@ -64,7 +64,7 @@ uint32_t CRC_GetCRC(void)
 /*******************************************************************************
 * Function Name  : CRC_SetIDRegister
 * Description    : Stores a 8-bit data in the Independent Data(ID) register.
-* Input          : IDValue: 8-bit value to be stored in the ID register. 	
+* Input          : IDValue: 8-bit value to be stored in the ID register.
 * Return         : None
 *******************************************************************************/
 void CRC_SetIDRegister(uint8_t IDValue)
@@ -75,18 +75,11 @@ void CRC_SetIDRegister(uint8_t IDValue)
 /*******************************************************************************
 * Function Name  : CRC_GetIDRegister
 * Description    : Returns the 8-bit data stored in the Independent Data(ID) register.
-* Input          : None 	
+* Input          : None
 * Return         : 8-bit value of the ID register.
 *******************************************************************************/
 uint8_t CRC_GetIDRegister(void)
 {
   return (CRC->IDATAR);
 }
-
-
-
-
-
-
-
 

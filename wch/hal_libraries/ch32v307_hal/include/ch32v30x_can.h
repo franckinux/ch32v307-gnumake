@@ -3,9 +3,9 @@
 * Author             : WCH
 * Version            : V1.0.0
 * Date               : 2021/06/06
-* Description        : This file contains all the functions prototypes for the 
+* Description        : This file contains all the functions prototypes for the
 *                      CAN firmware library.
-*******************************************************************************/ 
+*******************************************************************************/
 #ifndef __CH32V30x_CAN_H
 #define __CH32V30x_CAN_H
 
@@ -18,50 +18,50 @@
 /* CAN init structure definition */
 typedef struct
 {
-  uint16_t CAN_Prescaler;   /* Specifies the length of a time quantum. 
+  uint16_t CAN_Prescaler;   /* Specifies the length of a time quantum.
                                It ranges from 1 to 1024. */
-  
+
   uint8_t CAN_Mode;         /* Specifies the CAN operating mode.
-                               This parameter can be a value of 
+                               This parameter can be a value of
                               @ref CAN_operating_mode */
 
-  uint8_t CAN_SJW;          /* Specifies the maximum number of time quanta 
-                               the CAN hardware is allowed to lengthen or 
+  uint8_t CAN_SJW;          /* Specifies the maximum number of time quanta
+                               the CAN hardware is allowed to lengthen or
                                shorten a bit to perform resynchronization.
-                               This parameter can be a value of 
+                               This parameter can be a value of
                                @ref CAN_synchronisation_jump_width */
 
-  uint8_t CAN_BS1;          /* Specifies the number of time quanta in Bit 
-                               Segment 1. This parameter can be a value of 
+  uint8_t CAN_BS1;          /* Specifies the number of time quanta in Bit
+                               Segment 1. This parameter can be a value of
                                @ref CAN_time_quantum_in_bit_segment_1 */
 
-  uint8_t CAN_BS2;          /* Specifies the number of time quanta in Bit 
+  uint8_t CAN_BS2;          /* Specifies the number of time quanta in Bit
                                Segment 2.
-                               This parameter can be a value of 
+                               This parameter can be a value of
                                @ref CAN_time_quantum_in_bit_segment_2 */
-  
-  FunctionalState CAN_TTCM; /* Enable or disable the time triggered 
-                               communication mode. This parameter can be set 
+
+  FunctionalState CAN_TTCM; /* Enable or disable the time triggered
+                               communication mode. This parameter can be set
                                either to ENABLE or DISABLE. */
-  
-  FunctionalState CAN_ABOM;  /* Enable or disable the automatic bus-off 
-                                management. This parameter can be set either 
+
+  FunctionalState CAN_ABOM;  /* Enable or disable the automatic bus-off
+                                management. This parameter can be set either
                                 to ENABLE or DISABLE. */
 
-  FunctionalState CAN_AWUM;  /* Enable or disable the automatic wake-up mode. 
-                                This parameter can be set either to ENABLE or 
+  FunctionalState CAN_AWUM;  /* Enable or disable the automatic wake-up mode.
+                                This parameter can be set either to ENABLE or
                                 DISABLE. */
 
-  FunctionalState CAN_NART;  /* Enable or disable the no-automatic 
-                                retransmission mode. This parameter can be 
+  FunctionalState CAN_NART;  /* Enable or disable the no-automatic
+                                retransmission mode. This parameter can be
                                 set either to ENABLE or DISABLE. */
 
   FunctionalState CAN_RFLM;  /* Enable or disable the Receive FIFO Locked mode.
-                                This parameter can be set either to ENABLE 
+                                This parameter can be set either to ENABLE
                                 or DISABLE. */
 
   FunctionalState CAN_TXFP;  /* Enable or disable the transmit FIFO priority.
-                                This parameter can be set either to ENABLE 
+                                This parameter can be set either to ENABLE
                                 or DISABLE. */
 } CAN_InitTypeDef;
 
@@ -88,7 +88,7 @@ typedef struct
 
   uint16_t CAN_FilterFIFOAssignment; /* Specifies the FIFO (0 or 1) which will be assigned to the filter.
                                             This parameter can be a value of @ref CAN_filter_FIFO */
-  
+
   uint8_t CAN_FilterNumber;          /* Specifies the filter which will be initialized. It ranges from 0 to 13. */
 
   uint8_t CAN_FilterMode;            /* Specifies the filter mode to be initialized.
@@ -110,19 +110,19 @@ typedef struct
   uint32_t ExtId;  /* Specifies the extended identifier.
                       This parameter can be a value between 0 to 0x1FFFFFFF. */
 
-  uint8_t IDE;     /* Specifies the type of identifier for the message that 
-                      will be transmitted. This parameter can be a value 
+  uint8_t IDE;     /* Specifies the type of identifier for the message that
+                      will be transmitted. This parameter can be a value
                       of @ref CAN_identifier_type */
 
-  uint8_t RTR;     /* Specifies the type of frame for the message that will 
-                      be transmitted. This parameter can be a value of 
+  uint8_t RTR;     /* Specifies the type of frame for the message that will
+                      be transmitted. This parameter can be a value of
                       @ref CAN_remote_transmission_request */
 
-  uint8_t DLC;     /* Specifies the length of the frame that will be 
-                      transmitted. This parameter can be a value between 
+  uint8_t DLC;     /* Specifies the length of the frame that will be
+                      transmitted. This parameter can be a value between
                       0 to 8 */
 
-  uint8_t Data[8]; /* Contains the data to be transmitted. It ranges from 0 
+  uint8_t Data[8]; /* Contains the data to be transmitted. It ranges from 0
                        to 0xFF. */
 } CanTxMsg;
 
@@ -135,22 +135,22 @@ typedef struct
   uint32_t ExtId;  /* Specifies the extended identifier.
                       This parameter can be a value between 0 to 0x1FFFFFFF. */
 
-  uint8_t IDE;     /* Specifies the type of identifier for the message that 
-                      will be received. This parameter can be a value of 
+  uint8_t IDE;     /* Specifies the type of identifier for the message that
+                      will be received. This parameter can be a value of
                       @ref CAN_identifier_type */
 
   uint8_t RTR;     /* Specifies the type of frame for the received message.
-                      This parameter can be a value of 
+                      This parameter can be a value of
                       @ref CAN_remote_transmission_request */
 
   uint8_t DLC;     /* Specifies the length of the frame that will be received.
                       This parameter can be a value between 0 to 8 */
 
-  uint8_t Data[8]; /* Contains the data to be received. It ranges from 0 to 
+  uint8_t Data[8]; /* Contains the data to be received. It ranges from 0 to
                       0xFF. */
 
-  uint8_t FMI;     /* Specifies the index of the filter the message stored in 
-                      the mailbox passes through. This parameter can be a 
+  uint8_t FMI;     /* Specifies the index of the filter the message stored in
+                      the mailbox passes through. This parameter can be a
                       value between 0 to 0xFF */
 } CanRxMsg;
 
@@ -244,16 +244,16 @@ typedef struct
 /* CAN_wake_up_constants */
 #define CAN_WakeUp_Failed                  ((uint8_t)0x00) /* CAN did not leave the sleep mode */
 #define CAN_WakeUp_Ok                      ((uint8_t)0x01) /* CAN leaved the sleep mode */
- 
-/* CAN_Error_Code_constants */                                                               
-#define CAN_ErrorCode_NoErr                ((uint8_t)0x00) /* No Error */ 
-#define	CAN_ErrorCode_StuffErr             ((uint8_t)0x10) /* Stuff Error */ 
-#define	CAN_ErrorCode_FormErr              ((uint8_t)0x20) /* Form Error */ 
-#define	CAN_ErrorCode_ACKErr               ((uint8_t)0x30) /* Acknowledgment Error */ 
-#define	CAN_ErrorCode_BitRecessiveErr      ((uint8_t)0x40) /* Bit Recessive Error */ 
-#define	CAN_ErrorCode_BitDominantErr       ((uint8_t)0x50) /* Bit Dominant Error */ 
-#define	CAN_ErrorCode_CRCErr               ((uint8_t)0x60) /* CRC Error  */ 
-#define	CAN_ErrorCode_SoftwareSetErr       ((uint8_t)0x70) /* Software Set Error */ 
+
+/* CAN_Error_Code_constants */
+#define CAN_ErrorCode_NoErr                ((uint8_t)0x00) /* No Error */
+#define	CAN_ErrorCode_StuffErr             ((uint8_t)0x10) /* Stuff Error */
+#define	CAN_ErrorCode_FormErr              ((uint8_t)0x20) /* Form Error */
+#define	CAN_ErrorCode_ACKErr               ((uint8_t)0x30) /* Acknowledgment Error */
+#define	CAN_ErrorCode_BitRecessiveErr      ((uint8_t)0x40) /* Bit Recessive Error */
+#define	CAN_ErrorCode_BitDominantErr       ((uint8_t)0x50) /* Bit Dominant Error */
+#define	CAN_ErrorCode_CRCErr               ((uint8_t)0x60) /* CRC Error  */
+#define	CAN_ErrorCode_SoftwareSetErr       ((uint8_t)0x70) /* Software Set Error */
 
 
 /* CAN_flags */
@@ -262,7 +262,7 @@ typedef struct
 #define CAN_FLAG_RQCP1                     ((uint32_t)0x38000100) /* Request MailBox1 Flag */
 #define CAN_FLAG_RQCP2                     ((uint32_t)0x38010000) /* Request MailBox2 Flag */
 
-/* Receive Flags */ 
+/* Receive Flags */
 #define CAN_FLAG_FMP0                      ((uint32_t)0x12000003) /* FIFO 0 Message Pending Flag */
 #define CAN_FLAG_FF0                       ((uint32_t)0x32000008) /* FIFO 0 Full Flag            */
 #define CAN_FLAG_FOV0                      ((uint32_t)0x32000010) /* FIFO 0 Overrun Flag         */
@@ -313,9 +313,9 @@ typedef struct
 #define CANINITOK                   CAN_InitStatus_Success
 #define CAN_FilterFIFO0             CAN_Filter_FIFO0
 #define CAN_FilterFIFO1             CAN_Filter_FIFO1
-#define CAN_ID_STD                  CAN_Id_Standard           
+#define CAN_ID_STD                  CAN_Id_Standard
 #define CAN_ID_EXT                  CAN_Id_Extended
-#define CAN_RTR_DATA                CAN_RTR_Data         
+#define CAN_RTR_DATA                CAN_RTR_Data
 #define CAN_RTR_REMOTE              CAN_RTR_Remote
 #define CANTXFAILE                  CAN_TxStatus_Failed
 #define CANTXOK                     CAN_TxStatus_Ok
@@ -323,15 +323,15 @@ typedef struct
 #define CAN_NO_MB                   CAN_TxStatus_NoMailBox
 #define CANSLEEPFAILED              CAN_Sleep_Failed
 #define CANSLEEPOK                  CAN_Sleep_Ok
-#define CANWAKEUPFAILED             CAN_WakeUp_Failed        
-#define CANWAKEUPOK                 CAN_WakeUp_Ok        
+#define CANWAKEUPFAILED             CAN_WakeUp_Failed
+#define CANWAKEUPOK                 CAN_WakeUp_Ok
 
 
-void CAN_DeInit(CAN_TypeDef* CANx); 
+void CAN_DeInit(CAN_TypeDef* CANx);
 uint8_t CAN_Init(CAN_TypeDef* CANx, CAN_InitTypeDef* CAN_InitStruct);
 void CAN_FilterInit(CAN_FilterInitTypeDef* CAN_FilterInitStruct);
 void CAN_StructInit(CAN_InitTypeDef* CAN_InitStruct);
-void CAN_SlaveStartBank(uint8_t CAN_BankNumber); 
+void CAN_SlaveStartBank(uint8_t CAN_BankNumber);
 void CAN_DBGFreeze(CAN_TypeDef* CANx, FunctionalState NewState);
 void CAN_TTComModeCmd(CAN_TypeDef* CANx, FunctionalState NewState);
 uint8_t CAN_Transmit(CAN_TypeDef* CANx, CanTxMsg* TxMessage);
@@ -356,9 +356,5 @@ void CAN_ClearITPendingBit(CAN_TypeDef* CANx, uint32_t CAN_IT);
 }
 #endif
 
-#endif 
-
-
-
-
+#endif
 

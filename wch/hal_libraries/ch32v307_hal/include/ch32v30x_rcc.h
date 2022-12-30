@@ -4,7 +4,7 @@
 * Version            : V1.0.0
 * Date               : 2021/06/06
 * Description        : This file provides all the RCC firmware functions.
-*******************************************************************************/ 
+*******************************************************************************/
 #ifndef __CH32V30x_RCC_H
 #define __CH32V30x_RCC_H
 
@@ -360,7 +360,7 @@ void RCC_RTCCLKCmd(FunctionalState NewState);
 void RCC_GetClocksFreq(RCC_ClocksTypeDef* RCC_Clocks);
 void RCC_AHBPeriphClockCmd(uint32_t RCC_AHBPeriph, FunctionalState NewState);
 void RCC_APB2PeriphClockCmd(uint32_t RCC_APB2Periph, FunctionalState NewState);
-void RCC_APB1PeriphClockCmd(uint32_t RCC_APB1Periph, FunctionalState NewState); 
+void RCC_APB1PeriphClockCmd(uint32_t RCC_APB1Periph, FunctionalState NewState);
 void RCC_APB2PeriphResetCmd(uint32_t RCC_APB2Periph, FunctionalState NewState);
 void RCC_APB1PeriphResetCmd(uint32_t RCC_APB1Periph, FunctionalState NewState);
 void RCC_BackupResetCmd(FunctionalState NewState);
@@ -396,9 +396,5 @@ void RCC_USBCLK48MConfig(uint32_t RCC_USBCLK48MSource);
 }
 #endif
 
-#endif 
-
-
-
-
+#endif
 

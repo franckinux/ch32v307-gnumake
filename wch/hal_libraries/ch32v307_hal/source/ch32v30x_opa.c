@@ -16,7 +16,7 @@
 *                  reset values.
 * Input          : None
 * Return         : None
-*********************************************************************************/	
+*********************************************************************************/
 void OPA_DeInit(void)
 {
    OPA->CR=0;
@@ -28,7 +28,7 @@ void OPA_DeInit(void)
 *                  parameters in the OPA_InitStruct.
 * Input          : OPA_InitStruct: pointer to a OPA_InitTypeDef structure
 * Return         : None
-*********************************************************************************/	
+*********************************************************************************/
 void OPA_Init(OPA_InitTypeDef* OPA_InitStruct)
 {
     uint32_t tmp=0;

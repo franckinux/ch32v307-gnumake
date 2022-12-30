@@ -3,9 +3,9 @@
 * Author             : WCH
 * Version            : V1.0.0
 * Date               : 2021/06/06
-* Description        : This file contains all the functions prototypes for the 
+* Description        : This file contains all the functions prototypes for the
 *                      DBGMCU firmware library.
-*******************************************************************************/ 
+*******************************************************************************/
 #ifndef __CH32V30x_DBGMCU_H
 #define __CH32V30x_DBGMCU_H
 
@@ -31,18 +31,12 @@
 #define DBGMCU_STOP                  ((uint32_t)0x00000002)
 #define DBGMCU_STANDBY               ((uint32_t)0x00000004)
 
-                                              
+
 void DBGMCU_Config(uint32_t DBGMCU_Periph, FunctionalState NewState);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif 
-
-
-
-
-
-
+#endif
 

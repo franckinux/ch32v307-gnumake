@@ -3,9 +3,9 @@
 * Author             : WCH
 * Version            : V1.0.0
 * Date               : 2021/06/06
-* Description        : This file contains all the functions prototypes for the RTC  
+* Description        : This file contains all the functions prototypes for the RTC
 *                      firmware library.
-*******************************************************************************/ 
+*******************************************************************************/
 #ifndef __CH32V30x_RTC_H
 #define __CH32V30x_RTC_H
 
@@ -27,7 +27,7 @@
 #define RTC_FLAG_OW          ((uint16_t)0x0004)  /* Overflow flag */
 #define RTC_FLAG_ALR         ((uint16_t)0x0002)  /* Alarm flag */
 #define RTC_FLAG_SEC         ((uint16_t)0x0001)  /* Second flag */
-	 
+
 
 void RTC_ITConfig(uint16_t RTC_IT, FunctionalState NewState);
 void RTC_EnterConfigMode(void);
@@ -48,5 +48,5 @@ void RTC_ClearITPendingBit(uint16_t RTC_IT);
 }
 #endif
 
-#endif 
+#endif
 

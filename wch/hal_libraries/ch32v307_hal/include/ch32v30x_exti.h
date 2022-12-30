@@ -3,9 +3,9 @@
 * Author             : WCH
 * Version            : V1.0.0
 * Date               : 2021/06/06
-* Description        : This file contains all the functions prototypes for the 
+* Description        : This file contains all the functions prototypes for the
 *                      EXTI firmware library.
-*******************************************************************************/ 
+*******************************************************************************/
 #ifndef __CH32V30x_EXTI_H
 #define __CH32V30x_EXTI_H
 
@@ -26,7 +26,7 @@ typedef enum
 typedef enum
 {
   EXTI_Trigger_Rising = 0x08,
-  EXTI_Trigger_Falling = 0x0C,  
+  EXTI_Trigger_Falling = 0x0C,
   EXTI_Trigger_Rising_Falling = 0x10
 }EXTITrigger_TypeDef;
 
@@ -35,7 +35,7 @@ typedef struct
 {
   uint32_t EXTI_Line;               /* Specifies the EXTI lines to be enabled or disabled.
                                        This parameter can be any combination of @ref EXTI_Lines */
-   
+
   EXTIMode_TypeDef EXTI_Mode;       /* Specifies the mode for the EXTI lines.
                                        This parameter can be a value of @ref EXTIMode_TypeDef */
 
@@ -43,7 +43,7 @@ typedef struct
                                        This parameter can be a value of @ref EXTIMode_TypeDef */
 
   FunctionalState EXTI_LineCmd;     /* Specifies the new state of the selected EXTI lines.
-                                       This parameter can be set either to ENABLE or DISABLE */ 
+                                       This parameter can be set either to ENABLE or DISABLE */
 }EXTI_InitTypeDef;
 
 
@@ -67,7 +67,7 @@ typedef struct
 #define EXTI_Line16      ((uint32_t)0x10000)  /* External interrupt line 16 Connected to the PVD Output */
 #define EXTI_Line17      ((uint32_t)0x20000)  /* External interrupt line 17 Connected to the RTC Alarm event */
 #define EXTI_Line18      ((uint32_t)0x40000)  /* External interrupt line 18 Connected to the USB Device/USB OTG FS
-                                                 Wakeup from suspend event */                                    
+                                                 Wakeup from suspend event */
 #define EXTI_Line19      ((uint32_t)0x80000)  /* External interrupt line 19 Connected to the Ethernet Wakeup event */
 #define EXTI_Line20      ((uint32_t)0x100000) /* External interrupt line 20 Connected to the USBHD Wakeup event */
 
@@ -84,5 +84,6 @@ void EXTI_ClearITPendingBit(uint32_t EXTI_Line);
 }
 #endif
 
-#endif 
+#endif
+
 

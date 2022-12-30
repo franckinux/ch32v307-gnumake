@@ -3,9 +3,9 @@
 * Author             : WCH
 * Version            : V1.0.0
 * Date               : 2021/06/06
-* Description        : This file contains all the functions prototypes for the  
+* Description        : This file contains all the functions prototypes for the
 *                      TIM firmware library.
-*******************************************************************************/ 
+*******************************************************************************/
 #ifndef __CH32V30x_TIM_H
 #define __CH32V30x_TIM_H
 
@@ -26,7 +26,7 @@ typedef struct
 
   uint16_t TIM_Period;            /* Specifies the period value to be loaded into the active
                                      Auto-Reload Register at the next update event.
-                                     This parameter must be a number between 0x0000 and 0xFFFF.  */ 
+                                     This parameter must be a number between 0x0000 and 0xFFFF.  */
 
   uint16_t TIM_ClockDivision;     /* Specifies the clock division.
                                     This parameter can be a value of @ref TIM_Clock_Division_CKD */
@@ -37,9 +37,9 @@ typedef struct
                                      This means in PWM mode that (N+1) corresponds to:
                                         - the number of PWM periods in edge-aligned mode
                                         - the number of half PWM period in center-aligned mode
-                                     This parameter must be a number between 0x00 and 0xFF. 
+                                     This parameter must be a number between 0x00 and 0xFF.
                                      @note This parameter is valid only for TIM1 and TIM8. */
-} TIM_TimeBaseInitTypeDef;       
+} TIM_TimeBaseInitTypeDef;
 
 /* TIM Output Compare Init structure definition */
 typedef struct
@@ -54,7 +54,7 @@ typedef struct
                                  This parameter can be a value of @ref TIM_Output_Compare_N_state
                                  @note This parameter is valid only for TIM1 and TIM8. */
 
-  uint16_t TIM_Pulse;         /* Specifies the pulse value to be loaded into the Capture Compare Register. 
+  uint16_t TIM_Pulse;         /* Specifies the pulse value to be loaded into the Capture Compare Register.
                                  This parameter can be a number between 0x0000 and 0xFFFF */
 
   uint16_t TIM_OCPolarity;    /* Specifies the output polarity.
@@ -102,19 +102,19 @@ typedef struct
                                     This parameter can be a value of @ref OSSI_Off_State_Selection_for_Idle_mode_state */
 
   uint16_t TIM_LOCKLevel;        /* Specifies the LOCK level parameters.
-                                    This parameter can be a value of @ref Lock_level */ 
+                                    This parameter can be a value of @ref Lock_level */
 
   uint16_t TIM_DeadTime;         /* Specifies the delay time between the switching-off and the
                                     switching-on of the outputs.
                                     This parameter can be a number between 0x00 and 0xFF  */
 
-  uint16_t TIM_Break;            /* Specifies whether the TIM Break input is enabled or not. 
+  uint16_t TIM_Break;            /* Specifies whether the TIM Break input is enabled or not.
                                     This parameter can be a value of @ref Break_Input_enable_disable */
 
   uint16_t TIM_BreakPolarity;    /* Specifies the TIM Break Input pin polarity.
                                     This parameter can be a value of @ref Break_Polarity */
 
-  uint16_t TIM_AutomaticOutput;  /* Specifies whether the TIM Automatic Output feature is enabled or not. 
+  uint16_t TIM_AutomaticOutput;  /* Specifies whether the TIM Automatic Output feature is enabled or not.
                                     This parameter can be a value of @ref TIM_AOE_Bit_Set_Reset */
 } TIM_BDTRInitTypeDef;
 
@@ -152,7 +152,7 @@ typedef struct
 #define TIM_OCPolarity_High                ((uint16_t)0x0000)
 #define TIM_OCPolarity_Low                 ((uint16_t)0x0002)
 
-/* TIM_Output_Compare_N_Polarity */  
+/* TIM_Output_Compare_N_Polarity */
 #define TIM_OCNPolarity_High               ((uint16_t)0x0000)
 #define TIM_OCNPolarity_Low                ((uint16_t)0x0008)
 
@@ -210,9 +210,9 @@ typedef struct
 #define  TIM_ICPolarity_Rising             ((uint16_t)0x0000)
 #define  TIM_ICPolarity_Falling            ((uint16_t)0x0002)
 #define  TIM_ICPolarity_BothEdge           ((uint16_t)0x000A)
-                                     
+
 /* TIM_Input_Capture_Selection */
-#define TIM_ICSelection_DirectTI           ((uint16_t)0x0001) /* TIM Input 1, 2, 3 or 4 is selected to be 
+#define TIM_ICSelection_DirectTI           ((uint16_t)0x0001) /* TIM Input 1, 2, 3 or 4 is selected to be
                                                                  connected to IC1, IC2, IC3 or IC4, respectively */
 #define TIM_ICSelection_IndirectTI         ((uint16_t)0x0002) /* TIM Input 1, 2, 3 or 4 is selected to be
                                                                  connected to IC2, IC1, IC4 or IC3, respectively. */
@@ -430,7 +430,7 @@ void TIM_TIxExternalClockConfig(TIM_TypeDef* TIMx, uint16_t TIM_TIxExternalCLKSo
                                 uint16_t TIM_ICPolarity, uint16_t ICFilter);
 void TIM_ETRClockMode1Config(TIM_TypeDef* TIMx, uint16_t TIM_ExtTRGPrescaler, uint16_t TIM_ExtTRGPolarity,
                              uint16_t ExtTRGFilter);
-void TIM_ETRClockMode2Config(TIM_TypeDef* TIMx, uint16_t TIM_ExtTRGPrescaler, 
+void TIM_ETRClockMode2Config(TIM_TypeDef* TIMx, uint16_t TIM_ExtTRGPrescaler,
                              uint16_t TIM_ExtTRGPolarity, uint16_t ExtTRGFilter);
 void TIM_ETRConfig(TIM_TypeDef* TIMx, uint16_t TIM_ExtTRGPrescaler, uint16_t TIM_ExtTRGPolarity,
                    uint16_t ExtTRGFilter);
@@ -502,12 +502,5 @@ void TIM_ClearITPendingBit(TIM_TypeDef* TIMx, uint16_t TIM_IT);
 }
 #endif
 
-#endif 
-
-
-
-
-
-
-
+#endif
 

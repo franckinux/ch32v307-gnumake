@@ -21,7 +21,7 @@
 * Description    : Deinitializes the WWDG peripheral registers to their default reset values
 * Input          : None
 * Return         : None
-*********************************************************************************/	
+*********************************************************************************/
 void WWDG_DeInit(void)
 {
   RCC_APB1PeriphResetCmd(RCC_APB1Periph_WWDG, ENABLE);
@@ -37,7 +37,7 @@ void WWDG_DeInit(void)
 *                    WWDG_Prescaler_4: WWDG counter clock = (PCLK1/4096)/4
 *                    WWDG_Prescaler_8: WWDG counter clock = (PCLK1/4096)/8
 * Return         : None
-*********************************************************************************/	
+*********************************************************************************/
 void WWDG_SetPrescaler(uint32_t WWDG_Prescaler)
 {
   uint32_t tmpreg = 0;
@@ -49,10 +49,10 @@ void WWDG_SetPrescaler(uint32_t WWDG_Prescaler)
 /********************************************************************************
 * Function Name  : WWDG_SetWindowValue
 * Description    : Sets the WWDG window value
-* Input          : WindowValue: specifies the window value to be compared to the 
+* Input          : WindowValue: specifies the window value to be compared to the
 *                               downcounter,which must be lower than 0x80
 * Return         : None
-*********************************************************************************/	
+*********************************************************************************/
 void WWDG_SetWindowValue(uint8_t WindowValue)
 {
   __IO uint32_t tmpreg = 0;
@@ -78,7 +78,7 @@ void WWDG_EnableIT(void)
 /********************************************************************************
 * Function Name  : WWDG_SetCounter
 * Description    : Sets the WWDG counter value
-* Input          : Counter: specifies the watchdog counter value,which must be a 
+* Input          : Counter: specifies the watchdog counter value,which must be a
 *                           number between 0x40 and 0x7F
 * Return         : None
 *********************************************************************************/
@@ -91,7 +91,7 @@ void WWDG_SetCounter(uint8_t Counter)
 /********************************************************************************
 * Function Name  : WWDG_Enable
 * Description    : Enables WWDG and load the counter value
-* Input          : Counter: specifies the watchdog counter value,which must be a 
+* Input          : Counter: specifies the watchdog counter value,which must be a
 *                           number between 0x40 and 0x7F
 * Return         : None
 *********************************************************************************/
@@ -121,3 +121,4 @@ void WWDG_ClearFlag(void)
 {
   WWDG->STATR = (uint32_t)RESET;
 }
+

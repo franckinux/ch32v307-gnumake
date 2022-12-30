@@ -3,7 +3,7 @@
 * Author             : WCH
 * Version            : V1.0.0
 * Date               : 2021/06/06
-* Description        : This file contains all the functions prototypes for the 
+* Description        : This file contains all the functions prototypes for the
 *                      DAC firmware library.
 *******************************************************************************/
 #ifndef __CH32V30x_DAC_H
@@ -26,7 +26,7 @@ typedef struct
                                                 This parameter can be a value of @ref DAC_wave_generation */
 
   uint32_t DAC_LFSRUnmask_TriangleAmplitude; /* Specifies the LFSR mask for noise wave generation or
-                                                the maximum amplitude triangle generation for the DAC channel. 
+                                                the maximum amplitude triangle generation for the DAC channel.
                                                 This parameter can be a value of @ref DAC_lfsrunmask_triangleamplitude */
 
   uint32_t DAC_OutputBuffer;                 /* Specifies whether the DAC channel output buffer is enabled or disabled.
@@ -35,7 +35,7 @@ typedef struct
 
 
 /* DAC_trigger_selection */
-#define DAC_Trigger_None                   ((uint32_t)0x00000000) /* Conversion is automatic once the DAC1_DHRxxxx register 
+#define DAC_Trigger_None                   ((uint32_t)0x00000000) /* Conversion is automatic once the DAC1_DHRxxxx register
                                                                      has been loaded, and not by external trigger */
 #define DAC_Trigger_T6_TRGO                ((uint32_t)0x00000004) /* TIM6 TRGO selected as external conversion trigger for DAC channel */
 #define DAC_Trigger_T8_TRGO                ((uint32_t)0x0000000C) /* TIM8 TRGO selected as external conversion trigger for DAC channel
@@ -44,7 +44,7 @@ typedef struct
                                                                      only in Connectivity line, Medium-density and Low-density Value Line devices */
 #define DAC_Trigger_T7_TRGO                ((uint32_t)0x00000014) /* TIM7 TRGO selected as external conversion trigger for DAC channel */
 #define DAC_Trigger_T5_TRGO                ((uint32_t)0x0000001C) /* TIM5 TRGO selected as external conversion trigger for DAC channel */
-#define DAC_Trigger_T15_TRGO               ((uint32_t)0x0000001C) /* TIM15 TRGO selected as external conversion trigger for DAC channel 
+#define DAC_Trigger_T15_TRGO               ((uint32_t)0x0000001C) /* TIM15 TRGO selected as external conversion trigger for DAC channel
                                                                      only in Medium-density and Low-density Value Line devices*/
 #define DAC_Trigger_T2_TRGO                ((uint32_t)0x00000024) /* TIM2 TRGO selected as external conversion trigger for DAC channel */
 #define DAC_Trigger_T4_TRGO                ((uint32_t)0x0000002C) /* TIM4 TRGO selected as external conversion trigger for DAC channel */
@@ -90,7 +90,7 @@ typedef struct
 /* DAC_Channel_selection */
 #define DAC_Channel_1                      ((uint32_t)0x00000000)
 #define DAC_Channel_2                      ((uint32_t)0x00000010)
-																 
+
 /* DAC_data_alignment */
 #define DAC_Align_12b_R                    ((uint32_t)0x00000000)
 #define DAC_Align_12b_L                    ((uint32_t)0x00000004)
@@ -118,5 +118,5 @@ uint16_t DAC_GetDataOutputValue(uint32_t DAC_Channel);
 }
 #endif
 
-#endif 
+#endif
 

@@ -3,9 +3,9 @@
 * Author             : WCH
 * Version            : V1.0.0
 * Date               : 2021/06/06
-* Description        : This file contains all the functions prototypes for the 
+* Description        : This file contains all the functions prototypes for the
 *                      I2C firmware library.
-*******************************************************************************/ 
+*******************************************************************************/
 #ifndef __CH32V30x_I2C_H
 #define __CH32V30x_I2C_H
 
@@ -39,7 +39,7 @@ typedef struct
 
 /* I2C_mode */
 #define I2C_Mode_I2C                    ((uint16_t)0x0000)
-#define I2C_Mode_SMBusDevice            ((uint16_t)0x0002)  
+#define I2C_Mode_SMBusDevice            ((uint16_t)0x0002)
 #define I2C_Mode_SMBusHost              ((uint16_t)0x000A)
 
 /* I2C_duty_cycle_in_fast_mode */
@@ -182,7 +182,7 @@ void I2C_StretchClockCmd(I2C_TypeDef* I2Cx, FunctionalState NewState);
 void I2C_FastModeDutyCycleConfig(I2C_TypeDef* I2Cx, uint16_t I2C_DutyCycle);
 
 /****************************************************************************************
-*                         I2C State Monitoring Functions                     
+*                         I2C State Monitoring Functions
 ****************************************************************************************/
 
 ErrorStatus I2C_CheckEvent(I2C_TypeDef* I2Cx, uint32_t I2C_EVENT);
@@ -197,12 +197,5 @@ void I2C_ClearITPendingBit(I2C_TypeDef* I2Cx, uint32_t I2C_IT);
 }
 #endif
 
-#endif 
-
-
-
-
-
-
-
+#endif
 

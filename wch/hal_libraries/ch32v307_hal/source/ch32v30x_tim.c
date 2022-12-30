@@ -4,15 +4,15 @@
 * Version            : V1.0.0
 * Date               : 2021/06/06
 * Description        : This file provides all the TIM firmware functions.
-*******************************************************************************/ 
+*******************************************************************************/
 #include "ch32v30x_tim.h"
 #include "ch32v30x_rcc.h"
 
 /* TIM registers bit mask */
-#define SMCFGR_ETR_Mask               ((uint16_t)0x00FF) 
+#define SMCFGR_ETR_Mask               ((uint16_t)0x00FF)
 #define CHCTLR_Offset                 ((uint16_t)0x0018)
-#define CCER_CCE_Set                  ((uint16_t)0x0001)  
-#define	CCER_CCNE_Set                 ((uint16_t)0x0004) 
+#define CCER_CCE_Set                  ((uint16_t)0x0001)
+#define	CCER_CCNE_Set                 ((uint16_t)0x0004)
 
 static void TI1_Config(TIM_TypeDef* TIMx, uint16_t TIM_ICPolarity, uint16_t TIM_ICSelection,
                        uint16_t TIM_ICFilter);
@@ -25,7 +25,7 @@ static void TI4_Config(TIM_TypeDef* TIMx, uint16_t TIM_ICPolarity, uint16_t TIM_
 
 /*******************************************************************************
 * Function Name  : TIM_DeInit
-* Description    : Deinitializes the TIMx peripheral registers to their default 
+* Description    : Deinitializes the TIMx peripheral registers to their default
 *      reset values.
 * Input          : TIMx: where x can be 1 to 4 to select the TIM peripheral.
 * Return         : None
@@ -35,7 +35,7 @@ void TIM_DeInit(TIM_TypeDef* TIMx)
   if (TIMx == TIM1)
   {
     RCC_APB2PeriphResetCmd(RCC_APB2Periph_TIM1, ENABLE);
-    RCC_APB2PeriphResetCmd(RCC_APB2Periph_TIM1, DISABLE);  
+    RCC_APB2PeriphResetCmd(RCC_APB2Periph_TIM1, DISABLE);
   }
   else if (TIMx == TIM8)
   {
@@ -66,7 +66,7 @@ void TIM_DeInit(TIM_TypeDef* TIMx)
   {
     RCC_APB1PeriphResetCmd(RCC_APB1Periph_TIM4, ENABLE);
     RCC_APB1PeriphResetCmd(RCC_APB1Periph_TIM4, DISABLE);
-  } 
+  }
   else if (TIMx == TIM5)
   {
     RCC_APB1PeriphResetCmd(RCC_APB1Periph_TIM5, ENABLE);
@@ -86,7 +86,7 @@ void TIM_DeInit(TIM_TypeDef* TIMx)
 
 /*******************************************************************************
 * Function Name  : TIM_TimeBaseInit
-* Description    : Initializes the TIMx Time Base Unit peripheral according to 
+* Description    : Initializes the TIMx Time Base Unit peripheral according to
 *      the specified parameters in the TIM_TimeBaseInitStruct.
 * Input          : TIMx: where x can be 1 to 4 to select the TIM peripheral.
 *                  TIM_TimeBaseInitStruct: pointer to a TIM_TimeBaseInitTypeDef
@@ -97,7 +97,7 @@ void TIM_TimeBaseInit(TIM_TypeDef* TIMx, TIM_TimeBaseInitTypeDef* TIM_TimeBaseIn
 {
   uint16_t tmpcr1 = 0;
 
-  tmpcr1 = TIMx->CTLR1;  
+  tmpcr1 = TIMx->CTLR1;
 
   if((TIMx == TIM1) || (TIMx == TIM2) || (TIMx == TIM3)|| (TIMx == TIM4) ||
      (TIMx == TIM5) || (TIMx == TIM8) || (TIMx == TIM9)|| (TIMx == TIM10))
@@ -115,13 +115,13 @@ void TIM_TimeBaseInit(TIM_TypeDef* TIMx, TIM_TimeBaseInitTypeDef* TIM_TimeBaseIn
   TIMx->CTLR1 = tmpcr1;
   TIMx->ATRLR = TIM_TimeBaseInitStruct->TIM_Period ;
   TIMx->PSC = TIM_TimeBaseInitStruct->TIM_Prescaler;
-    
+
   if ((TIMx == TIM1) || (TIMx == TIM8) || (TIMx == TIM9)|| (TIMx == TIM10))
   {
     TIMx->RPTCR = TIM_TimeBaseInitStruct->TIM_RepetitionCounter;
   }
 
-  TIMx->SWEVGR = TIM_PSCReloadMode_Immediate;           
+  TIMx->SWEVGR = TIM_PSCReloadMode_Immediate;
 }
 
 /*******************************************************************************
@@ -135,7 +135,7 @@ void TIM_TimeBaseInit(TIM_TypeDef* TIMx, TIM_TimeBaseInitTypeDef* TIM_TimeBaseIn
 void TIM_OC1Init(TIM_TypeDef* TIMx, TIM_OCInitTypeDef* TIM_OCInitStruct)
 {
   uint16_t tmpccmrx = 0, tmpccer = 0, tmpcr2 = 0;
-     
+
   TIMx->CCER &= (uint16_t)(~(uint16_t)TIM_CC1E);
   tmpccer = TIMx->CCER;
   tmpcr2 =  TIMx->CTLR2;
@@ -146,25 +146,25 @@ void TIM_OC1Init(TIM_TypeDef* TIMx, TIM_OCInitTypeDef* TIM_OCInitStruct)
   tmpccer &= (uint16_t)(~((uint16_t)TIM_CC1P));
   tmpccer |= TIM_OCInitStruct->TIM_OCPolarity;
   tmpccer |= TIM_OCInitStruct->TIM_OutputState;
-    
+
   if((TIMx == TIM1) || (TIMx == TIM8) || (TIMx == TIM9)|| (TIMx == TIM10))
   {
     tmpccer &= (uint16_t)(~((uint16_t)TIM_CC1NP));
     tmpccer |= TIM_OCInitStruct->TIM_OCNPolarity;
- 
-    tmpccer &= (uint16_t)(~((uint16_t)TIM_CC1NE));    
+
+    tmpccer &= (uint16_t)(~((uint16_t)TIM_CC1NE));
     tmpccer |= TIM_OCInitStruct->TIM_OutputNState;
-    
+
     tmpcr2 &= (uint16_t)(~((uint16_t)TIM_OIS1));
     tmpcr2 &= (uint16_t)(~((uint16_t)TIM_OIS1N));
-    
+
     tmpcr2 |= TIM_OCInitStruct->TIM_OCIdleState;
     tmpcr2 |= TIM_OCInitStruct->TIM_OCNIdleState;
   }
 
   TIMx->CTLR2 = tmpcr2;
   TIMx->CHCTLR1 = tmpccmrx;
-  TIMx->CH1CVR = TIM_OCInitStruct->TIM_Pulse; 
+  TIMx->CH1CVR = TIM_OCInitStruct->TIM_Pulse;
   TIMx->CCER = tmpccer;
 }
 
@@ -179,8 +179,8 @@ void TIM_OC1Init(TIM_TypeDef* TIMx, TIM_OCInitTypeDef* TIM_OCInitStruct)
 void TIM_OC2Init(TIM_TypeDef* TIMx, TIM_OCInitTypeDef* TIM_OCInitStruct)
 {
   uint16_t tmpccmrx = 0, tmpccer = 0, tmpcr2 = 0;
-   
-  TIMx->CCER &= (uint16_t)(~((uint16_t)TIM_CC2E)); 
+
+  TIMx->CCER &= (uint16_t)(~((uint16_t)TIM_CC2E));
   tmpccer = TIMx->CCER;
   tmpcr2 =  TIMx->CTLR2;
   tmpccmrx = TIMx->CHCTLR1;
@@ -190,14 +190,14 @@ void TIM_OC2Init(TIM_TypeDef* TIMx, TIM_OCInitTypeDef* TIM_OCInitStruct)
   tmpccer &= (uint16_t)(~((uint16_t)TIM_CC2P));
   tmpccer |= (uint16_t)(TIM_OCInitStruct->TIM_OCPolarity << 4);
   tmpccer |= (uint16_t)(TIM_OCInitStruct->TIM_OutputState << 4);
-    
+
   if((TIMx == TIM1) || (TIMx == TIM8) || (TIMx == TIM9)|| (TIMx == TIM10))
   {
     tmpccer &= (uint16_t)(~((uint16_t)TIM_CC2NP));
     tmpccer |= (uint16_t)(TIM_OCInitStruct->TIM_OCNPolarity << 4);
-    tmpccer &= (uint16_t)(~((uint16_t)TIM_CC2NE));    
+    tmpccer &= (uint16_t)(~((uint16_t)TIM_CC2NE));
     tmpccer |= (uint16_t)(TIM_OCInitStruct->TIM_OutputNState << 4);
-    
+
     tmpcr2 &= (uint16_t)(~((uint16_t)TIM_OIS2));
     tmpcr2 &= (uint16_t)(~((uint16_t)TIM_OIS2N));
     tmpcr2 |= (uint16_t)(TIM_OCInitStruct->TIM_OCIdleState << 2);
@@ -221,18 +221,18 @@ void TIM_OC2Init(TIM_TypeDef* TIMx, TIM_OCInitTypeDef* TIM_OCInitStruct)
 void TIM_OC3Init(TIM_TypeDef* TIMx, TIM_OCInitTypeDef* TIM_OCInitStruct)
 {
   uint16_t tmpccmrx = 0, tmpccer = 0, tmpcr2 = 0;
-   
+
   TIMx->CCER &= (uint16_t)(~((uint16_t)TIM_CC3E));
   tmpccer = TIMx->CCER;
   tmpcr2 =  TIMx->CTLR2;
   tmpccmrx = TIMx->CHCTLR2;
   tmpccmrx &= (uint16_t)(~((uint16_t)TIM_OC3M));
-  tmpccmrx &= (uint16_t)(~((uint16_t)TIM_CC3S));  
+  tmpccmrx &= (uint16_t)(~((uint16_t)TIM_CC3S));
   tmpccmrx |= TIM_OCInitStruct->TIM_OCMode;
   tmpccer &= (uint16_t)(~((uint16_t)TIM_CC3P));
   tmpccer |= (uint16_t)(TIM_OCInitStruct->TIM_OCPolarity << 8);
   tmpccer |= (uint16_t)(TIM_OCInitStruct->TIM_OutputState << 8);
-    
+
   if((TIMx == TIM1) || (TIMx == TIM8) || (TIMx == TIM9)|| (TIMx == TIM10))
   {
     tmpccer &= (uint16_t)(~((uint16_t)TIM_CC3NP));
@@ -273,14 +273,14 @@ void TIM_OC4Init(TIM_TypeDef* TIMx, TIM_OCInitTypeDef* TIM_OCInitStruct)
   tmpccer &= (uint16_t)(~((uint16_t)TIM_CC4P));
   tmpccer |= (uint16_t)(TIM_OCInitStruct->TIM_OCPolarity << 12);
   tmpccer |= (uint16_t)(TIM_OCInitStruct->TIM_OutputState << 12);
-    
+
   if((TIMx == TIM1) || (TIMx == TIM8) || (TIMx == TIM9)|| (TIMx == TIM10))
   {
     tmpcr2 &= (uint16_t)(~((uint16_t)TIM_OIS4));
     tmpcr2 |= (uint16_t)(TIM_OCInitStruct->TIM_OCIdleState << 6);
   }
 
-  TIMx->CTLR2 = tmpcr2; 
+  TIMx->CTLR2 = tmpcr2;
   TIMx->CHCTLR2 = tmpccmrx;
   TIMx->CH4CVR = TIM_OCInitStruct->TIM_Pulse;
   TIMx->CCER = tmpccer;
@@ -356,7 +356,7 @@ void TIM_PWMIConfig(TIM_TypeDef* TIMx, TIM_ICInitTypeDef* TIM_ICInitStruct)
   {
     icoppositeselection = TIM_ICSelection_DirectTI;
   }
-	
+
   if (TIM_ICInitStruct->TIM_Channel == TIM_Channel_1)
   {
     TI1_Config(TIMx, TIM_ICInitStruct->TIM_ICPolarity, TIM_ICInitStruct->TIM_ICSelection,
@@ -366,7 +366,7 @@ void TIM_PWMIConfig(TIM_TypeDef* TIMx, TIM_ICInitTypeDef* TIM_ICInitStruct)
     TIM_SetIC2Prescaler(TIMx, TIM_ICInitStruct->TIM_ICPrescaler);
   }
   else
-  { 
+  {
     TI2_Config(TIMx, TIM_ICInitStruct->TIM_ICPolarity, TIM_ICInitStruct->TIM_ICSelection,
                TIM_ICInitStruct->TIM_ICFilter);
     TIM_SetIC2Prescaler(TIMx, TIM_ICInitStruct->TIM_ICPrescaler);
@@ -394,7 +394,7 @@ void TIM_BDTRConfig(TIM_TypeDef* TIMx, TIM_BDTRInitTypeDef *TIM_BDTRInitStruct)
 /*******************************************************************************
 * Function Name  : TIM_TimeBaseStructInit
 * Description    : Fills each TIM_TimeBaseInitStruct member with its default value.
-* Input          : TIM_TimeBaseInitStruct : pointer to a TIM_TimeBaseInitTypeDef structure.                 
+* Input          : TIM_TimeBaseInitStruct : pointer to a TIM_TimeBaseInitTypeDef structure.
 * Return         : None
 *******************************************************************************/
 void TIM_TimeBaseStructInit(TIM_TimeBaseInitTypeDef* TIM_TimeBaseInitStruct)
@@ -464,7 +464,7 @@ void TIM_BDTRStructInit(TIM_BDTRInitTypeDef* TIM_BDTRInitStruct)
 * Return         : None
 *******************************************************************************/
 void TIM_Cmd(TIM_TypeDef* TIMx, FunctionalState NewState)
-{ 
+{
   if (NewState != DISABLE)
   {
     TIMx->CTLR1 |= TIM_CEN;
@@ -491,7 +491,7 @@ void TIM_CtrlPWMOutputs(TIM_TypeDef* TIMx, FunctionalState NewState)
   else
   {
     TIMx->BDTR &= (uint16_t)(~((uint16_t)TIM_MOE));
-  }  
+  }
 }
 
 /*******************************************************************************
@@ -511,7 +511,7 @@ void TIM_CtrlPWMOutputs(TIM_TypeDef* TIMx, FunctionalState NewState)
 * Return         : None
 *******************************************************************************/
 void TIM_ITConfig(TIM_TypeDef* TIMx, uint16_t TIM_IT, FunctionalState NewState)
-{  
+{
   if (NewState != DISABLE)
   {
     TIMx->DMAINTENR |= TIM_IT;
@@ -538,7 +538,7 @@ void TIM_ITConfig(TIM_TypeDef* TIMx, uint16_t TIM_IT, FunctionalState NewState)
 * Return         : None
 *******************************************************************************/
 void TIM_GenerateEvent(TIM_TypeDef* TIMx, uint16_t TIM_EventSource)
-{ 
+{
   TIMx->SWEVGR = TIM_EventSource;
 }
 
@@ -590,10 +590,10 @@ void TIM_DMAConfig(TIM_TypeDef* TIMx, uint16_t TIM_DMABase, uint16_t TIM_DMABurs
 * Return         : None
 *******************************************************************************/
 void TIM_DMACmd(TIM_TypeDef* TIMx, uint16_t TIM_DMASource, FunctionalState NewState)
-{ 
+{
   if (NewState != DISABLE)
   {
-    TIMx->DMAINTENR |= TIM_DMASource; 
+    TIMx->DMAINTENR |= TIM_DMASource;
   }
   else
   {
@@ -708,7 +708,7 @@ void TIM_ETRClockMode1Config(TIM_TypeDef* TIMx, uint16_t TIM_ExtTRGPrescaler, ui
 *                    This parameter must be a value between 0x0 and 0xF.
 * Return         : None
 *******************************************************************************/
-void TIM_ETRClockMode2Config(TIM_TypeDef* TIMx, uint16_t TIM_ExtTRGPrescaler, 
+void TIM_ETRClockMode2Config(TIM_TypeDef* TIMx, uint16_t TIM_ExtTRGPrescaler,
                              uint16_t TIM_ExtTRGPolarity, uint16_t ExtTRGFilter)
 {
   TIM_ETRConfig(TIMx, TIM_ExtTRGPrescaler, TIM_ExtTRGPolarity, ExtTRGFilter);
@@ -811,11 +811,11 @@ void TIM_SelectInputTrigger(TIM_TypeDef* TIMx, uint16_t TIM_InputTriggerSource)
 * Description    : Configures the TIMx Encoder Interface.
 * Input          : TIMx: where x can be 1 to 4 to select the TIM peripheral.
 *                  TIM_EncoderMode: specifies the TIMx Encoder Mode.
-*                    TIM_EncoderMode_TI1: Counter counts on TI1FP1 edge depending 
+*                    TIM_EncoderMode_TI1: Counter counts on TI1FP1 edge depending
 *      on TI2FP2 level.
 *                    TIM_EncoderMode_TI2: Counter counts on TI2FP2 edge depending
 *      on TI1FP1 level.
-*                    TIM_EncoderMode_TI12: Counter counts on both TI1FP1 and 
+*                    TIM_EncoderMode_TI12: Counter counts on both TI1FP1 and
 *      TI2FP2 edges depending.
 *                  TIM_IC1Polarity: specifies the IC1 Polarity.
 *                    TIM_ICPolarity_Falling: IC Falling edge.
@@ -831,7 +831,7 @@ void TIM_EncoderInterfaceConfig(TIM_TypeDef* TIMx, uint16_t TIM_EncoderMode,
   uint16_t tmpsmcr = 0;
   uint16_t tmpccmr1 = 0;
   uint16_t tmpccer = 0;
-    
+
   tmpsmcr = TIMx->SMCFGR;
   tmpccmr1 = TIMx->CHCTLR1;
   tmpccer = TIMx->CCER;
@@ -840,7 +840,7 @@ void TIM_EncoderInterfaceConfig(TIM_TypeDef* TIMx, uint16_t TIM_EncoderMode,
   tmpccmr1 &= (uint16_t)(((uint16_t)~((uint16_t)TIM_CC1S)) & (uint16_t)(~((uint16_t)TIM_CC2S)));
   tmpccmr1 |= TIM_CC1S_0 | TIM_CC2S_0;
   tmpccer &= (uint16_t)(((uint16_t)~((uint16_t)TIM_CC1P)) & ((uint16_t)~((uint16_t)TIM_CC2P)));
-  tmpccer |= (uint16_t)(TIM_IC1Polarity | (uint16_t)(TIM_IC2Polarity << (uint16_t)4)); 
+  tmpccer |= (uint16_t)(TIM_IC1Polarity | (uint16_t)(TIM_IC2Polarity << (uint16_t)4));
   TIMx->SMCFGR = tmpsmcr;
   TIMx->CHCTLR1 = tmpccmr1;
   TIMx->CCER = tmpccer;
@@ -850,9 +850,9 @@ void TIM_EncoderInterfaceConfig(TIM_TypeDef* TIMx, uint16_t TIM_EncoderMode,
 * Function Name  : TIM_ForcedOC1Config
 * Description    : Forces the TIMx output 1 waveform to active or inactive level.
 * Input          : TIMx: where x can be 1 to 4 to select the TIM peripheral.
-*                  TIM_ForcedAction: specifies the forced Action to be set to the 
+*                  TIM_ForcedAction: specifies the forced Action to be set to the
 *      output waveform.
-*                    TIM_ForcedAction_Active: Force active level on OC1REF. 
+*                    TIM_ForcedAction_Active: Force active level on OC1REF.
 *                    TIM_ForcedAction_InActive: Force inactive level on OC1REF.
 * Return         : None
 *******************************************************************************/
@@ -870,9 +870,9 @@ void TIM_ForcedOC1Config(TIM_TypeDef* TIMx, uint16_t TIM_ForcedAction)
 * Function Name  : TIM_ForcedOC2Config
 * Description    : Forces the TIMx output 2 waveform to active or inactive level.
 * Input          : TIMx: where x can be 1 to 4 to select the TIM peripheral.
-*                  TIM_ForcedAction: specifies the forced Action to be set to the 
+*                  TIM_ForcedAction: specifies the forced Action to be set to the
 *      output waveform.
-*                    TIM_ForcedAction_Active: Force active level on OC2REF. 
+*                    TIM_ForcedAction_Active: Force active level on OC2REF.
 *                    TIM_ForcedAction_InActive: Force inactive level on OC2REF.
 * Return         : None
 *******************************************************************************/
@@ -890,9 +890,9 @@ void TIM_ForcedOC2Config(TIM_TypeDef* TIMx, uint16_t TIM_ForcedAction)
 * Function Name  : TIM_ForcedOC3Config
 * Description    : Forces the TIMx output 3 waveform to active or inactive level.
 * Input          : TIMx: where x can be 1 to 4 to select the TIM peripheral.
-*                  TIM_ForcedAction: specifies the forced Action to be set to the 
+*                  TIM_ForcedAction: specifies the forced Action to be set to the
 *      output waveform.
-*                    TIM_ForcedAction_Active: Force active level on OC3REF. 
+*                    TIM_ForcedAction_Active: Force active level on OC3REF.
 *                    TIM_ForcedAction_InActive: Force inactive level on OC3REF.
 * Return         : None
 *******************************************************************************/
@@ -910,19 +910,19 @@ void TIM_ForcedOC3Config(TIM_TypeDef* TIMx, uint16_t TIM_ForcedAction)
 * Function Name  : TIM_ForcedOC4Config
 * Description    : Forces the TIMx output 4 waveform to active or inactive level.
 * Input          : TIMx: where x can be 1 to 4 to select the TIM peripheral.
-*                  TIM_ForcedAction: specifies the forced Action to be set to the 
+*                  TIM_ForcedAction: specifies the forced Action to be set to the
 *      output waveform.
-*                    TIM_ForcedAction_Active: Force active level on OC4REF. 
+*                    TIM_ForcedAction_Active: Force active level on OC4REF.
 *                    TIM_ForcedAction_InActive: Force inactive level on OC4REF.
 * Return         : None
 *******************************************************************************/
 void TIM_ForcedOC4Config(TIM_TypeDef* TIMx, uint16_t TIM_ForcedAction)
 {
   uint16_t tmpccmr2 = 0;
-	
+
   tmpccmr2 = TIMx->CHCTLR2;
   tmpccmr2 &= (uint16_t)~((uint16_t)TIM_OC4M);
-  tmpccmr2 |= (uint16_t)(TIM_ForcedAction << 8);	
+  tmpccmr2 |= (uint16_t)(TIM_ForcedAction << 8);
   TIMx->CHCTLR2 = tmpccmr2;
 }
 
@@ -930,7 +930,7 @@ void TIM_ForcedOC4Config(TIM_TypeDef* TIMx, uint16_t TIM_ForcedAction)
 * Function Name  : TIM_ARRPreloadConfig
 * Description    : Enables or disables TIMx peripheral Preload register on ARR.
 * Input          : TIMx: where x can be 1 to 4 to select the TIM peripheral.
-*                  NewState: ENABLE or DISABLE. 
+*                  NewState: ENABLE or DISABLE.
 * Return         : None
 *******************************************************************************/
 void TIM_ARRPreloadConfig(TIM_TypeDef* TIMx, FunctionalState NewState)
@@ -949,7 +949,7 @@ void TIM_ARRPreloadConfig(TIM_TypeDef* TIMx, FunctionalState NewState)
 * Function Name  : TIM_SelectCOM
 * Description    : Selects the TIM peripheral Commutation event.
 * Input          : TIMx: where x can be 1 to 4 to select the TIM peripheral.
-*                  NewState: ENABLE or DISABLE. 
+*                  NewState: ENABLE or DISABLE.
 * Return         : None
 *******************************************************************************/
 void TIM_SelectCOM(TIM_TypeDef* TIMx, FunctionalState NewState)
@@ -968,7 +968,7 @@ void TIM_SelectCOM(TIM_TypeDef* TIMx, FunctionalState NewState)
 * Function Name  : TIM_SelectCCDMA
 * Description    : Selects the TIMx peripheral Capture Compare DMA source.
 * Input          : TIMx: where x can be 1 to 4 to select the TIM peripheral.
-*                  NewState: ENABLE or DISABLE. 
+*                  NewState: ENABLE or DISABLE.
 * Return         : None
 *******************************************************************************/
 void TIM_SelectCCDMA(TIM_TypeDef* TIMx, FunctionalState NewState)
@@ -987,11 +987,11 @@ void TIM_SelectCCDMA(TIM_TypeDef* TIMx, FunctionalState NewState)
 * Function Name  : TIM_CCPreloadControl
 * Description    : Sets or Resets the TIM peripheral Capture Compare Preload Control bit.
 * Input          : TIMx: where x can be 1 to 4 to select the TIM peripheral.
-*                  NewState: ENABLE or DISABLE. 
+*                  NewState: ENABLE or DISABLE.
 * Return         : None
 *******************************************************************************/
 void TIM_CCPreloadControl(TIM_TypeDef* TIMx, FunctionalState NewState)
-{ 
+{
   if (NewState != DISABLE)
   {
     TIMx->CTLR2 |= TIM_CCPC;
@@ -1036,7 +1036,7 @@ void TIM_OC2PreloadConfig(TIM_TypeDef* TIMx, uint16_t TIM_OCPreload)
 
   tmpccmr1 = TIMx->CHCTLR1;
   tmpccmr1 &= (uint16_t)~((uint16_t)TIM_OC2PE);
-  tmpccmr1 |= (uint16_t)(TIM_OCPreload << 8);	
+  tmpccmr1 |= (uint16_t)(TIM_OCPreload << 8);
   TIMx->CHCTLR1 = tmpccmr1;
 }
 
@@ -1131,7 +1131,7 @@ void TIM_OC3FastConfig(TIM_TypeDef* TIMx, uint16_t TIM_OCFast)
 
   tmpccmr2 = TIMx->CHCTLR2;
   tmpccmr2 &= (uint16_t)~((uint16_t)TIM_OC3FE);
-  tmpccmr2 |= TIM_OCFast;	
+  tmpccmr2 |= TIM_OCFast;
   TIMx->CHCTLR2 = tmpccmr2;
 }
 
@@ -1261,7 +1261,7 @@ void TIM_OC1PolarityConfig(TIM_TypeDef* TIMx, uint16_t TIM_OCPolarity)
 void TIM_OC1NPolarityConfig(TIM_TypeDef* TIMx, uint16_t TIM_OCNPolarity)
 {
   uint16_t tmpccer = 0;
-  
+
   tmpccer = TIMx->CCER;
   tmpccer &= (uint16_t)~((uint16_t)TIM_CC1NP);
   tmpccer |= TIM_OCNPolarity;
@@ -1299,7 +1299,7 @@ void TIM_OC2PolarityConfig(TIM_TypeDef* TIMx, uint16_t TIM_OCPolarity)
 void TIM_OC2NPolarityConfig(TIM_TypeDef* TIMx, uint16_t TIM_OCNPolarity)
 {
   uint16_t tmpccer = 0;
-  
+
   tmpccer = TIMx->CCER;
   tmpccer &= (uint16_t)~((uint16_t)TIM_CC2NP);
   tmpccer |= (uint16_t)(TIM_OCNPolarity << 4);
@@ -1337,7 +1337,7 @@ void TIM_OC3PolarityConfig(TIM_TypeDef* TIMx, uint16_t TIM_OCPolarity)
 void TIM_OC3NPolarityConfig(TIM_TypeDef* TIMx, uint16_t TIM_OCNPolarity)
 {
   uint16_t tmpccer = 0;
-    
+
   tmpccer = TIMx->CCER;
   tmpccer &= (uint16_t)~((uint16_t)TIM_CC3NP);
   tmpccer |= (uint16_t)(TIM_OCNPolarity << 8);
@@ -1420,7 +1420,7 @@ void TIM_CCxNCmd(TIM_TypeDef* TIMx, uint16_t TIM_Channel, uint16_t TIM_CCxN)
 *                  TIM_OCMode: specifies the TIM Output Compare Mode.
 *                    TIM_OCMode_Timing.
 *                    TIM_OCMode_Active.
-*                    TIM_OCMode_Toggle.              
+*                    TIM_OCMode_Toggle.
 *                    TIM_OCMode_PWM1.
 *                    TIM_OCMode_PWM2.
 *                    TIM_ForcedAction_Active.
@@ -1530,13 +1530,13 @@ void TIM_SelectOnePulseMode(TIM_TypeDef* TIMx, uint16_t TIM_OPMode)
 * Description    : Selects the TIMx Trigger Output Mode.
 * Input          : TIMx: where x can be 1 to 4 select the TIM peripheral.
 *                  TIM_TRGOSource: specifies the Trigger Output source.
-*                    TIM_TRGOSource_Reset:  The UG bit in the TIM_EGR register is 
+*                    TIM_TRGOSource_Reset:  The UG bit in the TIM_EGR register is
 *      used as the trigger output (TRGO).
 *                    TIM_TRGOSource_Enable: The Counter Enable CEN is used as the
 *      trigger output (TRGO).
-*                    TIM_TRGOSource_Update: The update event is selected as the 
+*                    TIM_TRGOSource_Update: The update event is selected as the
 *      trigger output (TRGO).
-*                    TIM_TRGOSource_OC1: The trigger output sends a positive pulse 
+*                    TIM_TRGOSource_OC1: The trigger output sends a positive pulse
 *      when the CC1IF flag is to be set, as soon as a capture or compare match occurs (TRGO).
 *                    TIM_TRGOSource_OC1Ref: OC1REF signal is used as the trigger output (TRGO).
 *                    TIM_TRGOSource_OC2Ref: OC2REF signal is used as the trigger output (TRGO).
@@ -1557,7 +1557,7 @@ void TIM_SelectOutputTrigger(TIM_TypeDef* TIMx, uint16_t TIM_TRGOSource)
 *                  TIM_SlaveMode: specifies the Timer Slave Mode.
 *                    TIM_SlaveMode_Reset: Rising edge of the selected trigger
 *      signal (TRGI) re-initializes.
-*                    TIM_SlaveMode_Gated: The counter clock is enabled when the 
+*                    TIM_SlaveMode_Gated: The counter clock is enabled when the
 *      trigger signal (TRGI) is high.
 *                    TIM_SlaveMode_Trigger:   The counter starts at a rising edge
 *      of the trigger TRGI.
@@ -1576,14 +1576,14 @@ void TIM_SelectSlaveMode(TIM_TypeDef* TIMx, uint16_t TIM_SlaveMode)
 * Description    : Sets or Resets the TIMx Master/Slave Mode.
 * Input          : TIMx: where x can be 1 to 4 select the TIM peripheral.
 *                  TIM_MasterSlaveMode: specifies the Timer Master Slave Mode.
-*                    TIM_MasterSlaveMode_Enable: synchronization between the current 
+*                    TIM_MasterSlaveMode_Enable: synchronization between the current
 *      timer and its slaves (through TRGO).
 *                    TIM_MasterSlaveMode_Disable: No action.
 * Return         : None
 *******************************************************************************/
 void TIM_SelectMasterSlaveMode(TIM_TypeDef* TIMx, uint16_t TIM_MasterSlaveMode)
 {
-  TIMx->SMCFGR &= (uint16_t)~((uint16_t)TIM_MSM);  
+  TIMx->SMCFGR &= (uint16_t)~((uint16_t)TIM_MSM);
   TIMx->SMCFGR |= TIM_MasterSlaveMode;
 }
 
@@ -1664,7 +1664,7 @@ void TIM_SetCompare4(TIM_TypeDef* TIMx, uint16_t Compare4)
 * Description    : Sets the TIMx Input Capture 1 prescaler.
 * Input          : TIMx: where x can be 1 to 4 select the TIM peripheral.
 *                  TIM_ICPSC: specifies the Input Capture1 prescaler new value.
-*                    TIM_ICPSC_DIV1: no prescaler.                
+*                    TIM_ICPSC_DIV1: no prescaler.
 *                    TIM_ICPSC_DIV2: capture is done once every 2 events.
 *                    TIM_ICPSC_DIV4: capture is done once every 4 events.
 *                    TIM_ICPSC_DIV8: capture is done once every 8 events.
@@ -1681,7 +1681,7 @@ void TIM_SetIC1Prescaler(TIM_TypeDef* TIMx, uint16_t TIM_ICPSC)
 * Description    : Sets the TIMx Input Capture 2 prescaler.
 * Input          : TIMx: where x can be 1 to 4 select the TIM peripheral.
 *                  TIM_ICPSC: specifies the Input Capture1 prescaler new value.
-*                    TIM_ICPSC_DIV1: no prescaler.                
+*                    TIM_ICPSC_DIV1: no prescaler.
 *                    TIM_ICPSC_DIV2: capture is done once every 2 events.
 *                    TIM_ICPSC_DIV4: capture is done once every 4 events.
 *                    TIM_ICPSC_DIV8: capture is done once every 8 events.
@@ -1698,7 +1698,7 @@ void TIM_SetIC2Prescaler(TIM_TypeDef* TIMx, uint16_t TIM_ICPSC)
 * Description    : Sets the TIMx Input Capture 3 prescaler.
 * Input          : TIMx: where x can be 1 to 4 select the TIM peripheral.
 *                  TIM_ICPSC: specifies the Input Capture1 prescaler new value.
-*                    TIM_ICPSC_DIV1: no prescaler.                
+*                    TIM_ICPSC_DIV1: no prescaler.
 *                    TIM_ICPSC_DIV2: capture is done once every 2 events.
 *                    TIM_ICPSC_DIV4: capture is done once every 4 events.
 *                    TIM_ICPSC_DIV8: capture is done once every 8 events.
@@ -1715,14 +1715,14 @@ void TIM_SetIC3Prescaler(TIM_TypeDef* TIMx, uint16_t TIM_ICPSC)
 * Description    : Sets the TIMx Input Capture 4 prescaler.
 * Input          : TIMx: where x can be 1 to 4 select the TIM peripheral.
 *                  TIM_ICPSC: specifies the Input Capture1 prescaler new value.
-*                    TIM_ICPSC_DIV1: no prescaler.                
+*                    TIM_ICPSC_DIV1: no prescaler.
 *                    TIM_ICPSC_DIV2: capture is done once every 2 events.
 *                    TIM_ICPSC_DIV4: capture is done once every 4 events.
 *                    TIM_ICPSC_DIV8: capture is done once every 8 events.
 * Return         : None
 *******************************************************************************/
 void TIM_SetIC4Prescaler(TIM_TypeDef* TIMx, uint16_t TIM_ICPSC)
-{  
+{
   TIMx->CHCTLR2 &= (uint16_t)~((uint16_t)TIM_IC4PSC);
   TIMx->CHCTLR2 |= (uint16_t)(TIM_ICPSC << 8);
 }
@@ -1732,7 +1732,7 @@ void TIM_SetIC4Prescaler(TIM_TypeDef* TIMx, uint16_t TIM_ICPSC)
 * Description    : Sets the TIMx Clock Division value.
 * Input          : TIMx: where x can be 1 to 4 select the TIM peripheral.
 *                  TIM_CKD: specifies the clock division value.
-*                    TIM_CKD_DIV1: TDTS = Tck_tim.              
+*                    TIM_CKD_DIV1: TDTS = Tck_tim.
 *                    TIM_CKD_DIV2: TDTS = 2*Tck_tim.
 *                    TIM_CKD_DIV4: TDTS = 4*Tck_tim.
 * Return         : None
@@ -1747,7 +1747,7 @@ void TIM_SetClockDivision(TIM_TypeDef* TIMx, uint16_t TIM_CKD)
 * Function Name  : TIM_GetCapture1
 * Description    : Gets the TIMx Input Capture 1 value.
 * Input          : TIMx: where x can be 1 to 4 select the TIM peripheral.
-* Return         : TIMx->CH1CVR: Capture Compare 1 Register value.                  
+* Return         : TIMx->CH1CVR: Capture Compare 1 Register value.
 *******************************************************************************/
 uint16_t TIM_GetCapture1(TIM_TypeDef* TIMx)
 {
@@ -1758,7 +1758,7 @@ uint16_t TIM_GetCapture1(TIM_TypeDef* TIMx)
 * Function Name  : TIM_GetCapture2
 * Description    : Gets the TIMx Input Capture 1 value.
 * Input          : TIMx: where x can be 1 to 4 select the TIM peripheral.
-* Return         : TIMx->CH2CVR: Capture Compare 2 Register value.                  
+* Return         : TIMx->CH2CVR: Capture Compare 2 Register value.
 *******************************************************************************/
 uint16_t TIM_GetCapture2(TIM_TypeDef* TIMx)
 {
@@ -1769,7 +1769,7 @@ uint16_t TIM_GetCapture2(TIM_TypeDef* TIMx)
 * Function Name  : TIM_GetCapture3
 * Description    : Gets the TIMx Input Capture 1 value.
 * Input          : TIMx: where x can be 1 to 4 select the TIM peripheral.
-* Return         : TIMx->CH3CVR: Capture Compare 3 Register value.                  
+* Return         : TIMx->CH3CVR: Capture Compare 3 Register value.
 *******************************************************************************/
 uint16_t TIM_GetCapture3(TIM_TypeDef* TIMx)
 {
@@ -1780,7 +1780,7 @@ uint16_t TIM_GetCapture3(TIM_TypeDef* TIMx)
 * Function Name  : TIM_GetCapture4
 * Description    : Gets the TIMx Input Capture 1 value.
 * Input          : TIMx: where x can be 1 to 4 select the TIM peripheral.
-* Return         : TIMx->CH4CVR: Capture Compare 4 Register value.                  
+* Return         : TIMx->CH4CVR: Capture Compare 4 Register value.
 *******************************************************************************/
 uint16_t TIM_GetCapture4(TIM_TypeDef* TIMx)
 {
@@ -1791,7 +1791,7 @@ uint16_t TIM_GetCapture4(TIM_TypeDef* TIMx)
 * Function Name  : TIM_GetCounter
 * Description    : Gets the TIMx Counter value.
 * Input          : TIMx: where x can be 1 to 4 select the TIM peripheral.
-* Return         : TIMx->CNT: Counter Register value.                  
+* Return         : TIMx->CNT: Counter Register value.
 *******************************************************************************/
 uint16_t TIM_GetCounter(TIM_TypeDef* TIMx)
 {
@@ -1802,7 +1802,7 @@ uint16_t TIM_GetCounter(TIM_TypeDef* TIMx)
 * Function Name  : TIM_GetPrescaler
 * Description    : Gets the TIMx Prescaler value.
 * Input          : TIMx: where x can be 1 to 4 select the TIM peripheral.
-* Return         : TIMx->PSC: Prescaler Register value.                  
+* Return         : TIMx->PSC: Prescaler Register value.
 *******************************************************************************/
 uint16_t TIM_GetPrescaler(TIM_TypeDef* TIMx)
 {
@@ -1814,7 +1814,7 @@ uint16_t TIM_GetPrescaler(TIM_TypeDef* TIMx)
 * Description    : Checks whether the specified TIM flag is set or not.
 * Input          : TIMx: where x can be 1 to 4 select the TIM peripheral.
 *                  TIM_FLAG: specifies the flag to check.
-*                    TIM_FLAG_Update: TIM update Flag.               
+*                    TIM_FLAG_Update: TIM update Flag.
 *                    TIM_FLAG_CC1: TIM Capture Compare 1 Flag.
 *                    TIM_FLAG_CC2: TIM Capture Compare 2 Flag.
 *                    TIM_FLAG_CC3: TIM Capture Compare 3 Flag.
@@ -1823,15 +1823,15 @@ uint16_t TIM_GetPrescaler(TIM_TypeDef* TIMx)
 *                    TIM_FLAG_Trigger: TIM Trigger Flag.
 *                    TIM_FLAG_Break: TIM Break Flag.
 *                    TIM_FLAG_CC1OF: TIM Capture Compare 1 overcapture Flag.
-*                    TIM_FLAG_CC2OF: TIM Capture Compare 2 overcapture Flag. 
+*                    TIM_FLAG_CC2OF: TIM Capture Compare 2 overcapture Flag.
 *                    TIM_FLAG_CC3OF: TIM Capture Compare 3 overcapture Flag.
 *                    TIM_FLAG_CC4OF: TIM Capture Compare 4 overcapture Flag.
 * Return         : bitstatus: SET or RESET.
 *******************************************************************************/
 FlagStatus TIM_GetFlagStatus(TIM_TypeDef* TIMx, uint16_t TIM_FLAG)
-{ 
-  ITStatus bitstatus = RESET;  
-  
+{
+  ITStatus bitstatus = RESET;
+
   if ((TIMx->INTFR & TIM_FLAG) != (uint16_t)RESET)
   {
     bitstatus = SET;
@@ -1840,7 +1840,7 @@ FlagStatus TIM_GetFlagStatus(TIM_TypeDef* TIMx, uint16_t TIM_FLAG)
   {
     bitstatus = RESET;
   }
-	
+
   return bitstatus;
 }
 
@@ -1849,7 +1849,7 @@ FlagStatus TIM_GetFlagStatus(TIM_TypeDef* TIMx, uint16_t TIM_FLAG)
 * Description    : Clears the TIMx's pending flags.
 * Input          : TIMx: where x can be 1 to 4 select the TIM peripheral.
 *                  TIM_FLAG: specifies the flag bit to clear.
-*                    TIM_FLAG_Update: TIM update Flag.               
+*                    TIM_FLAG_Update: TIM update Flag.
 *                    TIM_FLAG_CC1: TIM Capture Compare 1 Flag.
 *                    TIM_FLAG_CC2: TIM Capture Compare 2 Flag.
 *                    TIM_FLAG_CC3: TIM Capture Compare 3 Flag.
@@ -1858,13 +1858,13 @@ FlagStatus TIM_GetFlagStatus(TIM_TypeDef* TIMx, uint16_t TIM_FLAG)
 *                    TIM_FLAG_Trigger: TIM Trigger Flag.
 *                    TIM_FLAG_Break: TIM Break Flag.
 *                    TIM_FLAG_CC1OF: TIM Capture Compare 1 overcapture Flag.
-*                    TIM_FLAG_CC2OF: TIM Capture Compare 2 overcapture Flag. 
+*                    TIM_FLAG_CC2OF: TIM Capture Compare 2 overcapture Flag.
 *                    TIM_FLAG_CC3OF: TIM Capture Compare 3 overcapture Flag.
 *                    TIM_FLAG_CC4OF: TIM Capture Compare 4 overcapture Flag.
 * Return         : None
 *******************************************************************************/
 void TIM_ClearFlag(TIM_TypeDef* TIMx, uint16_t TIM_FLAG)
-{  
+{
   TIMx->INTFR = (uint16_t)~TIM_FLAG;
 }
 
@@ -1873,7 +1873,7 @@ void TIM_ClearFlag(TIM_TypeDef* TIMx, uint16_t TIM_FLAG)
 * Description    : Checks whether the TIM interrupt has occurred or not.
 * Input          : TIMx: where x can be 1 to 4 select the TIM peripheral.
 *                  TIM_IT: specifies the TIM interrupt source to check.
-*                    TIM_IT_Update: TIM update Interrupt source.               
+*                    TIM_IT_Update: TIM update Interrupt source.
 *                    TIM_IT_CC1: TIM Capture Compare 1 Interrupt source.
 *                    TIM_IT_CC2: TIM Capture Compare 2 Interrupt source.
 *                    TIM_IT_CC3: TIM Capture Compare 3 Interrupt source.
@@ -1885,11 +1885,11 @@ void TIM_ClearFlag(TIM_TypeDef* TIMx, uint16_t TIM_FLAG)
 *******************************************************************************/
 ITStatus TIM_GetITStatus(TIM_TypeDef* TIMx, uint16_t TIM_IT)
 {
-  ITStatus bitstatus = RESET;  
+  ITStatus bitstatus = RESET;
   uint16_t itstatus = 0x0, itenable = 0x0;
-   
+
   itstatus = TIMx->INTFR & TIM_IT;
-  
+
   itenable = TIMx->DMAINTENR & TIM_IT;
   if ((itstatus != (uint16_t)RESET) && (itenable != (uint16_t)RESET))
   {
@@ -1899,7 +1899,7 @@ ITStatus TIM_GetITStatus(TIM_TypeDef* TIMx, uint16_t TIM_IT)
   {
     bitstatus = RESET;
   }
-	
+
   return bitstatus;
 }
 
@@ -1908,7 +1908,7 @@ ITStatus TIM_GetITStatus(TIM_TypeDef* TIMx, uint16_t TIM_IT)
 * Description    : Clears the TIMx's interrupt pending bits.
 * Input          : TIMx: where x can be 1 to 4 select the TIM peripheral.
 *                  TIM_IT: specifies the pending bit to clear.
-*                    TIM_IT_Update: TIM update Interrupt source.               
+*                    TIM_IT_Update: TIM update Interrupt source.
 *                    TIM_IT_CC1: TIM Capture Compare 1 Interrupt source.
 *                    TIM_IT_CC2: TIM Capture Compare 2 Interrupt source.
 *                    TIM_IT_CC3: TIM Capture Compare 3 Interrupt source.
@@ -1928,14 +1928,14 @@ void TIM_ClearITPendingBit(TIM_TypeDef* TIMx, uint16_t TIM_IT)
 * Description    : Configure the TI1 as Input.
 * Input          : TIMx: where x can be 1 to 4 select the TIM peripheral.
 *                  IM_ICPolarity : The Input Polarity.
-*                    TIM_ICPolarity_Rising.               
+*                    TIM_ICPolarity_Rising.
 *                    TIM_ICPolarity_Falling.
 *                  TIM_ICSelection: specifies the input to be used.
-*                    TIM_ICSelection_DirectTI: TIM Input 1 is selected to be 
+*                    TIM_ICSelection_DirectTI: TIM Input 1 is selected to be
 *      connected to IC1.
 *                    TIM_ICSelection_IndirectTI: TIM Input 1 is selected to be
 *      connected to IC2.
-*                    TIM_ICSelection_TRC: TIM Input 1 is selected to be connected 
+*                    TIM_ICSelection_TRC: TIM Input 1 is selected to be connected
 *      to TRC.
 *                  TIM_ICFilter: Specifies the Input Capture Filter.
 *                    This parameter must be a value between 0x00 and 0x0F.
@@ -1951,7 +1951,7 @@ static void TI1_Config(TIM_TypeDef* TIMx, uint16_t TIM_ICPolarity, uint16_t TIM_
   tmpccer = TIMx->CCER;
   tmpccmr1 &= (uint16_t)(((uint16_t)~((uint16_t)TIM_CC1S)) & ((uint16_t)~((uint16_t)TIM_IC1F)));
   tmpccmr1 |= (uint16_t)(TIM_ICSelection | (uint16_t)(TIM_ICFilter << (uint16_t)4));
-  
+
   if((TIMx == TIM1) || (TIMx == TIM2) || (TIMx == TIM3)|| (TIMx == TIM4) ||
      (TIMx == TIM5) || (TIMx == TIM8) || (TIMx == TIM9)|| (TIMx == TIM10))
   {
@@ -1973,14 +1973,14 @@ static void TI1_Config(TIM_TypeDef* TIMx, uint16_t TIM_ICPolarity, uint16_t TIM_
 * Description    : Configure the TI2 as Input.
 * Input          : TIMx: where x can be 1 to 4 select the TIM peripheral.
 *                  IM_ICPolarity : The Input Polarity.
-*                    TIM_ICPolarity_Rising.               
+*                    TIM_ICPolarity_Rising.
 *                    TIM_ICPolarity_Falling.
 *                  TIM_ICSelection: specifies the input to be used.
-*                    TIM_ICSelection_DirectTI: TIM Input 2 is selected to be 
+*                    TIM_ICSelection_DirectTI: TIM Input 2 is selected to be
 *      connected to IC2.
 *                    TIM_ICSelection_IndirectTI: TIM Input 2 is selected to be
 *      connected to IC1.
-*                    TIM_ICSelection_TRC: TIM Input 2 is selected to be connected 
+*                    TIM_ICSelection_TRC: TIM Input 2 is selected to be connected
 *      to TRC.
 *                  TIM_ICFilter: Specifies the Input Capture Filter.
 *                    This parameter must be a value between 0x00 and 0x0F.
@@ -1998,7 +1998,7 @@ static void TI2_Config(TIM_TypeDef* TIMx, uint16_t TIM_ICPolarity, uint16_t TIM_
   tmpccmr1 &= (uint16_t)(((uint16_t)~((uint16_t)TIM_CC2S)) & ((uint16_t)~((uint16_t)TIM_IC2F)));
   tmpccmr1 |= (uint16_t)(TIM_ICFilter << 12);
   tmpccmr1 |= (uint16_t)(TIM_ICSelection << 8);
-  
+
   if((TIMx == TIM1) || (TIMx == TIM2) || (TIMx == TIM3)|| (TIMx == TIM4) ||
      (TIMx == TIM5) || (TIMx == TIM8) || (TIMx == TIM9)|| (TIMx == TIM10))
   {
@@ -2010,7 +2010,7 @@ static void TI2_Config(TIM_TypeDef* TIMx, uint16_t TIM_ICPolarity, uint16_t TIM_
     tmpccer &= (uint16_t)~((uint16_t)(TIM_CC2P | TIM_CC2NP));
     tmpccer |= (uint16_t)(TIM_ICPolarity | (uint16_t)TIM_CC2E);
   }
-  
+
   TIMx->CHCTLR1 = tmpccmr1 ;
   TIMx->CCER = tmpccer;
 }
@@ -2020,14 +2020,14 @@ static void TI2_Config(TIM_TypeDef* TIMx, uint16_t TIM_ICPolarity, uint16_t TIM_
 * Description    : Configure the TI3 as Input.
 * Input          : TIMx: where x can be 1 to 4 select the TIM peripheral.
 *                  IM_ICPolarity : The Input Polarity.
-*                    TIM_ICPolarity_Rising.               
+*                    TIM_ICPolarity_Rising.
 *                    TIM_ICPolarity_Falling.
 *                  TIM_ICSelection: specifies the input to be used.
-*                    TIM_ICSelection_DirectTI: TIM Input 3 is selected to be 
+*                    TIM_ICSelection_DirectTI: TIM Input 3 is selected to be
 *      connected to IC3.
 *                    TIM_ICSelection_IndirectTI: TIM Input 3 is selected to be
 *      connected to IC4.
-*                    TIM_ICSelection_TRC: TIM Input 3 is selected to be connected 
+*                    TIM_ICSelection_TRC: TIM Input 3 is selected to be connected
 *      to TRC.
 *                  TIM_ICFilter: Specifies the Input Capture Filter.
 *                    This parameter must be a value between 0x00 and 0x0F.
@@ -2044,7 +2044,7 @@ static void TI3_Config(TIM_TypeDef* TIMx, uint16_t TIM_ICPolarity, uint16_t TIM_
   tmp = (uint16_t)(TIM_ICPolarity << 8);
   tmpccmr2 &= (uint16_t)(((uint16_t)~((uint16_t)TIM_CC3S)) & ((uint16_t)~((uint16_t)TIM_IC3F)));
   tmpccmr2 |= (uint16_t)(TIM_ICSelection | (uint16_t)(TIM_ICFilter << (uint16_t)4));
-    
+
   if((TIMx == TIM1) || (TIMx == TIM2) || (TIMx == TIM3)|| (TIMx == TIM4) ||
      (TIMx == TIM5) || (TIMx == TIM8) || (TIMx == TIM9)|| (TIMx == TIM10))
   {
@@ -2056,7 +2056,7 @@ static void TI3_Config(TIM_TypeDef* TIMx, uint16_t TIM_ICPolarity, uint16_t TIM_
     tmpccer &= (uint16_t)~((uint16_t)(TIM_CC3P | TIM_CC3NP));
     tmpccer |= (uint16_t)(TIM_ICPolarity | (uint16_t)TIM_CC3E);
   }
-  
+
   TIMx->CHCTLR2 = tmpccmr2;
   TIMx->CCER = tmpccer;
 }
@@ -2066,14 +2066,14 @@ static void TI3_Config(TIM_TypeDef* TIMx, uint16_t TIM_ICPolarity, uint16_t TIM_
 * Description    : Configure the TI4 as Input.
 * Input          : TIMx: where x can be 1 to 4 select the TIM peripheral.
 *                  IM_ICPolarity : The Input Polarity.
-*                    TIM_ICPolarity_Rising.               
+*                    TIM_ICPolarity_Rising.
 *                    TIM_ICPolarity_Falling.
 *                  TIM_ICSelection: specifies the input to be used.
-*                    TIM_ICSelection_DirectTI: TIM Input 4 is selected to be 
+*                    TIM_ICSelection_DirectTI: TIM Input 4 is selected to be
 *      connected to IC4.
 *                    TIM_ICSelection_IndirectTI: TIM Input 4 is selected to be
 *      connected to IC3.
-*                    TIM_ICSelection_TRC: TIM Input 4 is selected to be connected 
+*                    TIM_ICSelection_TRC: TIM Input 4 is selected to be connected
 *      to TRC.
 *                  TIM_ICFilter: Specifies the Input Capture Filter.
 *                    This parameter must be a value between 0x00 and 0x0F.
@@ -2091,7 +2091,7 @@ static void TI4_Config(TIM_TypeDef* TIMx, uint16_t TIM_ICPolarity, uint16_t TIM_
   tmpccmr2 &= (uint16_t)((uint16_t)(~(uint16_t)TIM_CC4S) & ((uint16_t)~((uint16_t)TIM_IC4F)));
   tmpccmr2 |= (uint16_t)(TIM_ICSelection << 8);
   tmpccmr2 |= (uint16_t)(TIM_ICFilter << 12);
-  
+
   if((TIMx == TIM1) || (TIMx == TIM2) || (TIMx == TIM3)|| (TIMx == TIM4) ||
      (TIMx == TIM5) || (TIMx == TIM8) || (TIMx == TIM9)|| (TIMx == TIM10))
   {
@@ -2107,11 +2107,4 @@ static void TI4_Config(TIM_TypeDef* TIMx, uint16_t TIM_ICPolarity, uint16_t TIM_
   TIMx->CHCTLR2 = tmpccmr2;
   TIMx->CCER = tmpccer;
 }
-
-
-
-
-
-
-
 

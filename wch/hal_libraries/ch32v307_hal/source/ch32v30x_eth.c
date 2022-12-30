@@ -13,7 +13,7 @@ ETH_DMADESCTypeDef  *DMARxDescToGet;
 ETH_DMADESCTypeDef  *DMAPTPTxDescToSet;
 ETH_DMADESCTypeDef  *DMAPTPRxDescToGet;
 
-  
+
 /*******************************************************************************
 * Function Name  : ETH_DeInit
 * Description    : ETH hardware initialize again.
@@ -34,48 +34,48 @@ void ETH_DeInit(void)
 *******************************************************************************/
 void ETH_StructInit(ETH_InitTypeDef* ETH_InitStruct)
 {
-  /*------------------------   MAC   -----------------------------------*/     
-  ETH_InitStruct->ETH_AutoNegotiation = ETH_AutoNegotiation_Disable;           
-  ETH_InitStruct->ETH_Watchdog = ETH_Watchdog_Enable;                   
-  ETH_InitStruct->ETH_Jabber = ETH_Jabber_Enable;                                                     
-  ETH_InitStruct->ETH_InterFrameGap = ETH_InterFrameGap_96Bit;                                                                                                                          
-  ETH_InitStruct->ETH_CarrierSense = ETH_CarrierSense_Enable;                              
-  ETH_InitStruct->ETH_Speed = ETH_Speed_10M;                       
-  ETH_InitStruct->ETH_ReceiveOwn = ETH_ReceiveOwn_Enable;               
-  ETH_InitStruct->ETH_LoopbackMode = ETH_LoopbackMode_Disable;              
-  ETH_InitStruct->ETH_Mode = ETH_Mode_HalfDuplex;                       
-  ETH_InitStruct->ETH_ChecksumOffload = ETH_ChecksumOffload_Disable;                                                            
-  ETH_InitStruct->ETH_RetryTransmission = ETH_RetryTransmission_Enable;                                                                                  
-  ETH_InitStruct->ETH_AutomaticPadCRCStrip = ETH_AutomaticPadCRCStrip_Disable;                                                         
-  ETH_InitStruct->ETH_BackOffLimit = ETH_BackOffLimit_10;                                                                
-  ETH_InitStruct->ETH_DeferralCheck = ETH_DeferralCheck_Disable;                                                                                                                  
-  ETH_InitStruct->ETH_ReceiveAll = ETH_ReceiveAll_Disable;                                                               
-  ETH_InitStruct->ETH_SourceAddrFilter = ETH_SourceAddrFilter_Disable;                                
-  ETH_InitStruct->ETH_PassControlFrames = ETH_PassControlFrames_BlockAll;          
+  /*------------------------   MAC   -----------------------------------*/
+  ETH_InitStruct->ETH_AutoNegotiation = ETH_AutoNegotiation_Disable;
+  ETH_InitStruct->ETH_Watchdog = ETH_Watchdog_Enable;
+  ETH_InitStruct->ETH_Jabber = ETH_Jabber_Enable;
+  ETH_InitStruct->ETH_InterFrameGap = ETH_InterFrameGap_96Bit;
+  ETH_InitStruct->ETH_CarrierSense = ETH_CarrierSense_Enable;
+  ETH_InitStruct->ETH_Speed = ETH_Speed_10M;
+  ETH_InitStruct->ETH_ReceiveOwn = ETH_ReceiveOwn_Enable;
+  ETH_InitStruct->ETH_LoopbackMode = ETH_LoopbackMode_Disable;
+  ETH_InitStruct->ETH_Mode = ETH_Mode_HalfDuplex;
+  ETH_InitStruct->ETH_ChecksumOffload = ETH_ChecksumOffload_Disable;
+  ETH_InitStruct->ETH_RetryTransmission = ETH_RetryTransmission_Enable;
+  ETH_InitStruct->ETH_AutomaticPadCRCStrip = ETH_AutomaticPadCRCStrip_Disable;
+  ETH_InitStruct->ETH_BackOffLimit = ETH_BackOffLimit_10;
+  ETH_InitStruct->ETH_DeferralCheck = ETH_DeferralCheck_Disable;
+  ETH_InitStruct->ETH_ReceiveAll = ETH_ReceiveAll_Disable;
+  ETH_InitStruct->ETH_SourceAddrFilter = ETH_SourceAddrFilter_Disable;
+  ETH_InitStruct->ETH_PassControlFrames = ETH_PassControlFrames_BlockAll;
   ETH_InitStruct->ETH_BroadcastFramesReception = ETH_BroadcastFramesReception_Disable;
-  ETH_InitStruct->ETH_DestinationAddrFilter = ETH_DestinationAddrFilter_Normal;      
-  ETH_InitStruct->ETH_PromiscuousMode = ETH_PromiscuousMode_Disable;                                                             
-  ETH_InitStruct->ETH_MulticastFramesFilter = ETH_MulticastFramesFilter_Perfect;      
-  ETH_InitStruct->ETH_UnicastFramesFilter = ETH_UnicastFramesFilter_Perfect;      
-  ETH_InitStruct->ETH_HashTableHigh = 0x0;                
-  ETH_InitStruct->ETH_HashTableLow = 0x0;                     
-  ETH_InitStruct->ETH_PauseTime = 0x0;                 
-  ETH_InitStruct->ETH_ZeroQuantaPause = ETH_ZeroQuantaPause_Disable;            
-  ETH_InitStruct->ETH_PauseLowThreshold = ETH_PauseLowThreshold_Minus4;         
-  ETH_InitStruct->ETH_UnicastPauseFrameDetect = ETH_UnicastPauseFrameDetect_Disable;   
-  ETH_InitStruct->ETH_ReceiveFlowControl = ETH_ReceiveFlowControl_Disable;        
-  ETH_InitStruct->ETH_TransmitFlowControl = ETH_TransmitFlowControl_Disable;      
-  ETH_InitStruct->ETH_VLANTagComparison = ETH_VLANTagComparison_16Bit;          
-  ETH_InitStruct->ETH_VLANTagIdentifier = 0x0;          
-  /*------------------------   DMA   -----------------------------------*/  
-  ETH_InitStruct->ETH_DropTCPIPChecksumErrorFrame = ETH_DropTCPIPChecksumErrorFrame_Disable; 
-  ETH_InitStruct->ETH_ReceiveStoreForward = ETH_ReceiveStoreForward_Enable;       
+  ETH_InitStruct->ETH_DestinationAddrFilter = ETH_DestinationAddrFilter_Normal;
+  ETH_InitStruct->ETH_PromiscuousMode = ETH_PromiscuousMode_Disable;
+  ETH_InitStruct->ETH_MulticastFramesFilter = ETH_MulticastFramesFilter_Perfect;
+  ETH_InitStruct->ETH_UnicastFramesFilter = ETH_UnicastFramesFilter_Perfect;
+  ETH_InitStruct->ETH_HashTableHigh = 0x0;
+  ETH_InitStruct->ETH_HashTableLow = 0x0;
+  ETH_InitStruct->ETH_PauseTime = 0x0;
+  ETH_InitStruct->ETH_ZeroQuantaPause = ETH_ZeroQuantaPause_Disable;
+  ETH_InitStruct->ETH_PauseLowThreshold = ETH_PauseLowThreshold_Minus4;
+  ETH_InitStruct->ETH_UnicastPauseFrameDetect = ETH_UnicastPauseFrameDetect_Disable;
+  ETH_InitStruct->ETH_ReceiveFlowControl = ETH_ReceiveFlowControl_Disable;
+  ETH_InitStruct->ETH_TransmitFlowControl = ETH_TransmitFlowControl_Disable;
+  ETH_InitStruct->ETH_VLANTagComparison = ETH_VLANTagComparison_16Bit;
+  ETH_InitStruct->ETH_VLANTagIdentifier = 0x0;
+  /*------------------------   DMA   -----------------------------------*/
+  ETH_InitStruct->ETH_DropTCPIPChecksumErrorFrame = ETH_DropTCPIPChecksumErrorFrame_Disable;
+  ETH_InitStruct->ETH_ReceiveStoreForward = ETH_ReceiveStoreForward_Enable;
   ETH_InitStruct->ETH_FlushReceivedFrame = ETH_FlushReceivedFrame_Enable;
-  ETH_InitStruct->ETH_TransmitStoreForward = ETH_TransmitStoreForward_Enable;     
-  ETH_InitStruct->ETH_TransmitThresholdControl = ETH_TransmitThresholdControl_64Bytes;  
-  ETH_InitStruct->ETH_ForwardErrorFrames = ETH_ForwardErrorFrames_Disable;       
-  ETH_InitStruct->ETH_ForwardUndersizedGoodFrames = ETH_ForwardUndersizedGoodFrames_Disable; 
-  ETH_InitStruct->ETH_ReceiveThresholdControl = ETH_ReceiveThresholdControl_64Bytes;   
+  ETH_InitStruct->ETH_TransmitStoreForward = ETH_TransmitStoreForward_Enable;
+  ETH_InitStruct->ETH_TransmitThresholdControl = ETH_TransmitThresholdControl_64Bytes;
+  ETH_InitStruct->ETH_ForwardErrorFrames = ETH_ForwardErrorFrames_Disable;
+  ETH_InitStruct->ETH_ForwardUndersizedGoodFrames = ETH_ForwardUndersizedGoodFrames_Disable;
+  ETH_InitStruct->ETH_ReceiveThresholdControl = ETH_ReceiveThresholdControl_64Bytes;
   ETH_InitStruct->ETH_SecondFrameOperate = ETH_SecondFrameOperate_Disable;
   ETH_InitStruct->ETH_AddressAlignedBeats = ETH_AddressAlignedBeats_Enable;
   ETH_InitStruct->ETH_FixedBurst = ETH_FixedBurst_Disable;
@@ -96,8 +96,8 @@ void ETH_Start(void)
   ETH_MACTransmissionCmd(ENABLE);
   ETH_FlushTransmitFIFO();
   ETH_MACReceptionCmd(ENABLE);
-  ETH_DMATransmissionCmd(ENABLE); 
-  ETH_DMAReceptionCmd(ENABLE);   
+  ETH_DMATransmissionCmd(ENABLE);
+  ETH_DMAReceptionCmd(ENABLE);
 }
 
 /*******************************************************************************
@@ -109,7 +109,7 @@ void ETH_Start(void)
 *                  ETH_SUCCESS: for correct transmission.
 *******************************************************************************/
 uint32_t ETH_HandleTxPkt(uint8_t *ppkt, uint16_t FrameLength)
-{ 
+{
   uint32_t offset = 0;
 
   if((DMATxDescToSet->Status & ETH_DMATxDesc_OWN) != (uint32_t)RESET)
@@ -117,11 +117,11 @@ uint32_t ETH_HandleTxPkt(uint8_t *ppkt, uint16_t FrameLength)
     return ETH_ERROR;
   }
 
-  for(offset=0; offset<FrameLength; offset++)       
+  for(offset=0; offset<FrameLength; offset++)
   {
     (*(__IO uint8_t *)((DMATxDescToSet->Buffer1Addr) + offset)) = (*(ppkt + offset));
   }
-        
+
   DMATxDescToSet->ControlBufferSize = (FrameLength & ETH_DMATxDesc_TBS1);
   DMATxDescToSet->Status |= ETH_DMATxDesc_LS | ETH_DMATxDesc_FS ;
   DMATxDescToSet->Status |= ETH_DMATxDesc_OWN;
@@ -133,22 +133,22 @@ uint32_t ETH_HandleTxPkt(uint8_t *ppkt, uint16_t FrameLength)
   }
 
   if((DMATxDescToSet->Status & ETH_DMATxDesc_TCH) != (uint32_t)RESET)
-  {     
-    DMATxDescToSet = (ETH_DMADESCTypeDef*) (DMATxDescToSet->Buffer2NextDescAddr);    
+  {
+    DMATxDescToSet = (ETH_DMADESCTypeDef*) (DMATxDescToSet->Buffer2NextDescAddr);
   }
   else
-  {  
+  {
     if((DMATxDescToSet->Status & ETH_DMATxDesc_TER) != (uint32_t)RESET)
     {
-      DMATxDescToSet = (ETH_DMADESCTypeDef*) (ETH->DMATDLAR);      
+      DMATxDescToSet = (ETH_DMADESCTypeDef*) (ETH->DMATDLAR);
     }
     else
-    {  
-      DMATxDescToSet = (ETH_DMADESCTypeDef*) ((uint32_t)DMATxDescToSet + 0x10 + ((ETH->DMABMR & ETH_DMABMR_DSL) >> 2));      
+    {
+      DMATxDescToSet = (ETH_DMADESCTypeDef*) ((uint32_t)DMATxDescToSet + 0x10 + ((ETH->DMABMR & ETH_DMABMR_DSL) >> 2));
     }
   }
 
-  return ETH_SUCCESS;   
+  return ETH_SUCCESS;
 }
 
 /*******************************************************************************
@@ -159,21 +159,21 @@ uint32_t ETH_HandleTxPkt(uint8_t *ppkt, uint16_t FrameLength)
 *                  framelength: received packet size if packet reception is correct
 *******************************************************************************/
 uint32_t ETH_HandleRxPkt(uint8_t *ppkt)
-{ 
+{
   uint32_t offset = 0, framelength = 0;
 
   if((DMARxDescToGet->Status & ETH_DMARxDesc_OWN) != (uint32_t)RESET)
   {
-    return ETH_ERROR; 
+    return ETH_ERROR;
   }
-  
-  if(((DMARxDescToGet->Status & ETH_DMARxDesc_ES) == (uint32_t)RESET) && 
-     ((DMARxDescToGet->Status & ETH_DMARxDesc_LS) != (uint32_t)RESET) &&  
-     ((DMARxDescToGet->Status & ETH_DMARxDesc_FS) != (uint32_t)RESET))  
-  {      
+
+  if(((DMARxDescToGet->Status & ETH_DMARxDesc_ES) == (uint32_t)RESET) &&
+     ((DMARxDescToGet->Status & ETH_DMARxDesc_LS) != (uint32_t)RESET) &&
+     ((DMARxDescToGet->Status & ETH_DMARxDesc_FS) != (uint32_t)RESET))
+  {
     framelength = ((DMARxDescToGet->Status & ETH_DMARxDesc_FL) >> ETH_DMARXDESC_FRAME_LENGTHSHIFT) - 4;
 
-    for(offset=0; offset<framelength; offset++)       
+    for(offset=0; offset<framelength; offset++)
     {
       (*(ppkt + offset)) = (*(__IO uint8_t *)((DMARxDescToGet->Buffer1Addr) + offset));
     }
@@ -183,31 +183,31 @@ uint32_t ETH_HandleRxPkt(uint8_t *ppkt)
     framelength = ETH_ERROR;
   }
 
-  DMARxDescToGet->Status = ETH_DMARxDesc_OWN; 
+  DMARxDescToGet->Status = ETH_DMARxDesc_OWN;
 
-  if ((ETH->DMASR & ETH_DMASR_RBUS) != (uint32_t)RESET)  
+  if ((ETH->DMASR & ETH_DMASR_RBUS) != (uint32_t)RESET)
   {
     ETH->DMASR = ETH_DMASR_RBUS;
     ETH->DMARPDR = 0;
   }
-  
+
   if((DMARxDescToGet->ControlBufferSize & ETH_DMARxDesc_RCH) != (uint32_t)RESET)
-  {     
-    DMARxDescToGet = (ETH_DMADESCTypeDef*) (DMARxDescToGet->Buffer2NextDescAddr);    
+  {
+    DMARxDescToGet = (ETH_DMADESCTypeDef*) (DMARxDescToGet->Buffer2NextDescAddr);
   }
   else
-  {   
+  {
     if((DMARxDescToGet->ControlBufferSize & ETH_DMARxDesc_RER) != (uint32_t)RESET)
     {
-      DMARxDescToGet = (ETH_DMADESCTypeDef*) (ETH->DMARDLAR);      
+      DMARxDescToGet = (ETH_DMADESCTypeDef*) (ETH->DMARDLAR);
     }
     else
-    { 
-      DMARxDescToGet = (ETH_DMADESCTypeDef*) ((uint32_t)DMARxDescToGet + 0x10 + ((ETH->DMABMR & ETH_DMABMR_DSL) >> 2));      
+    {
+      DMARxDescToGet = (ETH_DMADESCTypeDef*) ((uint32_t)DMARxDescToGet + 0x10 + ((ETH->DMABMR & ETH_DMABMR_DSL) >> 2));
     }
   }
-  
-  return (framelength);  
+
+  return (framelength);
 }
 
 /*******************************************************************************
@@ -226,7 +226,7 @@ uint32_t ETH_GetRxPktSize(void)
   {
     frameLength = ETH_GetDMARxDescFrameLength(DMARxDescToGet);
   }
- 
+
  return frameLength;
 }
 
@@ -238,7 +238,7 @@ uint32_t ETH_GetRxPktSize(void)
 *******************************************************************************/
 void ETH_DropRxPkt(void)
 {
-  DMARxDescToGet->Status = ETH_DMARxDesc_OWN;  
+  DMARxDescToGet->Status = ETH_DMARxDesc_OWN;
 
   if((DMARxDescToGet->ControlBufferSize & ETH_DMARxDesc_RCH) != (uint32_t)RESET)
   {
@@ -267,9 +267,9 @@ void ETH_DropRxPkt(void)
 *******************************************************************************/
 uint16_t ETH_ReadPHYRegister(uint16_t PHYAddress, uint16_t PHYReg)
 {
-  uint32_t tmpreg = 0;     
+  uint32_t tmpreg = 0;
   __IO uint32_t timeout = 0;
-  
+
   tmpreg = ETH->MACMIIAR;
   tmpreg &= ~MACMIIAR_CR_MASK;
   tmpreg |=(((uint32_t)PHYAddress<<11) & ETH_MACMIIAR_PA);
@@ -288,7 +288,7 @@ uint16_t ETH_ReadPHYRegister(uint16_t PHYAddress, uint16_t PHYReg)
   {
     return (uint16_t)ETH_ERROR;
   }
-  
+
   return (uint16_t)(ETH->MACMIIDR);
 }
 
@@ -303,9 +303,9 @@ uint16_t ETH_ReadPHYRegister(uint16_t PHYAddress, uint16_t PHYReg)
 *******************************************************************************/
 uint32_t ETH_WritePHYRegister(uint16_t PHYAddress, uint16_t PHYReg, uint16_t PHYValue)
 {
-  uint32_t tmpreg = 0;     
+  uint32_t tmpreg = 0;
   __IO uint32_t timeout = 0;
-  
+
   tmpreg = ETH->MACMIIAR;
   tmpreg &= ~MACMIIAR_CR_MASK;
   tmpreg |=(((uint32_t)PHYAddress<<11) & ETH_MACMIIAR_PA);
@@ -326,7 +326,7 @@ uint32_t ETH_WritePHYRegister(uint16_t PHYAddress, uint16_t PHYReg, uint16_t PHY
     return ETH_ERROR;
   }
 
-  return ETH_SUCCESS;  
+  return ETH_SUCCESS;
 }
 
 /*******************************************************************************
@@ -340,12 +340,12 @@ uint32_t ETH_WritePHYRegister(uint16_t PHYAddress, uint16_t PHYReg, uint16_t PHY
 uint32_t ETH_PHYLoopBackCmd(uint16_t PHYAddress, FunctionalState NewState)
 {
   uint16_t tmpreg = 0;
-    
-  tmpreg = ETH_ReadPHYRegister(PHYAddress, PHY_BCR); 
-  
+
+  tmpreg = ETH_ReadPHYRegister(PHYAddress, PHY_BCR);
+
   if (NewState != DISABLE)
   {
-    tmpreg |= PHY_Loopback;  
+    tmpreg |= PHY_Loopback;
   }
   else
   {
@@ -358,8 +358,8 @@ uint32_t ETH_PHYLoopBackCmd(uint16_t PHYAddress, FunctionalState NewState)
   }
   else
   {
-    return ETH_ERROR; 
-  }   
+    return ETH_ERROR;
+  }
 }
 
 /*******************************************************************************
@@ -372,7 +372,7 @@ void ETH_MACTransmissionCmd(FunctionalState NewState)
 {
   if (NewState != DISABLE)
   {
-    ETH->MACCR |= ETH_MACCR_TE;  
+    ETH->MACCR |= ETH_MACCR_TE;
   }
   else
   {
@@ -390,7 +390,7 @@ void ETH_MACReceptionCmd(FunctionalState NewState)
 {
   if (NewState != DISABLE)
   {
-    ETH->MACCR |= ETH_MACCR_RE;  
+    ETH->MACCR |= ETH_MACCR_RE;
   }
   else
   {
@@ -425,9 +425,9 @@ FlagStatus ETH_GetFlowControlBusyStatus(void)
 * Input          : None.
 * Return         : None.
 *******************************************************************************/
-void ETH_InitiatePauseControlFrame(void)  
-{ 
-  ETH->MACFCR |= ETH_MACFCR_FCBBPA;  
+void ETH_InitiatePauseControlFrame(void)
+{
+  ETH->MACFCR |= ETH_MACFCR_FCBBPA;
 }
 
 /*******************************************************************************
@@ -436,16 +436,16 @@ void ETH_InitiatePauseControlFrame(void)
 * Input          : NewState: new state of the MAC BackPressure operation activation.
 * Return         : None.
 *******************************************************************************/
-void ETH_BackPressureActivationCmd(FunctionalState NewState)   
+void ETH_BackPressureActivationCmd(FunctionalState NewState)
 {
   if (NewState != DISABLE)
   {
-    ETH->MACFCR |= ETH_MACFCR_FCBBPA; 
+    ETH->MACFCR |= ETH_MACFCR_FCBBPA;
   }
   else
   {
-    ETH->MACFCR &= ~ETH_MACFCR_FCBBPA; 
-  } 
+    ETH->MACFCR &= ~ETH_MACFCR_FCBBPA;
+  }
 }
 
 /*******************************************************************************
@@ -524,11 +524,11 @@ void ETH_MACITConfig(uint32_t ETH_MAC_IT, FunctionalState NewState)
 void ETH_MACAddressConfig(uint32_t MacAddr, uint8_t *Addr)
 {
   uint32_t tmpreg;
-  
+
   tmpreg = ((uint32_t)Addr[5] << 8) | (uint32_t)Addr[4];
   (*(__IO uint32_t *) (ETH_MAC_ADDR_HBASE + MacAddr)) = tmpreg;
   tmpreg = ((uint32_t)Addr[3] << 24) | ((uint32_t)Addr[2] << 16) | ((uint32_t)Addr[1] << 8) | Addr[0];
- 
+
   (*(__IO uint32_t *) (ETH_MAC_ADDR_LBASE + MacAddr)) = tmpreg;
 }
 
@@ -546,9 +546,9 @@ void ETH_MACAddressConfig(uint32_t MacAddr, uint8_t *Addr)
 void ETH_GetMACAddress(uint32_t MacAddr, uint8_t *Addr)
 {
   uint32_t tmpreg;
-  
+
   tmpreg =(*(__IO uint32_t *) (ETH_MAC_ADDR_HBASE + MacAddr));
- 
+
   Addr[5] = ((tmpreg >> 8) & (uint8_t)0xFF);
   Addr[4] = (tmpreg & (uint8_t)0xFF);
   tmpreg =(*(__IO uint32_t *) (ETH_MAC_ADDR_LBASE + MacAddr));
@@ -639,7 +639,7 @@ void ETH_DMATxDescChainInit(ETH_DMADESCTypeDef *DMATxDescTab, uint8_t* TxBuff, u
 {
   uint32_t i = 0;
   ETH_DMADESCTypeDef *DMATxDesc;
-  
+
   DMATxDescToSet = DMATxDescTab;
 
   for(i=0; i < TxBuffCount; i++)
@@ -647,17 +647,17 @@ void ETH_DMATxDescChainInit(ETH_DMADESCTypeDef *DMATxDescTab, uint8_t* TxBuff, u
     DMATxDesc = DMATxDescTab + i;
     DMATxDesc->Status = ETH_DMATxDesc_TCH;
     DMATxDesc->Buffer1Addr = (uint32_t)(&TxBuff[i*ETH_MAX_PACKET_SIZE]);
-    
+
     if(i < (TxBuffCount-1))
     {
       DMATxDesc->Buffer2NextDescAddr = (uint32_t)(DMATxDescTab+i+1);
     }
     else
     {
-      DMATxDesc->Buffer2NextDescAddr = (uint32_t) DMATxDescTab;  
+      DMATxDesc->Buffer2NextDescAddr = (uint32_t) DMATxDescTab;
     }
   }
-   
+
   ETH->DMATDLAR = (uint32_t) DMATxDescTab;
 }
 
@@ -674,7 +674,7 @@ void ETH_DMATxDescRingInit(ETH_DMADESCTypeDef *DMATxDescTab, uint8_t *TxBuff1, u
 {
   uint32_t i = 0;
   ETH_DMADESCTypeDef *DMATxDesc;
- 
+
   DMATxDescToSet = DMATxDescTab;
 
   for(i=0; i < TxBuffCount; i++)
@@ -682,13 +682,13 @@ void ETH_DMATxDescRingInit(ETH_DMADESCTypeDef *DMATxDescTab, uint8_t *TxBuff1, u
     DMATxDesc = DMATxDescTab + i;
     DMATxDesc->Buffer1Addr = (uint32_t)(&TxBuff1[i*ETH_MAX_PACKET_SIZE]);
     DMATxDesc->Buffer2NextDescAddr = (uint32_t)(&TxBuff2[i*ETH_MAX_PACKET_SIZE]);
-    
+
     if(i == (TxBuffCount-1))
     {
       DMATxDesc->Status = ETH_DMATxDesc_TER;
     }
   }
-   
+
   ETH->DMATDLAR =  (uint32_t) DMATxDescTab;
 }
 
@@ -822,7 +822,7 @@ void ETH_DMATxDescCRCCmd(ETH_DMADESCTypeDef *DMATxDesc, FunctionalState NewState
   }
   else
   {
-    DMATxDesc->Status |= ETH_DMATxDesc_DC; 
+    DMATxDesc->Status |= ETH_DMATxDesc_DC;
   }
 }
 
@@ -837,11 +837,11 @@ void ETH_DMATxDescEndOfRingCmd(ETH_DMADESCTypeDef *DMATxDesc, FunctionalState Ne
 {
   if (NewState != DISABLE)
   {
-    DMATxDesc->Status |= ETH_DMATxDesc_TER;  
+    DMATxDesc->Status |= ETH_DMATxDesc_TER;
   }
   else
   {
-    DMATxDesc->Status &= (~(uint32_t)ETH_DMATxDesc_TER); 
+    DMATxDesc->Status &= (~(uint32_t)ETH_DMATxDesc_TER);
   }
 }
 
@@ -856,11 +856,11 @@ void ETH_DMATxDescSecondAddressChainedCmd(ETH_DMADESCTypeDef *DMATxDesc, Functio
 {
   if (NewState != DISABLE)
   {
-    DMATxDesc->Status |= ETH_DMATxDesc_TCH;  
+    DMATxDesc->Status |= ETH_DMATxDesc_TCH;
   }
   else
   {
-    DMATxDesc->Status &=(~(uint32_t)ETH_DMATxDesc_TCH); 
+    DMATxDesc->Status &=(~(uint32_t)ETH_DMATxDesc_TCH);
   }
 }
 
@@ -879,7 +879,7 @@ void ETH_DMATxDescShortFramePaddingCmd(ETH_DMADESCTypeDef *DMATxDesc, Functional
   }
   else
   {
-    DMATxDesc->Status |= ETH_DMATxDesc_DP; 
+    DMATxDesc->Status |= ETH_DMATxDesc_DP;
   }
 }
 
@@ -894,11 +894,11 @@ void ETH_DMATxDescTimeStampCmd(ETH_DMADESCTypeDef *DMATxDesc, FunctionalState Ne
 {
   if (NewState != DISABLE)
   {
-    DMATxDesc->Status |= ETH_DMATxDesc_TTSE;  
+    DMATxDesc->Status |= ETH_DMATxDesc_TTSE;
   }
   else
   {
-    DMATxDesc->Status &=(~(uint32_t)ETH_DMATxDesc_TTSE); 
+    DMATxDesc->Status &=(~(uint32_t)ETH_DMATxDesc_TTSE);
   }
 }
 
@@ -928,27 +928,27 @@ void ETH_DMARxDescChainInit(ETH_DMADESCTypeDef *DMARxDescTab, uint8_t *RxBuff, u
 {
   uint32_t i = 0;
   ETH_DMADESCTypeDef *DMARxDesc;
-  
-  DMARxDescToGet = DMARxDescTab; 
+
+  DMARxDescToGet = DMARxDescTab;
 
   for(i=0; i < RxBuffCount; i++)
   {
     DMARxDesc = DMARxDescTab+i;
     DMARxDesc->Status = ETH_DMARxDesc_OWN;
-    DMARxDesc->ControlBufferSize = ETH_DMARxDesc_RCH | (uint32_t)ETH_MAX_PACKET_SIZE;  
+    DMARxDesc->ControlBufferSize = ETH_DMARxDesc_RCH | (uint32_t)ETH_MAX_PACKET_SIZE;
     DMARxDesc->Buffer1Addr = (uint32_t)(&RxBuff[i*ETH_MAX_PACKET_SIZE]);
-    
+
     if(i < (RxBuffCount-1))
     {
-      DMARxDesc->Buffer2NextDescAddr = (uint32_t)(DMARxDescTab+i+1); 
+      DMARxDesc->Buffer2NextDescAddr = (uint32_t)(DMARxDescTab+i+1);
     }
     else
     {
-      DMARxDesc->Buffer2NextDescAddr = (uint32_t)(DMARxDescTab); 
+      DMARxDesc->Buffer2NextDescAddr = (uint32_t)(DMARxDescTab);
     }
   }
-   
-  ETH->DMARDLAR = (uint32_t) DMARxDescTab;  
+
+  ETH->DMARDLAR = (uint32_t) DMARxDescTab;
 
 }
 
@@ -966,23 +966,23 @@ void ETH_DMARxDescRingInit(ETH_DMADESCTypeDef *DMARxDescTab, uint8_t *RxBuff1, u
   uint32_t i = 0;
   ETH_DMADESCTypeDef *DMARxDesc;
 
-  DMARxDescToGet = DMARxDescTab; 
+  DMARxDescToGet = DMARxDescTab;
 
   for(i=0; i < RxBuffCount; i++)
   {
-    DMARxDesc = DMARxDescTab+i; 
-    DMARxDesc->Status = ETH_DMARxDesc_OWN; 
-    DMARxDesc->ControlBufferSize = ETH_MAX_PACKET_SIZE;  
+    DMARxDesc = DMARxDescTab+i;
+    DMARxDesc->Status = ETH_DMARxDesc_OWN;
+    DMARxDesc->ControlBufferSize = ETH_MAX_PACKET_SIZE;
     DMARxDesc->Buffer1Addr = (uint32_t)(&RxBuff1[i*ETH_MAX_PACKET_SIZE]);
-    DMARxDesc->Buffer2NextDescAddr = (uint32_t)(&RxBuff2[i*ETH_MAX_PACKET_SIZE]); 
-    
+    DMARxDesc->Buffer2NextDescAddr = (uint32_t)(&RxBuff2[i*ETH_MAX_PACKET_SIZE]);
+
     if(i == (RxBuffCount-1))
     {
       DMARxDesc->ControlBufferSize |= ETH_DMARxDesc_RER;
     }
   }
-   
-  ETH->DMARDLAR = (uint32_t) DMARxDescTab;  
+
+  ETH->DMARDLAR = (uint32_t) DMARxDescTab;
 }
 
 /*******************************************************************************
@@ -1078,11 +1078,11 @@ void ETH_DMARxDescEndOfRingCmd(ETH_DMADESCTypeDef *DMARxDesc, FunctionalState Ne
 {
   if (NewState != DISABLE)
   {
-    DMARxDesc->ControlBufferSize |= ETH_DMARxDesc_RER;  
+    DMARxDesc->ControlBufferSize |= ETH_DMARxDesc_RER;
   }
   else
   {
-    DMARxDesc->ControlBufferSize &=(~(uint32_t)ETH_DMARxDesc_RER); 
+    DMARxDesc->ControlBufferSize &=(~(uint32_t)ETH_DMARxDesc_RER);
   }
 }
 
@@ -1097,11 +1097,11 @@ void ETH_DMARxDescSecondAddressChainedCmd(ETH_DMADESCTypeDef *DMARxDesc, Functio
 {
   if (NewState != DISABLE)
   {
-    DMARxDesc->ControlBufferSize |= ETH_DMARxDesc_RCH;  
+    DMARxDesc->ControlBufferSize |= ETH_DMARxDesc_RCH;
   }
   else
   {
-    DMARxDesc->ControlBufferSize &=(~(uint32_t)ETH_DMARxDesc_RCH); 
+    DMARxDesc->ControlBufferSize &=(~(uint32_t)ETH_DMARxDesc_RCH);
   }
 }
 
@@ -1118,11 +1118,11 @@ uint32_t ETH_GetDMARxDescBufferSize(ETH_DMADESCTypeDef *DMARxDesc, uint32_t DMAR
 {
   if(DMARxDesc_Buffer != ETH_DMARxDesc_Buffer1)
   {
-    return ((DMARxDesc->ControlBufferSize & ETH_DMARxDesc_RBS2) >> ETH_DMARXDESC_BUFFER2_SIZESHIFT); 
+    return ((DMARxDesc->ControlBufferSize & ETH_DMARxDesc_RBS2) >> ETH_DMARXDESC_BUFFER2_SIZESHIFT);
   }
   else
   {
-    return (DMARxDesc->ControlBufferSize & ETH_DMARxDesc_RBS1); 
+    return (DMARxDesc->ControlBufferSize & ETH_DMARxDesc_RBS1);
   }
 }
 
@@ -1150,7 +1150,7 @@ FlagStatus ETH_GetSoftwareResetStatus(void)
   {
     bitstatus = SET;
   }
-  else 
+  else
   {
     bitstatus = RESET;
   }
@@ -1209,7 +1209,7 @@ FlagStatus ETH_GetlinkStaus (void)
 * Return         : The new state of ETH_DMA_FLAG (SET or RESET).
 *******************************************************************************/
 FlagStatus ETH_GetDMAFlagStatus(uint32_t ETH_DMA_FLAG)
-{  
+{
   FlagStatus bitstatus = RESET;
 
   if ((ETH->DMASR & ETH_DMA_FLAG) != (uint32_t)RESET)
@@ -1274,7 +1274,7 @@ void ETH_DMAClearFlag(uint32_t ETH_DMA_FLAG)
 * Return         : The new state of ETH_DMA_IT (SET or RESET).
 *******************************************************************************/
 ITStatus ETH_GetDMAITStatus(uint32_t ETH_DMA_IT)
-{  
+{
   ITStatus bitstatus = RESET;
 
   if ((ETH->DMASR & ETH_DMA_IT) != (uint32_t)RESET)
@@ -1328,7 +1328,7 @@ void ETH_DMAClearITPendingBit(uint32_t ETH_DMA_IT)
 *******************************************************************************/
 uint32_t ETH_GetTransmitProcessState(void)
 {
-  return ((uint32_t)(ETH->DMASR & ETH_DMASR_TS)); 
+  return ((uint32_t)(ETH->DMASR & ETH_DMASR_TS));
 }
 
 /*******************************************************************************
@@ -1345,7 +1345,7 @@ uint32_t ETH_GetTransmitProcessState(void)
 *******************************************************************************/
 uint32_t ETH_GetReceiveProcessState(void)
 {
-  return ((uint32_t)(ETH->DMASR & ETH_DMASR_RS)); 
+  return ((uint32_t)(ETH->DMASR & ETH_DMASR_RS));
 }
 
 /*******************************************************************************
@@ -1356,7 +1356,7 @@ uint32_t ETH_GetReceiveProcessState(void)
 *******************************************************************************/
 void ETH_FlushTransmitFIFO(void)
 {
-  ETH->DMAOMR |= ETH_DMAOMR_FTF;  
+  ETH->DMAOMR |= ETH_DMAOMR_FTF;
 }
 
 /*******************************************************************************
@@ -1366,7 +1366,7 @@ void ETH_FlushTransmitFIFO(void)
 * Return         : The new state of ETHERNET flush transmit FIFO bit (SET or RESET).
 *******************************************************************************/
 FlagStatus ETH_GetFlushTransmitFIFOStatus(void)
-{   
+{
   FlagStatus bitstatus = RESET;
   if ((ETH->DMAOMR & ETH_DMAOMR_FTF) != (uint32_t)RESET)
   {
@@ -1376,7 +1376,7 @@ FlagStatus ETH_GetFlushTransmitFIFOStatus(void)
   {
     bitstatus = RESET;
   }
-  return bitstatus; 
+  return bitstatus;
 }
 
 /*******************************************************************************
@@ -1389,7 +1389,7 @@ void ETH_DMATransmissionCmd(FunctionalState NewState)
 {
   if (NewState != DISABLE)
   {
-    ETH->DMAOMR |= ETH_DMAOMR_ST;  
+    ETH->DMAOMR |= ETH_DMAOMR_ST;
   }
   else
   {
@@ -1407,7 +1407,7 @@ void ETH_DMAReceptionCmd(FunctionalState NewState)
 {
   if (NewState != DISABLE)
   {
-    ETH->DMAOMR |= ETH_DMAOMR_SR;  
+    ETH->DMAOMR |= ETH_DMAOMR_SR;
   }
   else
   {
@@ -1462,7 +1462,7 @@ void ETH_DMAITConfig(uint32_t ETH_DMA_IT, FunctionalState NewState)
 FlagStatus ETH_GetDMAOverflowStatus(uint32_t ETH_DMA_Overflow)
 {
   FlagStatus bitstatus = RESET;
-  
+
   if ((ETH->DMAMFBOCR & ETH_DMA_Overflow) != (uint32_t)RESET)
   {
     bitstatus = SET;
@@ -1569,8 +1569,8 @@ void ETH_ResumeDMAReception(void)
 * Return         : None.
 *******************************************************************************/
 void ETH_ResetWakeUpFrameFilterRegisterPointer(void)
-{  
-  ETH->MACPMTCSR |= ETH_MACPMTCSR_WFFRPR;  
+{
+  ETH->MACPMTCSR |= ETH_MACPMTCSR_WFFRPR;
 }
 
 /*******************************************************************************
@@ -1582,7 +1582,7 @@ void ETH_ResetWakeUpFrameFilterRegisterPointer(void)
 void ETH_SetWakeUpFrameFilterRegister(uint32_t *Buffer)
 {
   uint32_t i = 0;
-  
+
   for(i =0; i<ETH_WAKEUP_REGISTER_LENGTH; i++)
   {
     ETH->MACRWUFFR = Buffer[i];
@@ -1599,7 +1599,7 @@ void ETH_GlobalUnicastWakeUpCmd(FunctionalState NewState)
 {
   if (NewState != DISABLE)
   {
-    ETH->MACPMTCSR |= ETH_MACPMTCSR_GU;  
+    ETH->MACPMTCSR |= ETH_MACPMTCSR_GU;
   }
   else
   {
@@ -1639,7 +1639,7 @@ void ETH_WakeUpFrameDetectionCmd(FunctionalState NewState)
 {
   if (NewState != DISABLE)
   {
-    ETH->MACPMTCSR |= ETH_MACPMTCSR_WFE;  
+    ETH->MACPMTCSR |= ETH_MACPMTCSR_WFE;
   }
   else
   {
@@ -1657,7 +1657,7 @@ void ETH_MagicPacketDetectionCmd(FunctionalState NewState)
 {
   if (NewState != DISABLE)
   {
-    ETH->MACPMTCSR |= ETH_MACPMTCSR_MPE;  
+    ETH->MACPMTCSR |= ETH_MACPMTCSR_MPE;
   }
   else
   {
@@ -1675,7 +1675,7 @@ void ETH_PowerDownCmd(FunctionalState NewState)
 {
   if (NewState != DISABLE)
   {
-    ETH->MACPMTCSR |= ETH_MACPMTCSR_PD;  
+    ETH->MACPMTCSR |= ETH_MACPMTCSR_PD;
   }
   else
   {
@@ -1711,7 +1711,7 @@ void ETH_MMCResetOnReadCmd(FunctionalState NewState)
 {
   if (NewState != DISABLE)
   {
-    ETH->MMCCR |= ETH_MMCCR_ROR; 
+    ETH->MMCCR |= ETH_MMCCR_ROR;
   }
   else
   {
@@ -1733,7 +1733,7 @@ void ETH_MMCCounterRolloverCmd(FunctionalState NewState)
   }
   else
   {
-    ETH->MMCCR |= ETH_MMCCR_CSR; 
+    ETH->MMCCR |= ETH_MMCCR_CSR;
   }
 }
 
@@ -1745,7 +1745,7 @@ void ETH_MMCCounterRolloverCmd(FunctionalState NewState)
 *******************************************************************************/
 void ETH_MMCCountersReset(void)
 {
-  ETH->MMCCR |= ETH_MMCCR_CR; 
+  ETH->MMCCR |= ETH_MMCCR_CR;
 }
 
 /*******************************************************************************
@@ -1766,14 +1766,14 @@ void ETH_MMCITConfig(uint32_t ETH_MMC_IT, FunctionalState NewState)
   if ((ETH_MMC_IT & (uint32_t)0x10000000) != (uint32_t)RESET)
   {
     ETH_MMC_IT &= 0xEFFFFFFF;
-  
+
     if (NewState != DISABLE)
     {
       ETH->MMCRIMR &=(~(uint32_t)ETH_MMC_IT);
     }
     else
     {
-      ETH->MMCRIMR |= ETH_MMC_IT;    
+      ETH->MMCRIMR |= ETH_MMC_IT;
     }
   }
   else
@@ -1784,8 +1784,8 @@ void ETH_MMCITConfig(uint32_t ETH_MMC_IT, FunctionalState NewState)
     }
     else
     {
-      ETH->MMCTIMR |= ETH_MMC_IT;    
-    }  
+      ETH->MMCTIMR |= ETH_MMC_IT;
+    }
   }
 }
 
@@ -1804,7 +1804,7 @@ void ETH_MMCITConfig(uint32_t ETH_MMC_IT, FunctionalState NewState)
 ITStatus ETH_GetMMCITStatus(uint32_t ETH_MMC_IT)
 {
   ITStatus bitstatus = RESET;
-  
+
   if ((ETH_MMC_IT & (uint32_t)0x10000000) != (uint32_t)RESET)
   {
     if ((((ETH->MMCRIR & ETH_MMC_IT) != (uint32_t)RESET)) && ((ETH->MMCRIMR & ETH_MMC_IT) != (uint32_t)RESET))
@@ -1825,9 +1825,9 @@ ITStatus ETH_GetMMCITStatus(uint32_t ETH_MMC_IT)
     else
     {
       bitstatus = RESET;
-    }  
-  }    
-    
+    }
+  }
+
   return bitstatus;
 }
 
@@ -1861,7 +1861,7 @@ uint32_t ETH_GetMMCRegister(uint32_t ETH_MMCReg)
 *******************************************************************************/
 void ETH_EnablePTPTimeStampAddend(void)
 {
-  ETH->PTPTSCR |= ETH_PTPTSCR_TSARU;    
+  ETH->PTPTSCR |= ETH_PTPTSCR_TSARU;
 }
 
 /*******************************************************************************
@@ -1872,7 +1872,7 @@ void ETH_EnablePTPTimeStampAddend(void)
 *******************************************************************************/
 void ETH_EnablePTPTimeStampInterruptTrigger(void)
 {
-  ETH->PTPTSCR |= ETH_PTPTSCR_TSITE;    
+  ETH->PTPTSCR |= ETH_PTPTSCR_TSITE;
 }
 
 /*******************************************************************************
@@ -1883,7 +1883,7 @@ void ETH_EnablePTPTimeStampInterruptTrigger(void)
 *******************************************************************************/
 void ETH_EnablePTPTimeStampUpdate(void)
 {
-  ETH->PTPTSCR |= ETH_PTPTSCR_TSSTU;    
+  ETH->PTPTSCR |= ETH_PTPTSCR_TSSTU;
 }
 
 /*******************************************************************************
@@ -1894,7 +1894,7 @@ void ETH_EnablePTPTimeStampUpdate(void)
 *******************************************************************************/
 void ETH_InitializePTPTimeStamp(void)
 {
-  ETH->PTPTSCR |= ETH_PTPTSCR_TSSTI;    
+  ETH->PTPTSCR |= ETH_PTPTSCR_TSSTI;
 }
 
 /*******************************************************************************
@@ -1912,7 +1912,7 @@ void ETH_PTPUpdateMethodConfig(uint32_t UpdateMethod)
   else
   {
     ETH->PTPTSCR &= (~(uint32_t)ETH_PTPTSCR_TSFCU);
-  } 
+  }
 }
 
 /*******************************************************************************
@@ -1942,7 +1942,7 @@ void ETH_PTPTimeStampCmd(FunctionalState NewState)
 FlagStatus ETH_GetPTPFlagStatus(uint32_t ETH_PTP_FLAG)
 {
   FlagStatus bitstatus = RESET;
-  
+
   if ((ETH->PTPTSCR & ETH_PTP_FLAG) != (uint32_t)RESET)
   {
     bitstatus = SET;
@@ -1962,7 +1962,7 @@ FlagStatus ETH_GetPTPFlagStatus(uint32_t ETH_PTP_FLAG)
 *******************************************************************************/
 void ETH_SetPTPSubSecondIncrement(uint32_t SubSecondValue)
 {
-  ETH->PTPSSIR = SubSecondValue;    
+  ETH->PTPSSIR = SubSecondValue;
 }
 
 /*******************************************************************************
@@ -1976,7 +1976,7 @@ void ETH_SetPTPSubSecondIncrement(uint32_t SubSecondValue)
 void ETH_SetPTPTimeStampUpdate(uint32_t Sign, uint32_t SecondValue, uint32_t SubSecondValue)
 {
   ETH->PTPTSHUR = SecondValue;
-  ETH->PTPTSLUR = Sign | SubSecondValue;   
+  ETH->PTPTSLUR = Sign | SubSecondValue;
 }
 
 /*******************************************************************************
@@ -1988,7 +1988,7 @@ void ETH_SetPTPTimeStampUpdate(uint32_t Sign, uint32_t SecondValue, uint32_t Sub
 void ETH_SetPTPTimeStampAddend(uint32_t Value)
 {
   /* Set the PTP Time Stamp Addend Register */
-  ETH->PTPTSAR = Value;    
+  ETH->PTPTSAR = Value;
 }
 
 /*******************************************************************************
@@ -2001,7 +2001,7 @@ void ETH_SetPTPTimeStampAddend(uint32_t Value)
 void ETH_SetPTPTargetTime(uint32_t HighValue, uint32_t LowValue)
 {
   ETH->PTPTTHR = HighValue;
-  ETH->PTPTTLR = LowValue;    
+  ETH->PTPTTLR = LowValue;
 }
 
 /*******************************************************************************
@@ -2038,23 +2038,23 @@ void ETH_DMAPTPTxDescChainInit(ETH_DMADESCTypeDef *DMATxDescTab, ETH_DMADESCType
 {
   uint32_t i = 0;
   ETH_DMADESCTypeDef *DMATxDesc;
-  
+
   DMATxDescToSet = DMATxDescTab;
   DMAPTPTxDescToSet = DMAPTPTxDescTab;
 
   for(i=0; i < TxBuffCount; i++)
   {
     DMATxDesc = DMATxDescTab+i;
-    DMATxDesc->Status = ETH_DMATxDesc_TCH | ETH_DMATxDesc_TTSE;  
+    DMATxDesc->Status = ETH_DMATxDesc_TCH | ETH_DMATxDesc_TTSE;
     DMATxDesc->Buffer1Addr =(uint32_t)(&TxBuff[i*ETH_MAX_PACKET_SIZE]);
-    
+
     if(i < (TxBuffCount-1))
     {
       DMATxDesc->Buffer2NextDescAddr = (uint32_t)(DMATxDescTab+i+1);
     }
     else
     {
-      DMATxDesc->Buffer2NextDescAddr = (uint32_t) DMATxDescTab;  
+      DMATxDesc->Buffer2NextDescAddr = (uint32_t) DMATxDescTab;
     }
 
     (&DMAPTPTxDescTab[i])->Buffer1Addr = DMATxDesc->Buffer1Addr;
@@ -2080,24 +2080,24 @@ void ETH_DMAPTPRxDescChainInit(ETH_DMADESCTypeDef *DMARxDescTab, ETH_DMADESCType
 {
   uint32_t i = 0;
   ETH_DMADESCTypeDef *DMARxDesc;
-  
-  DMARxDescToGet = DMARxDescTab; 
+
+  DMARxDescToGet = DMARxDescTab;
   DMAPTPRxDescToGet = DMAPTPRxDescTab;
 
   for(i=0; i < RxBuffCount; i++)
   {
     DMARxDesc = DMARxDescTab+i;
     DMARxDesc->Status = ETH_DMARxDesc_OWN;
-    DMARxDesc->ControlBufferSize = ETH_DMARxDesc_RCH | (uint32_t)ETH_MAX_PACKET_SIZE;  
+    DMARxDesc->ControlBufferSize = ETH_DMARxDesc_RCH | (uint32_t)ETH_MAX_PACKET_SIZE;
     DMARxDesc->Buffer1Addr = (uint32_t)(&RxBuff[i*ETH_MAX_PACKET_SIZE]);
-    
+
     if(i < (RxBuffCount-1))
     {
-      DMARxDesc->Buffer2NextDescAddr = (uint32_t)(DMARxDescTab+i+1); 
+      DMARxDesc->Buffer2NextDescAddr = (uint32_t)(DMARxDescTab+i+1);
     }
     else
     {
-      DMARxDesc->Buffer2NextDescAddr = (uint32_t)(DMARxDescTab); 
+      DMARxDesc->Buffer2NextDescAddr = (uint32_t)(DMARxDescTab);
     }
 
     (&DMAPTPRxDescTab[i])->Buffer1Addr = DMARxDesc->Buffer1Addr;
@@ -2105,7 +2105,7 @@ void ETH_DMAPTPRxDescChainInit(ETH_DMADESCTypeDef *DMARxDescTab, ETH_DMADESCType
   }
 
   (&DMAPTPRxDescTab[i-1])->Status = (uint32_t) DMAPTPRxDescTab;
-  ETH->DMARDLAR = (uint32_t) DMARxDescTab;  
+  ETH->DMARDLAR = (uint32_t) DMARxDescTab;
 }
 
 /*******************************************************************************
@@ -2156,10 +2156,10 @@ uint32_t ETH_HandlePTPTxPkt(uint8_t *ppkt, uint16_t FrameLength, uint32_t *PTPTx
   *PTPTxTab = DMATxDescToSet->Buffer2NextDescAddr;
 
   if((DMATxDescToSet->Status & ETH_DMATxDesc_TCH) != (uint32_t)RESET)
-  {  
+  {
     DMATxDescToSet = (ETH_DMADESCTypeDef*) (DMAPTPTxDescToSet->Buffer2NextDescAddr);
     if(DMAPTPTxDescToSet->Status != 0)
-    { 
+    {
       DMAPTPTxDescToSet = (ETH_DMADESCTypeDef*) (DMAPTPTxDescToSet->Status);
     }
     else
@@ -2168,16 +2168,16 @@ uint32_t ETH_HandlePTPTxPkt(uint8_t *ppkt, uint16_t FrameLength, uint32_t *PTPTx
     }
   }
   else
-  {  
+  {
     if((DMATxDescToSet->Status & ETH_DMATxDesc_TER) != (uint32_t)RESET)
     {
-      DMATxDescToSet = (ETH_DMADESCTypeDef*) (ETH->DMATDLAR); 
+      DMATxDescToSet = (ETH_DMADESCTypeDef*) (ETH->DMATDLAR);
       DMAPTPTxDescToSet = (ETH_DMADESCTypeDef*) (ETH->DMATDLAR);
     }
     else
     {
-      DMATxDescToSet = (ETH_DMADESCTypeDef*) ((uint32_t)DMATxDescToSet + 0x10 + ((ETH->DMABMR & ETH_DMABMR_DSL) >> 2));      
-      DMAPTPTxDescToSet = (ETH_DMADESCTypeDef*) ((uint32_t)DMAPTPTxDescToSet + 0x10 + ((ETH->DMABMR & ETH_DMABMR_DSL) >> 2));      
+      DMATxDescToSet = (ETH_DMADESCTypeDef*) ((uint32_t)DMATxDescToSet + 0x10 + ((ETH->DMABMR & ETH_DMABMR_DSL) >> 2));
+      DMAPTPTxDescToSet = (ETH_DMADESCTypeDef*) ((uint32_t)DMAPTPTxDescToSet + 0x10 + ((ETH->DMABMR & ETH_DMABMR_DSL) >> 2));
     }
   }
 
@@ -2246,7 +2246,7 @@ uint32_t ETH_HandlePTPRxPkt(uint8_t *ppkt, uint32_t *PTPRxTab)
     }
     else
     {
-      DMARxDescToGet = (ETH_DMADESCTypeDef*) ((uint32_t)DMARxDescToGet + 0x10 + ((ETH->DMABMR & ETH_DMABMR_DSL) >> 2));      
+      DMARxDescToGet = (ETH_DMADESCTypeDef*) ((uint32_t)DMARxDescToGet + 0x10 + ((ETH->DMABMR & ETH_DMABMR_DSL) >> 2));
     }
   }
 
@@ -2275,6 +2275,4 @@ void RGMII_TXC_Delay(uint8_t clock_polarity,uint8_t delay_time)
         // printf("Error:delay_time is out of range!\n");
     }
 }
-
-
 

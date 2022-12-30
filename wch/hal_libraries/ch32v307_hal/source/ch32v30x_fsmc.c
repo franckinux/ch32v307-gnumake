@@ -37,14 +37,14 @@ void FSMC_NORSRAMDeInit(uint32_t FSMC_Bank)
 {
   if(FSMC_Bank == FSMC_Bank1_NORSRAM1)
   {
-    FSMC_Bank1->BTCR[FSMC_Bank] = 0x000030DB;    
+    FSMC_Bank1->BTCR[FSMC_Bank] = 0x000030DB;
   }
   else
-  {   
-    FSMC_Bank1->BTCR[FSMC_Bank] = 0x000030D2; 
+  {
+    FSMC_Bank1->BTCR[FSMC_Bank] = 0x000030D2;
   }
   FSMC_Bank1->BTCR[FSMC_Bank + 1] = 0x0FFFFFFF;
-  FSMC_Bank1E->BWTR[FSMC_Bank] = 0x0FFFFFFF;  
+  FSMC_Bank1E->BWTR[FSMC_Bank] = 0x0FFFFFFF;
 }
 
 /*******************************************************************************
@@ -63,15 +63,15 @@ void FSMC_NANDDeInit(uint32_t FSMC_Bank)
     FSMC_Bank2->PCR2 = 0x00000018;
     FSMC_Bank2->SR2 = 0x00000040;
     FSMC_Bank2->PMEM2 = 0xFCFCFCFC;
-    FSMC_Bank2->PATT2 = 0xFCFCFCFC;  
+    FSMC_Bank2->PATT2 = 0xFCFCFCFC;
   }
   else
   {
     FSMC_Bank3->PCR3 = 0x00000018;
     FSMC_Bank3->SR3 = 0x00000040;
     FSMC_Bank3->PMEM3 = 0xFCFCFCFC;
-    FSMC_Bank3->PATT3 = 0xFCFCFCFC; 
-  }  
+    FSMC_Bank3->PATT3 = 0xFCFCFCFC;
+  }
 }
 
 /*******************************************************************************
@@ -83,8 +83,8 @@ void FSMC_NANDDeInit(uint32_t FSMC_Bank)
 *******************************************************************************/
 void FSMC_PCCARDDeInit(void)
 {
-  FSMC_Bank4->PCR4 = 0x00000018; 
-  FSMC_Bank4->SR4 = 0x00000000;	
+  FSMC_Bank4->PCR4 = 0x00000018;
+  FSMC_Bank4->SR4 = 0x00000000;
   FSMC_Bank4->PMEM4 = 0xFCFCFCFC;
   FSMC_Bank4->PATT4 = 0xFCFCFCFC;
   FSMC_Bank4->PIO4 = 0xFCFCFCFC;
@@ -100,8 +100,8 @@ void FSMC_PCCARDDeInit(void)
 * Return         : None
 *******************************************************************************/
 void FSMC_NORSRAMInit(FSMC_NORSRAMInitTypeDef* FSMC_NORSRAMInitStruct)
-{ 
-  FSMC_Bank1->BTCR[FSMC_NORSRAMInitStruct->FSMC_Bank] = 
+{
+  FSMC_Bank1->BTCR[FSMC_NORSRAMInitStruct->FSMC_Bank] =
             (uint32_t)FSMC_NORSRAMInitStruct->FSMC_DataAddressMux |
             FSMC_NORSRAMInitStruct->FSMC_MemoryType |
             FSMC_NORSRAMInitStruct->FSMC_MemoryDataWidth |
@@ -119,8 +119,8 @@ void FSMC_NORSRAMInit(FSMC_NORSRAMInitTypeDef* FSMC_NORSRAMInitStruct)
   {
     FSMC_Bank1->BTCR[FSMC_NORSRAMInitStruct->FSMC_Bank] |= (uint32_t)BCR_FACCEN_Set;
   }
-  
-  FSMC_Bank1->BTCR[FSMC_NORSRAMInitStruct->FSMC_Bank+1] = 
+
+  FSMC_Bank1->BTCR[FSMC_NORSRAMInitStruct->FSMC_Bank+1] =
             (uint32_t)FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_AddressSetupTime |
             (FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_AddressHoldTime << 4) |
             (FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_DataSetupTime << 8) |
@@ -131,7 +131,7 @@ void FSMC_NORSRAMInit(FSMC_NORSRAMInitTypeDef* FSMC_NORSRAMInitStruct)
 
   if(FSMC_NORSRAMInitStruct->FSMC_ExtendedMode == FSMC_ExtendedMode_Enable)
   {
-    FSMC_Bank1E->BWTR[FSMC_NORSRAMInitStruct->FSMC_Bank] = 
+    FSMC_Bank1E->BWTR[FSMC_NORSRAMInitStruct->FSMC_Bank] =
               (uint32_t)FSMC_NORSRAMInitStruct->FSMC_WriteTimingStruct->FSMC_AddressSetupTime |
               (FSMC_NORSRAMInitStruct->FSMC_WriteTimingStruct->FSMC_AddressHoldTime << 4 )|
               (FSMC_NORSRAMInitStruct->FSMC_WriteTimingStruct->FSMC_DataSetupTime << 8) |
@@ -156,8 +156,8 @@ void FSMC_NORSRAMInit(FSMC_NORSRAMInitTypeDef* FSMC_NORSRAMInitStruct)
 *******************************************************************************/
 void FSMC_NANDInit(FSMC_NANDInitTypeDef* FSMC_NANDInitStruct)
 {
-  uint32_t tmppcr = 0x00000000, tmppmem = 0x00000000, tmppatt = 0x00000000; 
-    
+  uint32_t tmppcr = 0x00000000, tmppmem = 0x00000000, tmppatt = 0x00000000;
+
   tmppcr = (uint32_t)FSMC_NANDInitStruct->FSMC_Waitfeature |
             PCR_MemoryType_NAND |
             FSMC_NANDInitStruct->FSMC_MemoryDataWidth |
@@ -165,17 +165,17 @@ void FSMC_NANDInit(FSMC_NANDInitTypeDef* FSMC_NANDInitStruct)
             FSMC_NANDInitStruct->FSMC_ECCPageSize |
             (FSMC_NANDInitStruct->FSMC_TCLRSetupTime << 9 )|
             (FSMC_NANDInitStruct->FSMC_TARSetupTime << 13);
-            
+
   tmppmem = (uint32_t)FSMC_NANDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_SetupTime |
             (FSMC_NANDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_WaitSetupTime << 8) |
             (FSMC_NANDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_HoldSetupTime << 16)|
-            (FSMC_NANDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_HiZSetupTime << 24); 
-            
+            (FSMC_NANDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_HiZSetupTime << 24);
+
   tmppatt = (uint32_t)FSMC_NANDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_SetupTime |
             (FSMC_NANDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_WaitSetupTime << 8) |
             (FSMC_NANDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_HoldSetupTime << 16)|
             (FSMC_NANDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_HiZSetupTime << 24);
-  
+
   if(FSMC_NANDInitStruct->FSMC_Bank == FSMC_Bank2_NAND)
   {
     FSMC_Bank2->PCR2 = tmppcr;
@@ -202,24 +202,24 @@ void FSMC_NANDInit(FSMC_NANDInitTypeDef* FSMC_NANDInitStruct)
 void FSMC_PCCARDInit(FSMC_PCCARDInitTypeDef* FSMC_PCCARDInitStruct)
 {
   FSMC_Bank4->PCR4 = (uint32_t)FSMC_PCCARDInitStruct->FSMC_Waitfeature |
-                     FSMC_MemoryDataWidth_16b |  
+                     FSMC_MemoryDataWidth_16b |
                      (FSMC_PCCARDInitStruct->FSMC_TCLRSetupTime << 9) |
                      (FSMC_PCCARDInitStruct->FSMC_TARSetupTime << 13);
-            
+
   FSMC_Bank4->PMEM4 = (uint32_t)FSMC_PCCARDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_SetupTime |
                       (FSMC_PCCARDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_WaitSetupTime << 8) |
                       (FSMC_PCCARDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_HoldSetupTime << 16)|
-                      (FSMC_PCCARDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_HiZSetupTime << 24); 
-            
+                      (FSMC_PCCARDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_HiZSetupTime << 24);
+
   FSMC_Bank4->PATT4 = (uint32_t)FSMC_PCCARDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_SetupTime |
                       (FSMC_PCCARDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_WaitSetupTime << 8) |
                       (FSMC_PCCARDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_HoldSetupTime << 16)|
-                      (FSMC_PCCARDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_HiZSetupTime << 24);	
-            
+                      (FSMC_PCCARDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_HiZSetupTime << 24);
+
   FSMC_Bank4->PIO4 = (uint32_t)FSMC_PCCARDInitStruct->FSMC_IOSpaceTimingStruct->FSMC_SetupTime |
                      (FSMC_PCCARDInitStruct->FSMC_IOSpaceTimingStruct->FSMC_WaitSetupTime << 8) |
                      (FSMC_PCCARDInitStruct->FSMC_IOSpaceTimingStruct->FSMC_HoldSetupTime << 16)|
-                     (FSMC_PCCARDInitStruct->FSMC_IOSpaceTimingStruct->FSMC_HiZSetupTime << 24);             
+                     (FSMC_PCCARDInitStruct->FSMC_IOSpaceTimingStruct->FSMC_HiZSetupTime << 24);
 }
 
 /*******************************************************************************
@@ -230,7 +230,7 @@ void FSMC_PCCARDInit(FSMC_PCCARDInitTypeDef* FSMC_PCCARDInitStruct)
 * Return         : None
 *******************************************************************************/
 void FSMC_NORSRAMStructInit(FSMC_NORSRAMInitTypeDef* FSMC_NORSRAMInitStruct)
-{  
+{
   FSMC_NORSRAMInitStruct->FSMC_Bank = FSMC_Bank1_NORSRAM1;
   FSMC_NORSRAMInitStruct->FSMC_DataAddressMux = FSMC_DataAddressMux_Enable;
   FSMC_NORSRAMInitStruct->FSMC_MemoryType = FSMC_MemoryType_SRAM;
@@ -250,7 +250,7 @@ void FSMC_NORSRAMStructInit(FSMC_NORSRAMInitTypeDef* FSMC_NORSRAMInitStruct)
   FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_BusTurnAroundDuration = 0xF;
   FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_CLKDivision = 0xF;
   FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_DataLatency = 0xF;
-  FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_AccessMode = FSMC_AccessMode_A; 
+  FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_AccessMode = FSMC_AccessMode_A;
   FSMC_NORSRAMInitStruct->FSMC_WriteTimingStruct->FSMC_AddressSetupTime = 0xF;
   FSMC_NORSRAMInitStruct->FSMC_WriteTimingStruct->FSMC_AddressHoldTime = 0xF;
   FSMC_NORSRAMInitStruct->FSMC_WriteTimingStruct->FSMC_DataSetupTime = 0xFF;
@@ -268,7 +268,7 @@ void FSMC_NORSRAMStructInit(FSMC_NORSRAMInitTypeDef* FSMC_NORSRAMInitStruct)
 * Return         : None
 *******************************************************************************/
 void FSMC_NANDStructInit(FSMC_NANDInitTypeDef* FSMC_NANDInitStruct)
-{ 
+{
   FSMC_NANDInitStruct->FSMC_Bank = FSMC_Bank2_NAND;
   FSMC_NANDInitStruct->FSMC_Waitfeature = FSMC_Waitfeature_Disable;
   FSMC_NANDInitStruct->FSMC_MemoryDataWidth = FSMC_MemoryDataWidth_8b;
@@ -283,7 +283,7 @@ void FSMC_NANDStructInit(FSMC_NANDInitTypeDef* FSMC_NANDInitStruct)
   FSMC_NANDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_SetupTime = 0xFC;
   FSMC_NANDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_WaitSetupTime = 0xFC;
   FSMC_NANDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_HoldSetupTime = 0xFC;
-  FSMC_NANDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_HiZSetupTime = 0xFC;	  
+  FSMC_NANDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_HiZSetupTime = 0xFC;
 }
 
 /*******************************************************************************
@@ -305,7 +305,7 @@ void FSMC_PCCARDStructInit(FSMC_PCCARDInitTypeDef* FSMC_PCCARDInitStruct)
   FSMC_PCCARDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_SetupTime = 0xFC;
   FSMC_PCCARDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_WaitSetupTime = 0xFC;
   FSMC_PCCARDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_HoldSetupTime = 0xFC;
-  FSMC_PCCARDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_HiZSetupTime = 0xFC;	
+  FSMC_PCCARDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_HiZSetupTime = 0xFC;
   FSMC_PCCARDInitStruct->FSMC_IOSpaceTimingStruct->FSMC_SetupTime = 0xFC;
   FSMC_PCCARDInitStruct->FSMC_IOSpaceTimingStruct->FSMC_WaitSetupTime = 0xFC;
   FSMC_PCCARDInitStruct->FSMC_IOSpaceTimingStruct->FSMC_HoldSetupTime = 0xFC;
@@ -325,7 +325,7 @@ void FSMC_PCCARDStructInit(FSMC_PCCARDInitTypeDef* FSMC_PCCARDInitStruct)
 *******************************************************************************/
 void FSMC_NORSRAMCmd(uint32_t FSMC_Bank, FunctionalState NewState)
 {
-  
+
   if (NewState != DISABLE)
   {
     FSMC_Bank1->BTCR[FSMC_Bank] |= BCR_MBKEN_Set;
@@ -347,7 +347,7 @@ void FSMC_NORSRAMCmd(uint32_t FSMC_Bank, FunctionalState NewState)
 *******************************************************************************/
 void FSMC_NANDCmd(uint32_t FSMC_Bank, FunctionalState NewState)
 {
-  
+
   if (NewState != DISABLE)
   {
     if(FSMC_Bank == FSMC_Bank2_NAND)
@@ -380,7 +380,7 @@ void FSMC_NANDCmd(uint32_t FSMC_Bank, FunctionalState NewState)
 *******************************************************************************/
 void FSMC_PCCARDCmd(FunctionalState NewState)
 {
-  
+
   if (NewState != DISABLE)
   {
     FSMC_Bank4->PCR4 |= PCR_PBKEN_Set;
@@ -438,7 +438,7 @@ void FSMC_NANDECCCmd(uint32_t FSMC_Bank, FunctionalState NewState)
 uint32_t FSMC_GetECC(uint32_t FSMC_Bank)
 {
   uint32_t eccval = 0x00000000;
-  
+
   if(FSMC_Bank == FSMC_Bank2_NAND)
   {
     eccval = FSMC_Bank2->ECCR2;
@@ -466,7 +466,7 @@ uint32_t FSMC_GetECC(uint32_t FSMC_Bank)
 *******************************************************************************/
 void FSMC_ITConfig(uint32_t FSMC_Bank, uint32_t FSMC_IT, FunctionalState NewState)
 {
-  
+
   if (NewState != DISABLE)
   {
     if(FSMC_Bank == FSMC_Bank2_NAND)
@@ -479,14 +479,14 @@ void FSMC_ITConfig(uint32_t FSMC_Bank, uint32_t FSMC_IT, FunctionalState NewStat
     }
     else
     {
-      FSMC_Bank4->SR4 |= FSMC_IT;    
+      FSMC_Bank4->SR4 |= FSMC_IT;
     }
   }
   else
   {
     if(FSMC_Bank == FSMC_Bank2_NAND)
     {
-      
+
       FSMC_Bank2->SR2 &= (uint32_t)~FSMC_IT;
     }
     else if (FSMC_Bank == FSMC_Bank3_NAND)
@@ -495,7 +495,7 @@ void FSMC_ITConfig(uint32_t FSMC_Bank, uint32_t FSMC_IT, FunctionalState NewStat
     }
     else
     {
-      FSMC_Bank4->SR4 &= (uint32_t)~FSMC_IT;    
+      FSMC_Bank4->SR4 &= (uint32_t)~FSMC_IT;
     }
   }
 }
@@ -519,12 +519,12 @@ FlagStatus FSMC_GetFlagStatus(uint32_t FSMC_Bank, uint32_t FSMC_FLAG)
 {
   FlagStatus bitstatus = RESET;
   uint32_t tmpsr = 0x00000000;
-  
-  
+
+
   if(FSMC_Bank == FSMC_Bank2_NAND)
   {
     tmpsr = FSMC_Bank2->SR2;
-  }  
+  }
   else if(FSMC_Bank == FSMC_Bank3_NAND)
   {
     tmpsr = FSMC_Bank3->SR3;
@@ -532,8 +532,8 @@ FlagStatus FSMC_GetFlagStatus(uint32_t FSMC_Bank, uint32_t FSMC_FLAG)
   else
   {
     tmpsr = FSMC_Bank4->SR4;
-  } 
-  
+  }
+
   if ((tmpsr & FSMC_FLAG) != (uint16_t)RESET )
   {
     bitstatus = SET;
@@ -561,11 +561,11 @@ FlagStatus FSMC_GetFlagStatus(uint32_t FSMC_Bank, uint32_t FSMC_FLAG)
 *******************************************************************************/
 void FSMC_ClearFlag(uint32_t FSMC_Bank, uint32_t FSMC_FLAG)
 {
-    
+
   if(FSMC_Bank == FSMC_Bank2_NAND)
   {
-    FSMC_Bank2->SR2 &= ~FSMC_FLAG; 
-  }  
+    FSMC_Bank2->SR2 &= ~FSMC_FLAG;
+  }
   else if(FSMC_Bank == FSMC_Bank3_NAND)
   {
     FSMC_Bank3->SR3 &= ~FSMC_FLAG;
@@ -592,13 +592,13 @@ void FSMC_ClearFlag(uint32_t FSMC_Bank, uint32_t FSMC_FLAG)
 ITStatus FSMC_GetITStatus(uint32_t FSMC_Bank, uint32_t FSMC_IT)
 {
   ITStatus bitstatus = RESET;
-  uint32_t tmpsr = 0x0, itstatus = 0x0, itenable = 0x0; 
-  
-  
+  uint32_t tmpsr = 0x0, itstatus = 0x0, itenable = 0x0;
+
+
   if(FSMC_Bank == FSMC_Bank2_NAND)
   {
     tmpsr = FSMC_Bank2->SR2;
-  }  
+  }
   else if(FSMC_Bank == FSMC_Bank3_NAND)
   {
     tmpsr = FSMC_Bank3->SR3;
@@ -606,10 +606,10 @@ ITStatus FSMC_GetITStatus(uint32_t FSMC_Bank, uint32_t FSMC_IT)
   else
   {
     tmpsr = FSMC_Bank4->SR4;
-  } 
-  
+  }
+
   itstatus = tmpsr & FSMC_IT;
-  
+
   itenable = tmpsr & (FSMC_IT >> 3);
   if ((itstatus != (uint32_t)RESET)  && (itenable != (uint32_t)RESET))
   {
@@ -619,7 +619,7 @@ ITStatus FSMC_GetITStatus(uint32_t FSMC_Bank, uint32_t FSMC_IT)
   {
     bitstatus = RESET;
   }
-  return bitstatus; 
+  return bitstatus;
 }
 
 /*******************************************************************************
@@ -637,11 +637,11 @@ ITStatus FSMC_GetITStatus(uint32_t FSMC_Bank, uint32_t FSMC_IT)
 *******************************************************************************/
 void FSMC_ClearITPendingBit(uint32_t FSMC_Bank, uint32_t FSMC_IT)
 {
-    
+
   if(FSMC_Bank == FSMC_Bank2_NAND)
   {
-    FSMC_Bank2->SR2 &= ~(FSMC_IT >> 3); 
-  }  
+    FSMC_Bank2->SR2 &= ~(FSMC_IT >> 3);
+  }
   else if(FSMC_Bank == FSMC_Bank3_NAND)
   {
     FSMC_Bank3->SR3 &= ~(FSMC_IT >> 3);
@@ -651,3 +651,4 @@ void FSMC_ClearITPendingBit(uint32_t FSMC_Bank, uint32_t FSMC_IT)
     FSMC_Bank4->SR4 &= ~(FSMC_IT >> 3);
   }
 }
+

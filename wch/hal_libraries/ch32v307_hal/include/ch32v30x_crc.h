@@ -3,9 +3,9 @@
 * Author             : WCH
 * Version            : V1.0.0
 * Date               : 2021/06/06
-* Description        : This file contains all the functions prototypes for the 
+* Description        : This file contains all the functions prototypes for the
 *                      CRC firmware library.
-*******************************************************************************/ 
+*******************************************************************************/
 #ifndef __CH32V30x_CRC_H
 #define __CH32V30x_CRC_H
 
@@ -15,7 +15,7 @@
 
 #include "ch32v30x.h"
 
-	 
+
 void CRC_ResetDR(void);
 uint32_t CRC_CalcCRC(uint32_t Data);
 uint32_t CRC_CalcBlockCRC(uint32_t pBuffer[], uint32_t BufferLength);
@@ -27,9 +27,5 @@ uint8_t CRC_GetIDRegister(void);
 }
 #endif
 
-#endif 
-
-
-
-
+#endif
 

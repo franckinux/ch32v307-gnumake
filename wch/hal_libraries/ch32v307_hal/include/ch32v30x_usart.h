@@ -3,9 +3,9 @@
 * Author             : WCH
 * Version            : V1.0.0
 * Date               : 2021/06/06
-* Description        : This file contains all the functions prototypes for the 
+* Description        : This file contains all the functions prototypes for the
 *                      USART firmware library.
-*******************************************************************************/ 
+*******************************************************************************/
 #ifndef __CH32V30x_USART_H
 #define __CH32V30x_USART_H
 
@@ -14,9 +14,9 @@
 #endif
 
 #include "ch32v30x.h"
- 
 
-/* USART Init Structure definition */  
+
+/* USART Init Structure definition */
 typedef struct
 {
   uint32_t USART_BaudRate;            /* This member configures the USART communication baud rate.
@@ -36,7 +36,7 @@ typedef struct
                                                at the MSB position of the transmitted data (9th bit when
                                                the word length is set to 9 data bits; 8th bit when the
                                                word length is set to 8 data bits). */
- 
+
   uint16_t USART_Mode;                /* Specifies wether the Receive or Transmit mode is enabled or disabled.
                                          This parameter can be a value of @ref USART_Mode */
 
@@ -45,7 +45,7 @@ typedef struct
                                          This parameter can be a value of @ref USART_Hardware_Flow_Control */
 } USART_InitTypeDef;
 
-/* USART Clock Init Structure definition */  
+/* USART Clock Init Structure definition */
 typedef struct
 {
 
@@ -63,22 +63,22 @@ typedef struct
                              This parameter can be a value of @ref USART_Last_Bit */
 } USART_ClockInitTypeDef;
 
-/* USART_Word_Length */ 
+/* USART_Word_Length */
 #define USART_WordLength_8b                  ((uint16_t)0x0000)
 #define USART_WordLength_9b                  ((uint16_t)0x1000)
-                                    
-/* USART_Stop_Bits */  
+
+/* USART_Stop_Bits */
 #define USART_StopBits_1                     ((uint16_t)0x0000)
 #define USART_StopBits_0_5                   ((uint16_t)0x1000)
 #define USART_StopBits_2                     ((uint16_t)0x2000)
 #define USART_StopBits_1_5                   ((uint16_t)0x3000)
 
-/* USART_Parity */  
+/* USART_Parity */
 #define USART_Parity_No                      ((uint16_t)0x0000)
 #define USART_Parity_Even                    ((uint16_t)0x0400)
-#define USART_Parity_Odd                     ((uint16_t)0x0600) 
+#define USART_Parity_Odd                     ((uint16_t)0x0600)
 
-/* USART_Mode */ 
+/* USART_Mode */
 #define USART_Mode_Rx                        ((uint16_t)0x0004)
 #define USART_Mode_Tx                        ((uint16_t)0x0008)
 
@@ -92,7 +92,7 @@ typedef struct
 #define USART_Clock_Disable                  ((uint16_t)0x0000)
 #define USART_Clock_Enable                   ((uint16_t)0x0800)
 
-/* USART_Clock_Polarity */  
+/* USART_Clock_Polarity */
 #define USART_CPOL_Low                       ((uint16_t)0x0000)
 #define USART_CPOL_High                      ((uint16_t)0x0400)
 
@@ -104,7 +104,7 @@ typedef struct
 #define USART_LastBit_Disable                ((uint16_t)0x0000)
 #define USART_LastBit_Enable                 ((uint16_t)0x0100)
 
-/* USART_Interrupt_definition */  
+/* USART_Interrupt_definition */
 #define USART_IT_PE                          ((uint16_t)0x0028)
 #define USART_IT_TXE                         ((uint16_t)0x0727)
 #define USART_IT_TC                          ((uint16_t)0x0626)
@@ -183,11 +183,5 @@ void USART_ClearITPendingBit(USART_TypeDef* USARTx, uint16_t USART_IT);
 }
 #endif
 
-#endif 
-
-
-
-
-
-
+#endif
 

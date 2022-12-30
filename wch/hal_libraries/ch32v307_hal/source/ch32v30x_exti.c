@@ -8,21 +8,21 @@
 #include "ch32v30x_exti.h"
 
 /* No interrupt selected */
-#define EXTI_LINENONE    ((uint32_t)0x00000)  
+#define EXTI_LINENONE    ((uint32_t)0x00000)
 
 /********************************************************************************
 * Function Name  : EXTI_DeInit
-* Description    : Deinitializes the EXTI peripheral registers to their default 
+* Description    : Deinitializes the EXTI peripheral registers to their default
 *                  reset values.
 * Input          : None
 * Return         : None
-*********************************************************************************/	
+*********************************************************************************/
 void EXTI_DeInit(void)
 {
   EXTI->INTENR = 0x00000000;
   EXTI->EVENR = 0x00000000;
-  EXTI->RTENR = 0x00000000; 
-  EXTI->FTENR = 0x00000000; 
+  EXTI->RTENR = 0x00000000;
+  EXTI->FTENR = 0x00000000;
   EXTI->INTFR = 0x000FFFFF;
 }
 
@@ -32,7 +32,7 @@ void EXTI_DeInit(void)
 *                  parameters in the EXTI_InitStruct.
 * Input          : EXTI_InitStruct: pointer to a EXTI_InitTypeDef structure
 * Return         : None
-*********************************************************************************/	
+*********************************************************************************/
 void EXTI_Init(EXTI_InitTypeDef* EXTI_InitStruct)
 {
   uint32_t tmp = 0;
@@ -70,7 +70,7 @@ void EXTI_Init(EXTI_InitTypeDef* EXTI_InitStruct)
 * Description    : Fills each EXTI_InitStruct member with its reset value.
 * Input          : EXTI_InitStruct: pointer to a EXTI_InitTypeDef structure
 * Return         : None
-*********************************************************************************/	
+*********************************************************************************/
 void EXTI_StructInit(EXTI_InitTypeDef* EXTI_InitStruct)
 {
   EXTI_InitStruct->EXTI_Line = EXTI_LINENONE;
@@ -84,7 +84,7 @@ void EXTI_StructInit(EXTI_InitTypeDef* EXTI_InitStruct)
 * Description    : Generates a Software interrupt.
 * Input          : EXTI_Line: specifies the EXTI lines to be enabled or disabled.
 * Return         : None
-*********************************************************************************/	
+*********************************************************************************/
 void EXTI_GenerateSWInterrupt(uint32_t EXTI_Line)
 {
   EXTI->SWIEVR |= EXTI_Line;
@@ -95,7 +95,7 @@ void EXTI_GenerateSWInterrupt(uint32_t EXTI_Line)
 * Description    : Checks whether the specified EXTI line flag is set or not.
 * Input          : EXTI_Line: specifies the EXTI lines to be enabled or disabled.
 * Return         : The new state of EXTI_Line (SET or RESET).
-*********************************************************************************/	
+*********************************************************************************/
 FlagStatus EXTI_GetFlagStatus(uint32_t EXTI_Line)
 {
   FlagStatus bitstatus = RESET;
@@ -115,9 +115,9 @@ FlagStatus EXTI_GetFlagStatus(uint32_t EXTI_Line)
 * Description    : Clears the EXTI's line pending flags.
 * Input          : EXTI_Line: specifies the EXTI lines to be enabled or disabled.
 * Return         : None
-*********************************************************************************/	
+*********************************************************************************/
 void EXTI_ClearFlag(uint32_t EXTI_Line)
-{  
+{
   EXTI->INTFR = EXTI_Line;
 }
 
@@ -126,12 +126,12 @@ void EXTI_ClearFlag(uint32_t EXTI_Line)
 * Description    : Checks whether the specified EXTI line is asserted or not.
 * Input          : EXTI_Line: specifies the EXTI lines to be enabled or disabled.
 * Return         : The new state of EXTI_Line (SET or RESET).
-*********************************************************************************/	
+*********************************************************************************/
 ITStatus EXTI_GetITStatus(uint32_t EXTI_Line)
 {
   ITStatus bitstatus = RESET;
   uint32_t enablestatus = 0;
-  
+
   enablestatus =  EXTI->INTENR & EXTI_Line;
   if (((EXTI->INTFR & EXTI_Line) != (uint32_t)RESET) && (enablestatus != (uint32_t)RESET))
   {
@@ -151,7 +151,7 @@ ITStatus EXTI_GetITStatus(uint32_t EXTI_Line)
 * Return         : None
 *********************************************************************************/
 void EXTI_ClearITPendingBit(uint32_t EXTI_Line)
-{  
+{
   EXTI->INTFR = EXTI_Line;
 }
 

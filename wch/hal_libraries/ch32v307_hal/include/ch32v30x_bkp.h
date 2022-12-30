@@ -3,9 +3,9 @@
 * Author             : WCH
 * Version            : V1.0.0
 * Date               : 2021/06/06
-* Description        : This file contains all the functions prototypes for the 
+* Description        : This file contains all the functions prototypes for the
 *                      BKP firmware library.
-*******************************************************************************/ 
+*******************************************************************************/
 #ifndef __CH32V30x_BKP_H
 #define __CH32V30x_BKP_H
 
@@ -24,7 +24,7 @@
 #define BKP_RTCOutputSource_CalibClock    ((uint16_t)0x0080)
 #define BKP_RTCOutputSource_Alarm         ((uint16_t)0x0100)
 #define BKP_RTCOutputSource_Second        ((uint16_t)0x0300)
-	 
+
 /* Data_Backup_Register */
 #define BKP_DR1                           ((uint16_t)0x0004)
 #define BKP_DR2                           ((uint16_t)0x0008)
@@ -87,9 +87,5 @@ void BKP_ClearITPendingBit(void);
 }
 #endif
 
-#endif 
-
-
-
-
+#endif
 

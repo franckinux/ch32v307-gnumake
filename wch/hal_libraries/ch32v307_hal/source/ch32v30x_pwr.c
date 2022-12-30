@@ -15,11 +15,11 @@
 
 /********************************************************************************
 * Function Name  : PWR_DeInit
-* Description    : Deinitializes the PWR peripheral registers to their default 
-*                  reset values. 
+* Description    : Deinitializes the PWR peripheral registers to their default
+*                  reset values.
 * Input          : None
 * Return         : None
-*********************************************************************************/	
+*********************************************************************************/
 void PWR_DeInit(void)
 {
   RCC_APB1PeriphResetCmd(RCC_APB1Periph_PWR, ENABLE);
@@ -29,11 +29,11 @@ void PWR_DeInit(void)
 
 /********************************************************************************
 * Function Name  : PWR_BackupAccessCmd
-* Description    : Enables or disables access to the RTC and backup registers.  
+* Description    : Enables or disables access to the RTC and backup registers.
 * Input          : NewState: new state of the access to the RTC and backup registers,
-*                            This parameter can be: ENABLE or DISABLE. 
+*                            This parameter can be: ENABLE or DISABLE.
 * Return         : None
-*********************************************************************************/	
+*********************************************************************************/
 void PWR_BackupAccessCmd(FunctionalState NewState)
 {
 	if(NewState)
@@ -41,7 +41,7 @@ void PWR_BackupAccessCmd(FunctionalState NewState)
 		PWR->CTLR |= (1<<8);
 	}
 	else{
-		PWR->CTLR &= ~(1<<8);		
+		PWR->CTLR &= ~(1<<8);
 	}
 }
 
@@ -51,7 +51,7 @@ void PWR_BackupAccessCmd(FunctionalState NewState)
 * Description    : Enables or disables the Power Voltage Detector(PVD).
 * Input          : NewState: new state of the PVD(ENABLE or DISABLE).
 * Return         : None
-*********************************************************************************/	
+*********************************************************************************/
 void PWR_PVDCmd(FunctionalState NewState)
 {
 	if(NewState)
@@ -59,14 +59,14 @@ void PWR_PVDCmd(FunctionalState NewState)
 		PWR->CTLR |= (1<<4);
 	}
 	else{
-		PWR->CTLR &= ~(1<<4);		
+		PWR->CTLR &= ~(1<<4);
 	}
 }
 
 
 /********************************************************************************
 * Function Name  : PWR_PVDLevelConfig
-* Description    : Configures the voltage threshold detected by the Power Voltage 
+* Description    : Configures the voltage threshold detected by the Power Voltage
 *                  Detector(PVD).
 * Input          : PWR_PVDLevel: specifies the PVD detection level
 *                     PWR_PVDLevel_2V2: PVD detection level set to 2.2V
@@ -78,7 +78,7 @@ void PWR_PVDCmd(FunctionalState NewState)
 *                     PWR_PVDLevel_2V8: PVD detection level set to 2.8V
 *                     PWR_PVDLevel_2V9: PVD detection level set to 2.9V
 * Return         : None
-*********************************************************************************/	
+*********************************************************************************/
 void PWR_PVDLevelConfig(uint32_t PWR_PVDLevel)
 {
   uint32_t tmpreg = 0;
@@ -94,7 +94,7 @@ void PWR_PVDLevelConfig(uint32_t PWR_PVDLevel)
 * Description    : Enables or disables the WakeUp Pin functionality.
 * Input          : NewState: new state of the WakeUp Pin functionality(ENABLE or DISABLE).
 * Return         : None
-*********************************************************************************/	
+*********************************************************************************/
 void PWR_WakeUpPinCmd(FunctionalState NewState)
 {
 	if(NewState)
@@ -102,7 +102,7 @@ void PWR_WakeUpPinCmd(FunctionalState NewState)
 		PWR->CSR |= (1<<8);
 	}
 	else{
-		PWR->CSR &= ~(1<<8);		
+		PWR->CSR &= ~(1<<8);
 	}
 }
 
@@ -112,12 +112,12 @@ void PWR_WakeUpPinCmd(FunctionalState NewState)
 * Description    : Enters STOP mode.
 * Input          : PWR_Regulator: specifies the regulator state in STOP mode.
 *                    PWR_Regulator_ON: STOP mode with regulator ON
-*                    PWR_Regulator_LowPower: STOP mode with regulator in low power mode  
+*                    PWR_Regulator_LowPower: STOP mode with regulator in low power mode
 *                  PWR_STOPEntry: specifies if STOP mode in entered with WFI or WFE instruction.
 *                    PWR_STOPEntry_WFI: enter STOP mode with WFI instruction
 *                    PWR_STOPEntry_WFE: enter STOP mode with WFE instruction
 * Return         : None
-*********************************************************************************/	
+*********************************************************************************/
 void PWR_EnterSTOPMode(uint32_t PWR_Regulator, uint8_t PWR_STOPEntry)
 {
   uint32_t tmpreg = 0;
@@ -127,9 +127,9 @@ void PWR_EnterSTOPMode(uint32_t PWR_Regulator, uint8_t PWR_STOPEntry)
   PWR->CTLR = tmpreg;
 
   NVIC->SCTLR |= (1<<2);
-  
+
   if(PWR_STOPEntry == PWR_STOPEntry_WFI)
-  {   
+  {
     __WFI();
   }
   else
@@ -145,7 +145,7 @@ void PWR_EnterSTOPMode(uint32_t PWR_Regulator, uint8_t PWR_STOPEntry)
 * Description    : Enters STANDBY mode.
 * Input          : None
 * Return         : None
-*********************************************************************************/	
+*********************************************************************************/
 void PWR_EnterSTANDBYMode(void)
 {
   PWR->CTLR |= PWR_CTLR_CWUF;
@@ -168,7 +168,7 @@ void PWR_EnterSTANDBYMode(void)
 FlagStatus PWR_GetFlagStatus(uint32_t PWR_FLAG)
 {
   FlagStatus bitstatus = RESET;
-  
+
   if ((PWR->CSR & PWR_FLAG) != (uint32_t)RESET)
   {
     bitstatus = SET;
@@ -190,7 +190,7 @@ FlagStatus PWR_GetFlagStatus(uint32_t PWR_FLAG)
 * Return         : None
 *********************************************************************************/
 void PWR_ClearFlag(uint32_t PWR_FLAG)
-{        
+{
   PWR->CTLR |=  PWR_FLAG << 2;
 }
 
@@ -322,7 +322,4 @@ void PWR_EnterSTANDBYMode_RAM_LV(void)
 
   __WFI();
 }
-
-
-
 
