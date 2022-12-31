@@ -4,10 +4,11 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 project(firmware)
 set(TARGET_ELF ${PROJECT_NAME}.elf)
-add_executable(${TARGET_ELF} src/main.c wch/extra/src/debug.c)
+add_executable(${TARGET_ELF} src/main.c)
 enable_language(C CXX ASM)
 target_compile_features(${TARGET_ELF} PRIVATE cxx_std_17)
 
+add_subdirectory(lib)
 add_subdirectory(wch)
 
 target_link_libraries(${TARGET_ELF} m)

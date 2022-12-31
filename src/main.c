@@ -8,7 +8,7 @@
 * SPDX-License-Identifier: Apache-2.0
 *******************************************************************************/
 
-#include "debug.h"
+#include "systick.h"
 
 /* Global define */
 
@@ -37,7 +37,6 @@ void GPIO_Toggle_INIT(void)
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init(GPIOB, &GPIO_InitStructure);
-
 }
 
 /*********************************************************************
@@ -49,25 +48,25 @@ void GPIO_Toggle_INIT(void)
  */
 int main(void)
 {
-    u8 i = 0;
-
-    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
-    Delay_Init();
-    USART_Printf_Init(115200);
-    printf("SystemClk:%d\r\n", SystemCoreClock);
-
-    printf("GPIO Toggle TEST\r\n");
     GPIO_Toggle_INIT();
+
+    // Get the systick counter running
+    Systick_Init();
+
+    uint32_t last_toggle = 0;
+    uint8_t l0 = 0;
+    uint8_t l1 = 1;
 
     while(1)
     {
-        Delay_Ms(250);
-        GPIO_WriteBit(GPIOA, GPIO_Pin_15, 1);
-        GPIO_WriteBit(GPIOB, GPIO_Pin_4, 1);
-        Delay_Ms(250);
-        GPIO_WriteBit(GPIOA, GPIO_Pin_15, 0);
-        GPIO_WriteBit(GPIOB, GPIO_Pin_4, 0);
+      uint32_t now = GetTick();
 
+      if (now - last_toggle >= 500) {
+        GPIO_WriteBit(GPIOA, GPIO_Pin_15, (l0 == 0) ? (l0 = Bit_SET) : (l0 = Bit_RESET));
+        GPIO_WriteBit(GPIOB, GPIO_Pin_4, (l1 == 0) ? (l1 = Bit_SET) : (l1 = Bit_RESET));
+
+        last_toggle = now;
+      }
     }
 }
 

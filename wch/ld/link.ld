@@ -1,13 +1,15 @@
 ENTRY( _start )
 
 __stack_size = 2048;
+__heap_size = 0;
 
 PROVIDE( _stack_size = __stack_size );
+PROVIDE( _heap_size = __heap_size );
 
 
 MEMORY
 {
-	FLASH (rx) : ORIGIN = 0x00000000, LENGTH = 480K
+	FLASH (rx) : ORIGIN = 0x00000000, LENGTH = 256K
 	RAM (xrw) : ORIGIN = 0x20000000, LENGTH = 64K
 }
 
@@ -156,8 +158,9 @@ SECTIONS
 	PROVIDE( _end = _ebss);
 	PROVIDE( end = . );
 
-	.stack ORIGIN(RAM) + LENGTH(RAM) - __stack_size :
+	.stack ORIGIN(RAM) + LENGTH(RAM) - __heap_size - __stack_size :
 	{
+		. = . + __heap_size;
 		PROVIDE( _heap_end = . );
 		. = ALIGN(4);
 		PROVIDE(_susrstack = . );
