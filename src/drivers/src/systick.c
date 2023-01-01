@@ -7,7 +7,7 @@
 
 #include "ch32v30x.h"
 
-uint32_t uwTick = 0;
+static uint32_t uwTick = 0;
 
 /*********************************************************************
  * @fn      SysTick_Handler

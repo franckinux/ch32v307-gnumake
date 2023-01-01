@@ -1,6 +1,0 @@
-add_subdirectory(hal_libraries/ch32v307_hal)
-add_subdirectory(hal_libraries/bmsis)
-target_include_directories(${TARGET_ELF} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/extra/inc)
-set(LINKER_SCRIPT ${CMAKE_CURRENT_SOURCE_DIR}/ld/link.ld)
-target_link_options(${TARGET_ELF} PUBLIC -T${LINKER_SCRIPT})
-target_link_options(${TARGET_ELF} PUBLIC -Wl,-Map=$<TARGET_FILE:${TARGET_ELF}>.map)
