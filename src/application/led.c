@@ -13,7 +13,7 @@ static thread_action_t thread_loop(void)
 {
   GPIO_WriteBit(GPIOB, GPIO_Pin_4, (green_led_state == 0) ? (green_led_state = Bit_SET) : (green_led_state = Bit_RESET));
 
-  log_debug("+");
+  log_debug("test log");
 
   return THREAD_LOOP;
 }
