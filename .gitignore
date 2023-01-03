@@ -6,3 +6,4 @@
 *.lst
 build
 *~
+.ccls-cache

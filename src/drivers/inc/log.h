@@ -6,44 +6,20 @@
 #include <stdbool.h>
 #include "fifos.h"
 
-typedef enum {
-  LOG_DEBUG,
-  LOG_INFO,
-  LOG_WARNING,
-  LOG_ERROR,
-  LOG_CRITICAL
-} log_level_t;
+#define LOG_DEBUG 0
+#define LOG_INFO 1
+#define LOG_WARNING 2
+#define LOG_ERROR 3
+#define LOG_CRITICAL 4
 
-bool insert_in_log_fifo(char *msg);
+bool insert_in_log_fifo(char* module, char *msg);
 
-#if (LOG_LEVEL >= LOG_DEBUG) && ENABLE_LOGS
-#define log_debug(m) insert_in_log_fifo(m)
-#else
-#define log_debug(m) {}
-#endif
+#define log(l, m) if (l >= LOG_LEVEL) do { insert_in_log_fifo(LOG_MODULE_NAME, m); } while (0)
 
-#if (LOG_LEVEL >= LOG_INFO) && ENABLE_LOGS
-#define log_info(m) insert_in_log_fifo(m)
-#else
-#define log_info(m) {}
-#endif
-
-#if (LOG_LEVEL >= LOG_WARNING) && ENABLE_LOGS
-#define log_warning(m) insert_in_log_fifo(m)
-#else
-#define log_warning(m) {}
-#endif
-
-#if (LOG_LEVEL >= LOG_ERROR) && ENABLE_LOGS
-#define log_error(m) insert_in_log_fifo(m)
-#else
-#define log_error(m) {}
-#endif
-
-#if (LOG_LEVEL >= LOG_CRITICAL) && ENABLE_LOGS
-#define log_critical(m) insert_in_log_fifo(m)
-#else
-#define log_critical(m) {}
-#endif
+#define log_debug(m) log(LOG_DEBUG, m)
+#define log_info(m) log(LOG_INFO, m)
+#define log_warning(m) log(LOG_WARNING, m)
+#define log_error(m) log(LOG_ERROR, m)
+#define log_critical(m) log(LOG_CRITICAL, m)
 
 #endif

@@ -5,6 +5,8 @@
 #include "log.h"
 
 #define LOG_LEVEL LOG_DEBUG
+#define LOG_MODULE_NAME "led"
+#define CYCLE_PERIOD 500  // 500 ms
 
 static uint8_t green_led_state = 1;
 
@@ -23,6 +25,6 @@ thread_t led_thread = {
   .active = true,
   .thread_init = NULL,
   .thread_loop = &thread_loop,
-  .delay = 500 / MAIN_DELAY,  //toggle every 500ms : 1s period
+  .delay = CYCLE_PERIOD / IDLE_PERIOD,
 };
 

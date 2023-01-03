@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-#define MAIN_DELAY 5   //ms
+#define IDLE_PERIOD 5   //ms
 
 
 typedef enum {

@@ -98,7 +98,7 @@ void main(void)
       uint32_t now = GetTick();
       __enable_irq();
 
-      if (now - later >= MAIN_DELAY) {
+      if (now - later >= IDLE_PERIOD) {
         app_loop();
 
         later = now;
