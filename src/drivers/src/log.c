@@ -27,15 +27,18 @@ void insert_in_log_fifo(char*module, char *msg)
     fifo_putc(&log_fifo, '\r');
     fifo_putc(&log_fifo, '\n');
 
-    /* send the first char if needed */
     if (fifo_emptied) {
-      uint8_t c = fifo_getc(&log_fifo);
-      if (c != EOF) {
-        USART_SendData(USART2, c);
-        USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
-        fifo_emptied = false;
-      }
+      USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
+      fifo_emptied = false;
     }
+    /* if (fifo_emptied) { */
+    /*   uint8_t c = fifo_getc(&log_fifo); */
+    /*   if (c != EOF) { */
+    /*     USART_SendData(USART2, c); */
+    /*     USART_ITConfig(USART2, USART_IT_TXE, ENABLE); */
+    /*     fifo_emptied = false; */
+    /*   } */
+    /* } */
   }
   __enable_irq();
 }
