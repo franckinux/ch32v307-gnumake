@@ -9,7 +9,7 @@ enable_language(C ASM)
 
 add_subdirectory(src)
 
-target_link_libraries(${TARGET_ELF} m)
+target_link_libraries(${TARGET_ELF} cocoos m)
 
 add_custom_command(TARGET ${TARGET_ELF} POST_BUILD
     COMMAND ${CROSS_OBJDUMP} "-CdSx" $<TARGET_FILE:${TARGET_ELF}> > $<TARGET_FILE:${TARGET_ELF}>.lst

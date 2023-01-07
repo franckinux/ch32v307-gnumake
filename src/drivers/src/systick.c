@@ -6,8 +6,7 @@
  */
 
 #include "ch32v30x.h"
-
-static uint32_t uwTick = 0;
+#include "os_applAPI.h"
 
 /*********************************************************************
  * @fn      SysTick_Handler
@@ -18,7 +17,7 @@ static uint32_t uwTick = 0;
  */
 __attribute__((interrupt("WCH-Interrupt-fast"))) void SysTick_Handler(void) {
     SysTick->SR = 0;
-    ++uwTick;
+    os_tick();
 }
 
 /*********************************************************************
@@ -32,27 +31,16 @@ void Systick_Init(void) {
     /*Configuration interrupt priority*/
     NVIC_InitTypeDef NVIC_InitStructure = { 0 };
     NVIC_InitStructure.NVIC_IRQChannel = SysTicK_IRQn;
-    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0; //Seeing priority
-    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0; //Response priority
-    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE; //Enable
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;  //Seeing priority
+    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;  //Response priority
+    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;  //Enable
     NVIC_Init(&NVIC_InitStructure);
 
     /*Configuration timer*/
     SysTick->CTLR = 0;
     SysTick->SR = 0;
     SysTick->CNT = 0;
-    SysTick->CMP = SystemCoreClock / 1000; //The latter 1000 represents 1000Hz (that is, 1MS to interrupt once)
+    SysTick->CMP = SystemCoreClock / 1000; //The latter 1000 represents 1000Hz (that is, 1 ms to interrupt once)
     SysTick->CTLR = 0xf;
-}
-
-/*********************************************************************
- * @fn      GetTick
- *
- * @brief   Get current tick in ms resolution
- *
- * @return  Current tick
- */
-uint32_t GetTick() {
-    return uwTick;
 }
 

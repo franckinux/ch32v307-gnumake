@@ -11,9 +11,8 @@
 #include "app.h"
 #include "systick.h"
 #include "ch32v30x.h"
-#include "thread.h"
 #include "fifos.h"
-
+#include "os_applAPI.h"
 
 void Error_Handler(void);
 
@@ -84,26 +83,17 @@ void main(void)
   gpio_init();
   usart_init();
 
+  fifos_init();
+  os_init();
+
   // Get the systick counter running
   Systick_Init();
 
-  fifos_init();
   if (!app_init()) {
     Error_Handler();
   }
 
-  while(1)
-  {
-      __disable_irq();
-      uint32_t now = GetTick();
-      __enable_irq();
-
-      if (now - later >= IDLE_PERIOD) {
-        app_loop();
-
-        later = now;
-      }
-  }
+  os_start();
 }
 
 

@@ -1,0 +1,3 @@
+[submodule "src/cocoos"]
+	path = src/cocoos
+	url = https://github.com/franckinux/cocoOS.git

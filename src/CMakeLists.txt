@@ -1,8 +1,10 @@
 add_subdirectory(bmsis)
 add_subdirectory(ch32v307_hal)
+add_subdirectory(cocoos)
 
 target_include_directories(${TARGET_ELF} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/application/inc)
 target_include_directories(${TARGET_ELF} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/drivers/inc)
+target_include_directories(${TARGET_ELF} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/cocoos/inc)
 
 target_sources(${TARGET_ELF} PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/application/src/app_main.c
