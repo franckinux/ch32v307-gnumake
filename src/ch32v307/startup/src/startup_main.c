@@ -78,8 +78,6 @@ static void usart_init(void)
 
 void main(void)
 {
-  uint32_t later = 0;
-
   gpio_init();
   usart_init();
 

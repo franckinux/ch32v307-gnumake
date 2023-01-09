@@ -1,4 +1,4 @@
-target_sources(${TARGET_ELF} PUBLIC
+target_sources(${MY_TARGET} PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/src/ch32v30x_adc.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/ch32v30x_bkp.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/ch32v30x_can.c
@@ -54,5 +54,5 @@ target_sources(${TARGET_ELF} PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/inc/ch32v30x.h
 )
 
-target_include_directories(${TARGET_ELF} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/inc)
+target_include_directories(${MY_TARGET} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/inc)
 

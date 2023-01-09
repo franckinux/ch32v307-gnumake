@@ -1,32 +1,32 @@
-cmake_minimum_required(VERSION 3.16)
-set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/cmake/toolchain-ch32v30x.cmake)
+cmake_minimum_required(VERSION 3.22)
+set(CMAKE_TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/cmake/toolchain-ch32v30x.cmake)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-project(firmware)
-set(TARGET_ELF ${PROJECT_NAME}.elf)
-add_executable(${TARGET_ELF})
+project(playground-firmware)
+set(CMAKE_EXECUTABLE_SUFFIX_C .elf CACHE STRING "")
 enable_language(C ASM)
+
+set(MY_TARGET "firmware")
+add_executable(${MY_TARGET})
 
 add_subdirectory(src)
 
-target_link_libraries(${TARGET_ELF} cocoos m)
-
-add_custom_command(TARGET ${TARGET_ELF} POST_BUILD
-    COMMAND ${CROSS_OBJDUMP} "-CdSx" $<TARGET_FILE:${TARGET_ELF}> > $<TARGET_FILE:${TARGET_ELF}>.lst
+add_custom_command(TARGET ${MY_TARGET} POST_BUILD
+    COMMAND ${CROSS_OBJDUMP} "-CdSx" $<TARGET_FILE:${MY_TARGET}> > ${MY_TARGET}.lst
     COMMENT "Generating disassembler file")
-add_custom_command(TARGET ${TARGET_ELF} POST_BUILD
-    COMMAND ${CROSS_OBJCOPY} "-Obinary" $<TARGET_FILE:${TARGET_ELF}> $<TARGET_FILE:${TARGET_ELF}>.bin
+add_custom_command(TARGET ${MY_TARGET} POST_BUILD
+    COMMAND ${CROSS_OBJCOPY} "-Obinary" $<TARGET_FILE:${MY_TARGET}> ${MY_TARGET}.bin
     COMMENT "Generating bin file")
-add_custom_command(TARGET ${TARGET_ELF} POST_BUILD
-    COMMAND ${CROSS_OBJCOPY} "-Oihex" $<TARGET_FILE:${TARGET_ELF}> $<TARGET_FILE:${TARGET_ELF}>.hex
+add_custom_command(TARGET ${MY_TARGET} POST_BUILD
+    COMMAND ${CROSS_OBJCOPY} "-Oihex" $<TARGET_FILE:${MY_TARGET}> ${MY_TARGET}.hex
     COMMENT "Generating hex file")
 
 add_custom_target(flash
-        COMMAND openocd -f ${CMAKE_CURRENT_SOURCE_DIR}/wch/wch-riscv.cfg
+        COMMAND openocd -f ${CMAKE_SOURCE_DIR}/wch/wch-riscv.cfg
             -c init
             -c halt
             -c "flash erase_sector wch_riscv 0 last"
-            -c "program ${TARGET_ELF} verify"
+            -c "program $<TARGET_FILE:${MY_TARGET}> verify"
             -c wlink_reset_resume
             -c exit
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}

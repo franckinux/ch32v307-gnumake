@@ -32,26 +32,30 @@ else()
 endif()
 
 set(CPU_FLAGS "-march=rv32imafc -mabi=ilp32f -msmall-data-limit=8 -mno-save-restore")
+set(COMMON_FLAGS "-std=gnu99 -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections")
+set(COMMON_FLAGS "${COMMON_FLAGS} -Wno-comment -Wno-unused-parameter -Wno-variadic-macros -Wno-main")
 
-set(COMMON_FLAGS "-fdata-sections -ffunction-sections")
-
-set(FLAGS_DEBUG "-Og -g3")
+set(FLAGS_DEBUG "-O0 -g3 -gdwarf")
 set(FLAGS_RELEASE "-O3")
 set(FLAGS_SIZE "-Os")
 
-set(CMAKE_C_FLAGS "${CPU_FLAGS} ${OPT_FLAGS} ${COMMON_FLAGS}")
+set(CMAKE_C_FLAGS "${CPU_FLAGS} ${FPU_FLAGS} ${OPT_FLAGS} ${COMMON_FLAGS}")
 set(CMAKE_C_FLAGS_DEBUG ${FLAGS_DEBUG})
 set(CMAKE_C_FLAGS_RELEASE ${FLAGS_RELEASE})
 set(CMAKE_C_FLAGS_MINSIZEREL ${FLAGS_SIZE})
-set(CMAKE_CXX_FLAGS "${CPU_FLAGS} ${OPT_FLAGS} ${COMMON_FLAGS} -fno-rtti -fno-exceptions")
+set(CMAKE_CXX_FLAGS "${CPU_FLAGS} ${FPU_FLAGS} ${OPT_FLAGS} ${COMMON_FLAGS} -fno-rtti -fno-exceptions")
 set(CMAKE_CXX_FLAGS_DEBUG ${FLAGS_DEBUG})
 set(CMAKE_CXX_FLAGS_RELEASE ${FLAGS_RELEASE})
 set(CMAKE_CXX_FLAGS_MINSIZEREL ${FLAGS_SIZE})
-SET(CMAKE_ASM_FLAGS "${CFLAGS} ${CPU_FLAGS} -x assembler-with-cpp")
+SET(CMAKE_ASM_FLAGS "${CFLAGS} ${CPU_FLAGS} ${FPU_FLAGS} -x assembler-with-cpp")
+SET(CMAKE_ASM_FLAGS_DEBUG  ${FLAGS_DEBUG})
+SET(CMAKE_ASM_FLAGS_RELEASE  ${FLAGS_RELEASE})
+set(CMAKE_ASM_FLAGS_MINSIZEREL ${FLAGS_SIZE})
 
-set(LD_FLAGS "-Wl,--gc-sections -Wl,--print-memory-usage -nostartfiles")
+set(LD_FLAGS "-Wl,--gc-sections -Wl,--print-memory-usage -nostartfiles --specs=nano.specs --specs=nosys.specs -ffreestanding -Xlinker --cref -Wl,-Map,${MY_TARGET}.map")
 
-set(CMAKE_EXE_LINKER_FLAGS "${CPU_FLAGS} --specs=nano.specs --specs=nosys.specs -ffreestanding ${LD_FLAGS}" CACHE INTERNAL "")
+set(CMAKE_EXE_LINKER_FLAGS "${CPU_FLAGS} ${FPU_FLAGS} ${LD_FLAGS}" CACHE INTERNAL "")
+set(CMAKE_EXE_LINKER_FLAGS_DEBUG  "-g3 -gdwarf")
 
 set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
 set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
