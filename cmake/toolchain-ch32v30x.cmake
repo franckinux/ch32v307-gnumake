@@ -52,7 +52,7 @@ SET(CMAKE_ASM_FLAGS_DEBUG  ${FLAGS_DEBUG})
 SET(CMAKE_ASM_FLAGS_RELEASE  ${FLAGS_RELEASE})
 set(CMAKE_ASM_FLAGS_MINSIZEREL ${FLAGS_SIZE})
 
-set(LD_FLAGS "-Wl,--gc-sections -Wl,--print-memory-usage -nostartfiles --specs=nano.specs --specs=nosys.specs -ffreestanding -Xlinker --cref -Wl,-Map,${MY_TARGET}.map")
+set(LD_FLAGS "-Wl,--gc-sections -Wl,--print-memory-usage -nostartfiles --specs=nano.specs --specs=nosys.specs -ffreestanding -Xlinker --cref")
 
 set(CMAKE_EXE_LINKER_FLAGS "${CPU_FLAGS} ${FPU_FLAGS} ${LD_FLAGS}" CACHE INTERNAL "")
 set(CMAKE_EXE_LINKER_FLAGS_DEBUG  "-g3 -gdwarf")

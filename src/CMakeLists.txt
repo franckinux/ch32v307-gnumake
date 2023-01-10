@@ -24,7 +24,6 @@ target_sources(${MY_TARGET} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/cocoos/src/os_task.c
 )
 
-target_link_libraries(${MY_TARGET} m)
-set(LINKER_SCRIPT ${CMAKE_CURRENT_SOURCE_DIR}/ch32v307/link.ld)
 target_link_options(${MY_TARGET} PRIVATE -T${LINKER_SCRIPT})
 target_link_options(${MY_TARGET} PRIVATE -Wl,-Map=$<TARGET_FILE:${MY_TARGET}>.map)
+target_link_libraries(${MY_TARGET} ${EXTERNAL_LIBRARIES})

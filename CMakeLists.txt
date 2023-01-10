@@ -2,12 +2,15 @@ cmake_minimum_required(VERSION 3.22)
 set(CMAKE_TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/cmake/toolchain-ch32v30x.cmake)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-project(playground-firmware)
+project(riscv-sandbox)
 set(CMAKE_EXECUTABLE_SUFFIX_C .elf CACHE STRING "")
 enable_language(C ASM)
 
-set(MY_TARGET "firmware")
+set(MY_TARGET "${PROJECT_NAME}-firmware")
 add_executable(${MY_TARGET})
+
+set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/src/ch32v307/link.ld)
+set(EXTERNAL_LIBRARIES "m")
 
 add_subdirectory(src)
 
